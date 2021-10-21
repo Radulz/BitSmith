@@ -10,7 +10,7 @@ namespace PCPartsShop.Interfaces
     {
         public T Add(T item);
         public T GetItem(int id);
-        public List<T> GetAllTs();
+        public List<T> GetAll();
         public T Delete(int id);
         public T Update(int id);
     }
