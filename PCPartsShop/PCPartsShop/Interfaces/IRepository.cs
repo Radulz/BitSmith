@@ -8,10 +8,10 @@ namespace PCPartsShop.Interfaces
 {
     public interface IRepository<T>
     {
-        public T Add(T item);
+        public void Add(T item);
         public T GetItem(int id);
         public List<T> GetAll();
-        public T Delete(int id);
-        public T Update(int id);
+        public void Delete(int id);
+        public void Update(int id);
     }
 }
