@@ -15,8 +15,16 @@ namespace PCPartsShop.Models
         public int PowerC { get; set; } // in W
         public int Length { get; set; } // in cm
 
+        private static int c = 0;
+        private static void createID()
+        {
+            c++;
+        }
+
         public GPU(string make, string model, int frequency, int capacity, string type, int tech, int power, int length) : base(make, model)
         {
+            createID();
+            ID = c;
             Freq = frequency;
             Memory = capacity;
             MemoryType = type;
@@ -24,9 +32,10 @@ namespace PCPartsShop.Models
             PowerC = power;
             Length = length;
         }
-        public GPU()
+        public GPU() : base()
         {
-
+            createID();
+            ID = c;
         }
     }
 }

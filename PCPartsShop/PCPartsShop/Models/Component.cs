@@ -12,6 +12,7 @@ namespace PCPartsShop.Models
         public string Make { get; set; }
         public string Model { get; set; }
 
+
         public Component(string make, string model)
         {
             Make = make;
@@ -19,7 +20,7 @@ namespace PCPartsShop.Models
         }
         public Component()
         {
-
+           
         }
     }
 }

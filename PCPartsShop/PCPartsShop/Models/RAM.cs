@@ -13,8 +13,15 @@ namespace PCPartsShop.Models
         public int Freq { get; set; } // in MHZ
         public double Voltage { get; set; } // in V
 
+        private static int c = 0;
+        private static void createID()
+        {
+            c++;
+        }
         public RAM(string make, string model, string type, int capacity, int frequency, double volts) : base(make, model)
         {
+            createID();
+            ID = c;
             Type = type;
             Capacity = capacity;
             Freq = frequency;
@@ -23,7 +30,8 @@ namespace PCPartsShop.Models
 
         public RAM()
         {
-
+            createID();
+            ID = c;
         }
     }
 }

@@ -14,8 +14,16 @@ namespace PCPartsShop.Models
         public int MFreq { get; set; } // MHz
         public int TDP { get; set; } // in W
         public int Cores { get; set; }
+
+        private static int c = 0;
+        private static void createID()
+        {
+            c++;
+        }
         public CPU(string make, string model, double frequency, string socket, int tech, int mfreq, int tdp, int corenr) : base(make, model)
         {
+            createID();
+            ID = c;
             Freq = frequency;
             Socket = socket;
             Tech = tech;
@@ -23,9 +31,10 @@ namespace PCPartsShop.Models
             TDP = tdp;
             Cores = corenr;
         }
-        public CPU()
+        public CPU() : base()
         {
-
+            createID();
+            ID = c;
         }
     }
 }
