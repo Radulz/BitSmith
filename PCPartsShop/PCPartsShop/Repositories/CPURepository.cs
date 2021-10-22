@@ -8,19 +8,23 @@ using PCPartsShop.Models;
 
 namespace PCPartsShop.Repositories
 {
-    public class CPURepository<T> : IRepository<T> where T : CPU
+    public class CPURepository : IRepository<CPU>
     {
-        public List<T> CPUs;
+        public List<CPU> CPUs = new List<CPU>();
+        public CPURepository()
+        {
 
-        void IRepository<T>.Add(T item)
+        }
+
+        public void Add(CPU item)
         {
             CPUs.Add(item);
         }
 
-        void IRepository<T>.Delete(int id)
+        public void Delete(int id)
         {
 
-            foreach (T c in CPUs)
+            foreach (CPU c in CPUs)
             {
                 if(c.ID == id)
                 {
@@ -30,14 +34,14 @@ namespace PCPartsShop.Repositories
             }
         }
 
-        List<T> IRepository<T>.GetAll()
+        public List<CPU> GetAll()
         {
             return CPUs;
         }
 
-        T IRepository<T>.GetItem(int id)
+        public CPU GetItem(int id)
         {
-            foreach (T c in CPUs)
+            foreach (CPU c in CPUs)
             {
                 if (c.ID == id)
                 {
@@ -47,7 +51,7 @@ namespace PCPartsShop.Repositories
             return null;
         }
 
-        void IRepository<T>.Update(int id)
+        public void Update(int id)
         {
             throw new NotImplementedException();
         }
