@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PCPartsShop.Models;
 
 namespace PCPartsShop.Interfaces
 {
-    public interface IRepository<T>
+    public interface IRepository<T> where T : class
     {
         public void Add(T item);
         public T GetItem(int id);
