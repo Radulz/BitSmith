@@ -7,7 +7,7 @@ using PCPartsShop.Models;
 
 namespace PCPartsShop.Interfaces
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<T> where T : Component
     {
         public void Add(T item);
         public T GetItem(int id);
