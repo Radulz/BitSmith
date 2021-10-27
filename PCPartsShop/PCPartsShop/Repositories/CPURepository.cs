@@ -21,16 +21,12 @@ namespace PCPartsShop.Repositories
             CPUs.Add(item);
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
-
-            foreach (CPU c in CPUs)
+            var cpu = CPUs.First(item => item.UniqueId == id);
+            if (cpu != null)
             {
-                if(c.ID == id)
-                {
-                    CPUs.Remove(c);
-                    return;
-                }
+                CPUs.Remove(cpu);
             }
         }
 
@@ -39,19 +35,19 @@ namespace PCPartsShop.Repositories
             return CPUs;
         }
 
-        public CPU GetItem(int id)
+        public CPU GetItem(Guid id)
         {
-            foreach (CPU c in CPUs)
+            var cpu = CPUs.First(item => item.UniqueId == id);
+            
+            if(cpu != null)
             {
-                if (c.ID == id)
-                {
-                    return c;
-                }
+                return cpu;
             }
+
             return null;
         }
 
-        public void Update(int id)
+        public void Update(Guid id)
         {
             throw new NotImplementedException();
         }

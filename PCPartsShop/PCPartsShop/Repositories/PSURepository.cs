@@ -20,15 +20,12 @@ namespace PCPartsShop.Repositories
             PSUs.Add(item);
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
-            foreach(PSU p in PSUs)
+            var psu = PSUs.First(item => item.UniqueId == id);
+            if (psu != null)
             {
-                if(p.ID == id)
-                {
-                    PSUs.Remove(p);
-                    return;
-                }
+                PSUs.Remove(psu);
             }
         }
 
@@ -37,19 +34,19 @@ namespace PCPartsShop.Repositories
             return PSUs;
         }
 
-        public PSU GetItem(int id)
+        public PSU GetItem(Guid id)
         {
-            foreach (PSU p in PSUs)
+            var psu = PSUs.First(item => item.UniqueId == id);
+
+            if (psu != null)
             {
-                if (p.ID == id)
-                {
-                    return p;
-                }
+                return psu;
             }
+
             return null;
         }
 
-        public void Update(int id)
+        public void Update(Guid id)
         {
             throw new NotImplementedException();
         }

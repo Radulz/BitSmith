@@ -20,15 +20,12 @@ namespace PCPartsShop.Repositories
             RAMs.Add(item);
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
-            foreach(RAM r in RAMs)
+            var ram = RAMs.First(item => item.UniqueId == id);
+            if (ram != null)
             {
-                if(r.ID == id)
-                {
-                    RAMs.Remove(r);
-                    return;
-                }
+                RAMs.Remove(ram);
             }
         }
 
@@ -37,19 +34,19 @@ namespace PCPartsShop.Repositories
             return RAMs;
         }
 
-        public RAM GetItem(int id)
+        public RAM GetItem(Guid id)
         {
-            foreach (RAM r in RAMs)
+            var ram = RAMs.First(item => item.UniqueId == id);
+
+            if (ram != null)
             {
-                if (r.ID == id)
-                {
-                    return r;
-                }
+                return ram;
             }
+
             return null;
         }
 
-        public void Update(int id)
+        public void Update(Guid id)
         {
             throw new NotImplementedException();
         }

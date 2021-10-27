@@ -52,41 +52,46 @@ namespace PCPartsShop
             sticks.Add((RAM)e);
             foreach (CPU i in proc.CPUs)
             {
-                Console.WriteLine(i.ID + " " + i.Make + " " + i.Model);
+                Console.WriteLine(i.UniqueId + " " + i.Make + " " + i.Model);
             }
+            Console.WriteLine();
             foreach (GPU i in gproc.GPUs)
             {
-                Console.WriteLine(i.ID + " " + i.Make + " " + i.Model);
+                Console.WriteLine(i.UniqueId + " " + i.Make + " " + i.Model);
             }
+            Console.WriteLine();
             foreach (MOBO i in boards.MOBOs)
             {
-                Console.WriteLine(i.ID + " " + i.Make + " " + i.Model);
+                Console.WriteLine(i.UniqueId + " " + i.Make + " " + i.Model);
             }
+            Console.WriteLine();
             foreach (PSU i in punits.PSUs)
             {
-                Console.WriteLine(i.ID + " " + i.Make + " " + i.Model);
+                Console.WriteLine(i.UniqueId + " " + i.Make + " " + i.Model);
             }
+            Console.WriteLine();
             foreach (RAM i in sticks.RAMs)
             {
-                Console.WriteLine(i.ID + " " + i.Make + " " + i.Model);
+                Console.WriteLine(i.UniqueId + " " + i.Make + " " + i.Model);
             }
-            aux1 = proc.GetItem(5);
-            aux3 = gproc.GetItem(2);
-            aux5 = boards.GetItem(1);
-            aux7 = punits.GetItem(2);
-            aux9 = sticks.GetItem(2);
+            Console.WriteLine();
+            aux1 = proc.GetItem(aux.UniqueId);
+            aux3 = gproc.GetItem(b.UniqueId);
+            aux5 = boards.GetItem(c.UniqueId);
+            aux7 = punits.GetItem(aux6.UniqueId);
+            aux9 = sticks.GetItem(aux8.UniqueId);
             if (aux1 != null)
             {
-                Console.WriteLine(aux1.ID);
+                Console.WriteLine(aux1.UniqueId);
             }
             else
             {
                 Console.WriteLine("This CPU doesn\'t exist");
             }
-            Console.WriteLine(aux3.ID);
-            Console.WriteLine(aux5.ID);
-            Console.WriteLine(aux7.ID);
-            Console.WriteLine(aux9.ID);
+            Console.WriteLine(aux3.UniqueId);
+            Console.WriteLine(aux5.UniqueId);
+            Console.WriteLine(aux7.UniqueId);
+            Console.WriteLine(aux9.UniqueId);
 
 
 

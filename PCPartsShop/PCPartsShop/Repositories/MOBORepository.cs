@@ -20,15 +20,12 @@ namespace PCPartsShop.Repositories
             MOBOs.Add(item);
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
-            foreach (MOBO m in MOBOs)
+            var mobo = MOBOs.First(item => item.UniqueId == id);
+            if (mobo != null)
             {
-                if (m.ID == id)
-                {
-                    MOBOs.Remove(m);
-                    return;
-                }
+                MOBOs.Remove(mobo);
             }
         }
 
@@ -37,19 +34,19 @@ namespace PCPartsShop.Repositories
             return MOBOs;
         }
 
-        public MOBO GetItem(int id)
+        public MOBO GetItem(Guid id)
         {
-            foreach (MOBO m in MOBOs)
+            var mobo = MOBOs.First(item => item.UniqueId == id);
+
+            if (mobo != null)
             {
-                if (m.ID == id)
-                {
-                    return m;
-                }
+                return mobo;
             }
+
             return null;
         }
 
-        public void Update(int id)
+        public void Update(Guid id)
         {
             throw new NotImplementedException();
         }

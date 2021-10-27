@@ -20,16 +20,14 @@ namespace PCPartsShop.Repositories
             GPUs.Add(item);
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
-            foreach(GPU g in GPUs)
+            var gpu = GPUs.First(item => item.UniqueId == id);
+            if (gpu != null)
             {
-                if(g.ID == id)
-                {
-                    GPUs.Remove(g);
-                    return;
-                }
+                GPUs.Remove(gpu);
             }
+            
         }
 
         public List<GPU> GetAll()
@@ -37,20 +35,19 @@ namespace PCPartsShop.Repositories
             return GPUs;
         }
 
-        public GPU GetItem(int id)
+        public GPU GetItem(Guid id)
         {
-            foreach (GPU g in GPUs)
+            var gpu = GPUs.First(item => item.UniqueId == id);
+
+            if (gpu != null)
             {
-                if (g.ID == id)
-                {
-                    GPUs.Remove(g);
-                    return g;
-                }
+                return gpu;
             }
+
             return null;
         }
 
-        public void Update(int id)
+        public void Update(Guid id)
         {
             throw new NotImplementedException();
         }

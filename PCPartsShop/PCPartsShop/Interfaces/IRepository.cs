@@ -10,9 +10,9 @@ namespace PCPartsShop.Interfaces
     public interface IRepository<T> where T : Component
     {
         public void Add(T item);
-        public T GetItem(int id);
+        public T GetItem(Guid id);
         public List<T> GetAll();
-        public void Delete(int id);
-        public void Update(int id);
+        public void Delete(Guid id);
+        public void Update(Guid id);
     }
 }
