@@ -14,15 +14,8 @@ namespace PCPartsShop.Models
         public List<int> MemoryFreq { get; set; } // all in MHz
         public string MemoryType { get; set; }
 
-        private static int c = 0;
-        private static void createID()
+        public MOBO(string make, string model, string socket, string format, string chipset, List<int> freqs, string memorytype) : base (Guid.NewGuid(), make, model)
         {
-            c++;
-        }
-        public MOBO(string make, string model, string socket, string format, string chipset, List<int> freqs, string memorytype) : base (make, model)
-        {
-            createID();
-            ID = c;
             Socket = socket;
             Format = format;
             Chipset = chipset;
@@ -30,10 +23,9 @@ namespace PCPartsShop.Models
             MemoryType = memorytype;
         }
 
-        public MOBO()
+        public MOBO() : base()
         {
-            createID();
-            ID = c;
+            
         }
 
     }

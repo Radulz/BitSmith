@@ -11,23 +11,16 @@ namespace PCPartsShop.Models
         public int Power { get; set; } // in W
         public string Type { get; set; }
 
-        private static int c = 0;
-        private static void createID()
+        public PSU(string make, string model, int power, string type) : base(Guid.NewGuid(), make, model)
         {
-            c++;
-        }
-        public PSU(string make, string model, int power, string type) : base(make, model)
-        {
-            createID();
-            ID = c;
+            
             Power = power;
             Type = type;
         }
 
-        public PSU()
+        public PSU() : base()
         {
-            createID();
-            ID = c;
+            
         }
     }
 }
