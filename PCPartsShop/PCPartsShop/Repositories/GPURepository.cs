@@ -47,9 +47,13 @@ namespace PCPartsShop.Repositories
             return null;
         }
 
-        public void Update(Guid id)
+        public void Update(GPU item)
         {
-            throw new NotImplementedException();
+            var gpuindex = GPUs.FindIndex(x => x.UniqueId == item.UniqueId);
+            if (gpuindex != -1)
+            {
+                GPUs[gpuindex] = item;
+            }
         }
     }
 }

@@ -46,9 +46,13 @@ namespace PCPartsShop.Repositories
             return null;
         }
 
-        public void Update(Guid id)
+        public void Update(MOBO item)
         {
-            throw new NotImplementedException();
+            var moboindex = MOBOs.FindIndex(x => x.UniqueId == item.UniqueId);
+            if (moboindex != -1)
+            {
+                MOBOs[moboindex] = item;
+            }
         }
     }
 }

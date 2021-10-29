@@ -47,9 +47,13 @@ namespace PCPartsShop.Repositories
             return null;
         }
 
-        public void Update(Guid id)
+        public void Update(CPU item)
         {
-            throw new NotImplementedException();
+            var cpuindex = CPUs.FindIndex(x => x.UniqueId == item.UniqueId);
+            if(cpuindex != -1)
+            {
+                CPUs[cpuindex] = item;
+            }
         }
     }
 }

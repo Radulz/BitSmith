@@ -80,20 +80,45 @@ namespace PCPartsShop
             aux5 = boards.GetItem(c.UniqueId);
             aux7 = punits.GetItem(aux6.UniqueId);
             aux9 = sticks.GetItem(aux8.UniqueId);
-            if (aux1 != null)
-            {
-                Console.WriteLine(aux1.UniqueId);
-            }
-            else
-            {
-                Console.WriteLine("This CPU doesn\'t exist");
-            }
-            Console.WriteLine(aux3.UniqueId);
-            Console.WriteLine(aux5.UniqueId);
-            Console.WriteLine(aux7.UniqueId);
-            Console.WriteLine(aux9.UniqueId);
+            //if (aux1 != null)
+            //{
+            //    Console.WriteLine(aux1.UniqueId);
+            //}
+            //else
+            //{
+            //    Console.WriteLine("This CPU doesn\'t exist");
+            //}
+            //Console.WriteLine(aux3.UniqueId);
+            //Console.WriteLine(aux5.UniqueId);
+            //Console.WriteLine(aux7.UniqueId);
+            //Console.WriteLine(aux9.UniqueId);
 
+            var gpu1 = new GPU
+            {
+                Make = "AMD",
+                Model = "RX7000XT",
+                Freq = 2000,
+                Memory = 8,
+                MemoryType = "GDDR6",
+                Tech = 8,
+                PowerC = 300,
+                Length = 250,
+            };
 
+            gpu1.UniqueId = aux2.UniqueId;
+            gproc.Update(gpu1);
+
+            aux6.UniqueId = d.UniqueId;
+            punits.Update(aux6);
+            Console.WriteLine();
+            foreach (GPU i in gproc.GPUs)
+            {
+                Console.WriteLine(i.UniqueId + " " + i.Make + " " + i.Model);
+            }
+            foreach (PSU i in punits.PSUs)
+            {
+                Console.WriteLine(i.UniqueId + " " + i.Make + " " + i.Model);
+            }
 
         }
     }

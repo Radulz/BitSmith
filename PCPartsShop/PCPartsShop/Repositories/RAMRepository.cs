@@ -46,9 +46,13 @@ namespace PCPartsShop.Repositories
             return null;
         }
 
-        public void Update(Guid id)
+        public void Update(RAM item)
         {
-            throw new NotImplementedException();
+            var ramindex = RAMs.FindIndex(x => x.UniqueId == item.UniqueId);
+            if (ramindex != -1)
+            {
+                RAMs[ramindex] = item;
+            }
         }
     }
 }

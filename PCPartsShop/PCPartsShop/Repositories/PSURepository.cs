@@ -46,9 +46,13 @@ namespace PCPartsShop.Repositories
             return null;
         }
 
-        public void Update(Guid id)
+        public void Update(PSU item)
         {
-            throw new NotImplementedException();
+            var psuindex = PSUs.FindIndex(x => x.UniqueId == item.UniqueId);
+            if (psuindex != -1)
+            {
+                PSUs[psuindex] = item;
+            }
         }
     }
 }
