@@ -22,7 +22,7 @@ namespace PCPartsShop.Repositories
 
         public void Delete(Guid id)
         {
-            var ram = RAMs.First(item => item.UniqueId == id);
+            var ram = RAMs.FirstOrDefault(item => item.UniqueId == id);
             if (ram != null)
             {
                 RAMs.Remove(ram);
@@ -36,7 +36,7 @@ namespace PCPartsShop.Repositories
 
         public RAM GetItem(Guid id)
         {
-            var ram = RAMs.First(item => item.UniqueId == id);
+            var ram = RAMs.FirstOrDefault(item => item.UniqueId == id);
 
             if (ram != null)
             {

@@ -22,7 +22,7 @@ namespace PCPartsShop.Repositories
 
         public void Delete(Guid id)
         {
-            var gpu = GPUs.First(item => item.UniqueId == id);
+            var gpu = GPUs.FirstOrDefault(item => item.UniqueId == id);
             if (gpu != null)
             {
                 GPUs.Remove(gpu);
@@ -37,7 +37,7 @@ namespace PCPartsShop.Repositories
 
         public GPU GetItem(Guid id)
         {
-            var gpu = GPUs.First(item => item.UniqueId == id);
+            var gpu = GPUs.FirstOrDefault(item => item.UniqueId == id);
 
             if (gpu != null)
             {

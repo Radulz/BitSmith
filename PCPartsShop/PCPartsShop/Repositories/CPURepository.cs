@@ -23,7 +23,7 @@ namespace PCPartsShop.Repositories
 
         public void Delete(Guid id)
         {
-            var cpu = CPUs.First(item => item.UniqueId == id);
+            var cpu = CPUs.FirstOrDefault(item => item.UniqueId == id);
             if (cpu != null)
             {
                 CPUs.Remove(cpu);
@@ -37,7 +37,7 @@ namespace PCPartsShop.Repositories
 
         public CPU GetItem(Guid id)
         {
-            var cpu = CPUs.First(item => item.UniqueId == id);
+            var cpu = CPUs.FirstOrDefault(item => item.UniqueId == id);
             
             if(cpu != null)
             {

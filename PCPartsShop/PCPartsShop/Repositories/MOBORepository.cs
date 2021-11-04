@@ -22,7 +22,7 @@ namespace PCPartsShop.Repositories
 
         public void Delete(Guid id)
         {
-            var mobo = MOBOs.First(item => item.UniqueId == id);
+            var mobo = MOBOs.FirstOrDefault(item => item.UniqueId == id);
             if (mobo != null)
             {
                 MOBOs.Remove(mobo);
@@ -36,7 +36,7 @@ namespace PCPartsShop.Repositories
 
         public MOBO GetItem(Guid id)
         {
-            var mobo = MOBOs.First(item => item.UniqueId == id);
+            var mobo = MOBOs.FirstOrDefault(item => item.UniqueId == id);
 
             if (mobo != null)
             {
