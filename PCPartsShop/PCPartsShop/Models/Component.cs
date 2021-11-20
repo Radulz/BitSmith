@@ -8,20 +8,20 @@ namespace PCPartsShop.Models
 {
     public abstract class Component
     {
-        public Guid UniqueId { get; set; }
+        public Guid ComponentId { get; set; }
         public string Make { get; set; }
         public string Model { get; set; }
 
 
         public Component(Guid ID, string make, string model)
         {
-            UniqueId = ID;
+            ComponentId = ID;
             Make = make;
             Model = model;
         }
         public Component()
         {
-            UniqueId = Guid.NewGuid();
+            ComponentId = Guid.NewGuid();
         }
     }
 }

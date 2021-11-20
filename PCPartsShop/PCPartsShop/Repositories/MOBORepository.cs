@@ -22,7 +22,7 @@ namespace PCPartsShop.Repositories
 
         public void Delete(Guid id)
         {
-            var mobo = MOBOs.FirstOrDefault(item => item.UniqueId == id);
+            var mobo = MOBOs.FirstOrDefault(item => item.ComponentId == id);
             if (mobo != null)
             {
                 MOBOs.Remove(mobo);
@@ -36,7 +36,7 @@ namespace PCPartsShop.Repositories
 
         public MOBO GetItem(Guid id)
         {
-            var mobo = MOBOs.FirstOrDefault(item => item.UniqueId == id);
+            var mobo = MOBOs.FirstOrDefault(item => item.ComponentId == id);
 
             if (mobo != null)
             {
@@ -48,7 +48,7 @@ namespace PCPartsShop.Repositories
 
         public void Update(MOBO item)
         {
-            var moboindex = MOBOs.FindIndex(x => x.UniqueId == item.UniqueId);
+            var moboindex = MOBOs.FindIndex(x => x.ComponentId == item.ComponentId);
             if (moboindex != -1)
             {
                 MOBOs[moboindex] = item;

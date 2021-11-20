@@ -22,7 +22,7 @@ namespace PCPartsShop.Repositories
 
         public void Delete(Guid id)
         {
-            var gpu = GPUs.FirstOrDefault(item => item.UniqueId == id);
+            var gpu = GPUs.FirstOrDefault(item => item.ComponentId == id);
             if (gpu != null)
             {
                 GPUs.Remove(gpu);
@@ -37,7 +37,7 @@ namespace PCPartsShop.Repositories
 
         public GPU GetItem(Guid id)
         {
-            var gpu = GPUs.FirstOrDefault(item => item.UniqueId == id);
+            var gpu = GPUs.FirstOrDefault(item => item.ComponentId == id);
 
             if (gpu != null)
             {
@@ -49,7 +49,7 @@ namespace PCPartsShop.Repositories
 
         public void Update(GPU item)
         {
-            var gpuindex = GPUs.FindIndex(x => x.UniqueId == item.UniqueId);
+            var gpuindex = GPUs.FindIndex(x => x.ComponentId == item.ComponentId);
             if (gpuindex != -1)
             {
                 GPUs[gpuindex] = item;

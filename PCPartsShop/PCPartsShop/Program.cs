@@ -52,34 +52,34 @@ namespace PCPartsShop
             sticks.Add((RAM)e);
             foreach (CPU i in proc.CPUs)
             {
-                Console.WriteLine(i.UniqueId + " " + i.Make + " " + i.Model);
+                Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
             }
             Console.WriteLine();
             foreach (GPU i in gproc.GPUs)
             {
-                Console.WriteLine(i.UniqueId + " " + i.Make + " " + i.Model);
+                Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
             }
             Console.WriteLine();
             foreach (MOBO i in boards.MOBOs)
             {
-                Console.WriteLine(i.UniqueId + " " + i.Make + " " + i.Model);
+                Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
             }
             Console.WriteLine();
             foreach (PSU i in punits.PSUs)
             {
-                Console.WriteLine(i.UniqueId + " " + i.Make + " " + i.Model);
+                Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
             }
             Console.WriteLine();
             foreach (RAM i in sticks.RAMs)
             {
-                Console.WriteLine(i.UniqueId + " " + i.Make + " " + i.Model);
+                Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
             }
             Console.WriteLine();
-            aux1 = proc.GetItem(aux.UniqueId);
-            aux3 = gproc.GetItem(b.UniqueId);
-            aux5 = boards.GetItem(c.UniqueId);
-            aux7 = punits.GetItem(aux6.UniqueId);
-            aux9 = sticks.GetItem(aux8.UniqueId);
+            aux1 = proc.GetItem(aux.ComponentId);
+            aux3 = gproc.GetItem(b.ComponentId);
+            aux5 = boards.GetItem(c.ComponentId);
+            aux7 = punits.GetItem(aux6.ComponentId);
+            aux9 = sticks.GetItem(aux8.ComponentId);
             //if (aux1 != null)
             //{
             //    Console.WriteLine(aux1.UniqueId);
@@ -105,19 +105,19 @@ namespace PCPartsShop
                 Length = 250,
             };
 
-            gpu1.UniqueId = aux2.UniqueId;
+            gpu1.ComponentId = aux2.ComponentId;
             gproc.Update(gpu1);
 
-            aux6.UniqueId = d.UniqueId;
+            aux6.ComponentId = d.ComponentId;
             punits.Update(aux6);
             Console.WriteLine();
             foreach (GPU i in gproc.GPUs)
             {
-                Console.WriteLine(i.UniqueId + " " + i.Make + " " + i.Model);
+                Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
             }
             foreach (PSU i in punits.PSUs)
             {
-                Console.WriteLine(i.UniqueId + " " + i.Make + " " + i.Model);
+                Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
             }
             
         }

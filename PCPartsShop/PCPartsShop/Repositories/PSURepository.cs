@@ -22,7 +22,7 @@ namespace PCPartsShop.Repositories
 
         public void Delete(Guid id)
         {
-            var psu = PSUs.FirstOrDefault(item => item.UniqueId == id);
+            var psu = PSUs.FirstOrDefault(item => item.ComponentId == id);
             if (psu != null)
             {
                 PSUs.Remove(psu);
@@ -36,7 +36,7 @@ namespace PCPartsShop.Repositories
 
         public PSU GetItem(Guid id)
         {
-            var psu = PSUs.FirstOrDefault(item => item.UniqueId == id);
+            var psu = PSUs.FirstOrDefault(item => item.ComponentId == id);
 
             if (psu != null)
             {
@@ -48,7 +48,7 @@ namespace PCPartsShop.Repositories
 
         public void Update(PSU item)
         {
-            var psuindex = PSUs.FindIndex(x => x.UniqueId == item.UniqueId);
+            var psuindex = PSUs.FindIndex(x => x.ComponentId == item.ComponentId);
             if (psuindex != -1)
             {
                 PSUs[psuindex] = item;

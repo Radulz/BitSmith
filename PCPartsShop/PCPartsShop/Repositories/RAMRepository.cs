@@ -22,7 +22,7 @@ namespace PCPartsShop.Repositories
 
         public void Delete(Guid id)
         {
-            var ram = RAMs.FirstOrDefault(item => item.UniqueId == id);
+            var ram = RAMs.FirstOrDefault(item => item.ComponentId == id);
             if (ram != null)
             {
                 RAMs.Remove(ram);
@@ -36,7 +36,7 @@ namespace PCPartsShop.Repositories
 
         public RAM GetItem(Guid id)
         {
-            var ram = RAMs.FirstOrDefault(item => item.UniqueId == id);
+            var ram = RAMs.FirstOrDefault(item => item.ComponentId == id);
 
             if (ram != null)
             {
@@ -48,7 +48,7 @@ namespace PCPartsShop.Repositories
 
         public void Update(RAM item)
         {
-            var ramindex = RAMs.FindIndex(x => x.UniqueId == item.UniqueId);
+            var ramindex = RAMs.FindIndex(x => x.ComponentId == item.ComponentId);
             if (ramindex != -1)
             {
                 RAMs[ramindex] = item;
