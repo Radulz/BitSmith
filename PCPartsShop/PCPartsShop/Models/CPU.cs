@@ -15,7 +15,7 @@ namespace PCPartsShop.Models
         public int TDP { get; set; } // in W
         public int Cores { get; set; }
 
-        public CPU(string make, string model, double frequency, string socket, int tech, int mfreq, int tdp, int corenr) : base(Guid.NewGuid(), make, model)
+        public CPU(string make, string model, double price, string img, double frequency, string socket, int tech, int mfreq, int tdp, int corenr) : base(Guid.NewGuid(), make, model, price, img)
         {
             Freq = frequency;
             Socket = socket;

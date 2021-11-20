@@ -15,7 +15,7 @@ namespace PCPartsShop.Models
         public int PowerC { get; set; } // in W
         public int Length { get; set; } // in cm
 
-        public GPU(string make, string model, int frequency, int capacity, string type, int tech, int power, int length) : base(Guid.NewGuid(), make, model)
+        public GPU(string make, string model, double price, string img, int frequency, int capacity, string type, int tech, int power, int length) : base(Guid.NewGuid(), make, model, price, img)
         {
             Freq = frequency;
             Memory = capacity;

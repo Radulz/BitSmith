@@ -14,7 +14,7 @@ namespace PCPartsShop.Models
         public List<int> MemoryFreq { get; set; } // all in MHz
         public string MemoryType { get; set; }
 
-        public MOBO(string make, string model, string socket, string format, string chipset, List<int> freqs, string memorytype) : base (Guid.NewGuid(), make, model)
+        public MOBO(string make, string model, double price, string img, string socket, string format, string chipset, List<int> freqs, string memorytype) : base (Guid.NewGuid(), make, model, price, img)
         {
             Socket = socket;
             Format = format;

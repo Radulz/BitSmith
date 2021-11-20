@@ -11,7 +11,7 @@ namespace PCPartsShop.Models
         public int Power { get; set; } // in W
         public string Type { get; set; }
 
-        public PSU(string make, string model, int power, string type) : base(Guid.NewGuid(), make, model)
+        public PSU(string make, string model, double price, string img, int power, string type) : base(Guid.NewGuid(), make, model, price, img)
         {
             
             Power = power;

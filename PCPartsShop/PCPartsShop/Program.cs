@@ -29,16 +29,16 @@ namespace PCPartsShop
             f.Add(3000);
             f.Add(3200);
             
-            aux = new CPU("intel", "i7", 2.5, "LGA1200", 14, 2666, 125, 6);
+            aux = new CPU("intel", "i7", 250.57, "img1", 2.5, "LGA1200", 14, 2666, 125, 6);
             a = new CPU();
             b = new GPU();
-            aux2 = new GPU("Nvidia", "GTX1060", 1833, 6, "GDDR5", 8, 150, 223);
+            aux2 = new GPU("Nvidia", "GTX1060", 420.33, "img2", 1833, 6, "GDDR5", 8, 150, 223);
             c = new MOBO();
-            aux4 = new MOBO("MSI", "MPG", "AM4", "ATX", "B550", f, "DDR4");
+            aux4 = new MOBO("MSI", "MPG", 155.89, "img3", "AM4", "ATX", "B550", f, "DDR4");
             d = new PSU();
-            aux6 = new PSU("Corsair", "TX750", 750, "Non-Modular");
+            aux6 = new PSU("Corsair", "TX750", 150, "img4", 750, "Non-Modular");
             e = new RAM();
-            aux8 = new RAM("HyperX", "Fury", "DDR4", 16, 2400, 1.2);
+            aux8 = new RAM("HyperX", "Fury", 125.5, "img5", "DDR4", 16, 2400, 1.2);
        
             proc.Add(aux);
             proc.Add((CPU)a);

@@ -13,7 +13,7 @@ namespace PCPartsShop.Models
         public int Freq { get; set; } // in MHZ
         public double Voltage { get; set; } // in V
 
-        public RAM(string make, string model, string type, int capacity, int frequency, double volts) : base(Guid.NewGuid(), make, model)
+        public RAM(string make, string model, double price, string img, string type, int capacity, int frequency, double volts) : base(Guid.NewGuid(), make, model, price, img)
         {
             Type = type;
             Capacity = capacity;
