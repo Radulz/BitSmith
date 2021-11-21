@@ -12,11 +12,18 @@ using PCPartsShop.Commands.CPUCommands.GetAllCPUs;
 using PCPartsShop.Commands.CPUCommands.GetCPU;
 using PCPartsShop.Commands.CPUCommands.RemoveCPU;
 using PCPartsShop.Commands.CPUCommands.UpdateCPU;
+using PCPartsShop.Commands.GPUCommands.CreateGPU;
+using PCPartsShop.Commands.GPUCommands.GetAllGPUs;
+using PCPartsShop.Commands.GPUCommands.GetGPU;
+using PCPartsShop.Commands.GPUCommands.RemoveGPU;
+using PCPartsShop.Commands.GPUCommands.UpdateGPU;
 
 namespace PCPartsShop
 {
     internal class Program
     {
+        private static IMediator _mediator;
+        private static ServiceProvider _diContainer;
         private static async Task Main(string[] args)
         {
             Component a, b, c, d, e;
@@ -102,17 +109,7 @@ namespace PCPartsShop
             //Console.WriteLine(aux7.UniqueId);
             //Console.WriteLine(aux9.UniqueId);
 
-            //var gpu1 = new GPU
-            //{
-            //    Make = "AMD",
-            //    Model = "RX7000XT",
-            //    Freq = 2000,
-            //    Memory = 8,
-            //    MemoryType = "GDDR6",
-            //    Tech = 8,
-            //    PowerC = 300,
-            //    Length = 250,
-            //};
+
 
             //gpu1.ComponentId = aux2.ComponentId;
             //gproc.Update(gpu1);
@@ -128,8 +125,15 @@ namespace PCPartsShop
             //{
             //    Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
             //}
-            
-            var diContainer = new ServiceCollection()
+            ConfigureMediator();
+            await TestCPURepo();
+            await TestGPURepo();
+           
+        }
+
+        private static void ConfigureMediator()
+        {
+            _diContainer = new ServiceCollection()
                 .AddMediatR(typeof(IComponentRepository<CPU>))
                 .AddScoped<IComponentRepository<CPU>, CPURepository>()
                 .AddScoped<IComponentRepository<GPU>, GPURepository>()
@@ -137,49 +141,74 @@ namespace PCPartsShop
                 .AddScoped<IComponentRepository<PSU>, PSURepository>()
                 .AddScoped<IComponentRepository<RAM>, RAMRepository>()
                 .BuildServiceProvider();
-            var mediator = diContainer.GetRequiredService<IMediator>();
+            _mediator = _diContainer.GetRequiredService<IMediator>();
+        }
 
-            var cpu1 = await mediator.Send(new CreateCPUCommand { Make = "AMD", Model = "Ryzen 5", Price = 299.99, Image = "no", Cores = 6, Freq = 5.0, MFreq = 3200, Socket = "AM4", TDP = 65, Tech = 7 });
+        private static async Task TestCPURepo()
+        {
+
+            var cpu1 = await _mediator.Send(new CreateCPUCommand { Make = "AMD", Model = "Ryzen 5", Price = 299.99, Image = "no", Cores = 6, Freq = 5.0, MFreq = 3200, Socket = "AM4", TDP = 65, Tech = 7 });
 
             Console.WriteLine(cpu1);
 
-            var cpu2 = await mediator.Send(new CreateCPUCommand { Make = "AMD", Model = "Ryzen 7", Price = 399.99, Image = "no", Cores = 8, Freq = 4.8, MFreq = 3200, Socket = "AM4", TDP = 90, Tech = 7 });
+            var cpu2 = await _mediator.Send(new CreateCPUCommand { Make = "AMD", Model = "Ryzen 7", Price = 399.99, Image = "no", Cores = 8, Freq = 4.8, MFreq = 3200, Socket = "AM4", TDP = 90, Tech = 7 });
 
             Console.WriteLine(cpu2);
 
-            var getcpus = await mediator.Send(new GetAllCPUsCommand());
+            var getcpus = await _mediator.Send(new GetAllCPUsCommand());
 
             foreach (var i in getcpus)
             {
                 Console.WriteLine(i.Make + " " + i.Model);
             }
 
-            var getcpu2 = await mediator.Send(new GetCPUByIdCommand { CPUId = cpu2} );
+            var getcpu2 = await _mediator.Send(new GetCPUByIdCommand { CPUId = cpu2 });
 
             Console.WriteLine(getcpu2.Make + " " + getcpu2.Model);
 
-            var delcpu2 = await mediator.Send(new RemoveCPUCommand { CPUId = new Guid() });
+            var delcpu2 = await _mediator.Send(new RemoveCPUCommand { CPUId = new Guid() });
             Console.WriteLine(delcpu2);
 
-            var cpu3 = new CPU
-            {
-                ComponentId = cpu2,
-                Make = "AMD",
-                Model = "Ryzen 7",
-                Price = 359.99,
-                Image = "no",
-                Cores = 8,
-                Freq = 4.8,
-                MFreq = 3200,
-                Socket = "AM4",
-                TDP = 90,
-                Tech = 7,
-            };
-
-            var updatecpu2 = await mediator.Send(new UpdateCPUCommand { CPUId = cpu2, Make = "AMD", Model = "Ryzen 7", Price = 359.99, Image = "no", Cores = 8, Freq = 4.8, MFreq = 3200, Socket = "AM4", TDP = 90, Tech = 7 });
+            var updatecpu2 = await _mediator.Send(new UpdateCPUCommand { CPUId = cpu2, Make = "AMD", Model = "Ryzen 7", Price = 359.99, Image = "no", Cores = 8, Freq = 4.8, MFreq = 3200, Socket = "AM4", TDP = 90, Tech = 7 });
 
             Console.WriteLine(updatecpu2);
-           
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+
+        private static async Task TestGPURepo()
+        {
+            var gpu1 = await _mediator.Send(new CreateGPUCommand {Make = "AMD", Model = "RX7000XT", Price=1000.99, Image="none", Freq = 2000, Memory = 8, MemoryType = "GDDR6", Tech = 8, PowerC = 300, Length = 250});
+            Console.WriteLine(gpu1);
+
+            var gpu2 = await _mediator.Send(new CreateGPUCommand { Make = "Nvidia", Model = "GTX1060", Price = 420.33, Image = "img2", Freq = 1833, Memory = 6, MemoryType = "GDDR5", Tech = 8, PowerC = 150, Length = 223 });
+            Console.WriteLine(gpu2);
+
+            var getgpus = await _mediator.Send(new GetAllGPUsCommand());
+
+            foreach (var i in getgpus)
+            {
+                Console.WriteLine(i.Make + " " + i.Model);
+            }
+
+            var getgpu2 = await _mediator.Send(new GetGPUByIdCommand { GPUId = gpu2 });
+
+            Console.WriteLine(getgpu2.Make + " " + getgpu2.Model);
+
+            var delgpu2 = await _mediator.Send(new RemoveGPUCommand { GPUId = gpu2 });
+            Console.WriteLine(delgpu2);
+            Console.WriteLine();
+
+            foreach (var i in getgpus)
+            {
+                Console.WriteLine(i.Make + " " + i.Model);
+            }
+            
+            var updategpu2 = await _mediator.Send(new UpdateGPUCommand { GPUId = gpu1, Make = "Nvidia", Model = "GTX1060", Price = 420.33, Image = "img2", Freq = 1833, Memory = 6, MemoryType = "GDDR5", Tech = 8, PowerC = 150, Length = 223 });
+
+            Console.WriteLine(updategpu2);
+            Console.WriteLine();
+            Console.WriteLine();
         }
     }
 }
