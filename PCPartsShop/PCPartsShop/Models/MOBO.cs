@@ -11,15 +11,17 @@ namespace PCPartsShop.Models
         public string Socket { get; set; }
         public string Format { get; set; }
         public string Chipset { get; set; }
-        public List<int> MemoryFreq { get; set; } // all in MHz
+        public int MemoryFreqInf { get; set; }
+        public int MemoryFreqSup { get; set; }
         public string MemoryType { get; set; }
 
-        public MOBO(string make, string model, double price, string img, string socket, string format, string chipset, List<int> freqs, string memorytype) : base (Guid.NewGuid(), make, model, price, img)
+        public MOBO(string make, string model, double price, string img, string socket, string format, string chipset, int inf, int sup, string memorytype) : base (Guid.NewGuid(), make, model, price, img)
         {
             Socket = socket;
             Format = format;
             Chipset = chipset;
-            MemoryFreq = freqs;
+            MemoryFreqInf = inf;
+            MemoryFreqSup = sup;
             MemoryType = memorytype;
         }
 
