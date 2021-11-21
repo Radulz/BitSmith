@@ -12,7 +12,7 @@ namespace PCPartsShop.Interfaces
         public void Add(T item);
         public T GetItem(Guid id);
         public IEnumerable<T> GetAll();
-        public void Delete(Guid id);
-        public void Update(T item);
+        public bool Delete(Guid id);
+        public bool Update(T item);
     }
 }

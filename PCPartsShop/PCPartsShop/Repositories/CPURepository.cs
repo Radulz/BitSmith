@@ -21,13 +21,15 @@ namespace PCPartsShop.Repositories
             _CPUs.Add(item);
         }
 
-        public void Delete(Guid id)
+        public bool Delete(Guid id)
         {
             var cpu = _CPUs.FirstOrDefault(item => item.ComponentId == id);
             if (cpu != null)
             {
                 _CPUs.Remove(cpu);
+                return true;
             }
+            return false;
         }
 
         public IEnumerable<CPU> GetAll()
@@ -47,13 +49,15 @@ namespace PCPartsShop.Repositories
             return null;
         }
 
-        public void Update(CPU item)
+        public bool Update(CPU item)
         {
             var cpuindex = _CPUs.FindIndex(x => x.ComponentId == item.ComponentId);
             if(cpuindex != -1)
             {
                 _CPUs[cpuindex] = item;
+                return true;
             }
+            return false;
         }
     }
 }

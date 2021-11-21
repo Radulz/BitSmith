@@ -20,13 +20,15 @@ namespace PCPartsShop.Repositories
             _MOBOs.Add(item);
         }
 
-        public void Delete(Guid id)
+        public bool Delete(Guid id)
         {
             var mobo = _MOBOs.FirstOrDefault(item => item.ComponentId == id);
             if (mobo != null)
             {
                 _MOBOs.Remove(mobo);
+                return true;
             }
+            return false;
         }
 
         public IEnumerable<MOBO> GetAll()
@@ -46,13 +48,15 @@ namespace PCPartsShop.Repositories
             return null;
         }
 
-        public void Update(MOBO item)
+        public bool Update(MOBO item)
         {
             var moboindex = _MOBOs.FindIndex(x => x.ComponentId == item.ComponentId);
             if (moboindex != -1)
             {
                 _MOBOs[moboindex] = item;
+                return true;
             }
+            return false;
         }
     }
 }

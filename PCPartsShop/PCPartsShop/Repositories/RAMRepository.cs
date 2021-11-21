@@ -20,13 +20,15 @@ namespace PCPartsShop.Repositories
             _RAMs.Add(item);
         }
 
-        public void Delete(Guid id)
+        public bool Delete(Guid id)
         {
             var ram = _RAMs.FirstOrDefault(item => item.ComponentId == id);
             if (ram != null)
             {
                 _RAMs.Remove(ram);
+                return true;
             }
+            return false;
         }
 
         public IEnumerable<RAM> GetAll()
@@ -46,13 +48,15 @@ namespace PCPartsShop.Repositories
             return null;
         }
 
-        public void Update(RAM item)
+        public bool Update(RAM item)
         {
             var ramindex = _RAMs.FindIndex(x => x.ComponentId == item.ComponentId);
             if (ramindex != -1)
             {
                 _RAMs[ramindex] = item;
+                return true;
             }
+            return false;
         }
     }
 }

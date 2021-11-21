@@ -20,13 +20,15 @@ namespace PCPartsShop.Repositories
             _GPUs.Add(item);
         }
 
-        public void Delete(Guid id)
+        public bool Delete(Guid id)
         {
             var gpu = _GPUs.FirstOrDefault(item => item.ComponentId == id);
             if (gpu != null)
             {
                 _GPUs.Remove(gpu);
+                return true;
             }
+            return false;
             
         }
 
@@ -47,13 +49,15 @@ namespace PCPartsShop.Repositories
             return null;
         }
 
-        public void Update(GPU item)
+        public bool Update(GPU item)
         {
             var gpuindex = _GPUs.FindIndex(x => x.ComponentId == item.ComponentId);
             if (gpuindex != -1)
             {
                 _GPUs[gpuindex] = item;
+                return true;
             }
+            return false;
         }
     }
 }

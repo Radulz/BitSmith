@@ -20,13 +20,15 @@ namespace PCPartsShop.Repositories
             _PSUs.Add(item);
         }
 
-        public void Delete(Guid id)
+        public bool Delete(Guid id)
         {
             var psu = _PSUs.FirstOrDefault(item => item.ComponentId == id);
             if (psu != null)
             {
                 _PSUs.Remove(psu);
+                return true;
             }
+            return false;
         }
 
         public IEnumerable<PSU> GetAll()
@@ -46,13 +48,15 @@ namespace PCPartsShop.Repositories
             return null;
         }
 
-        public void Update(PSU item)
+        public bool Update(PSU item)
         {
             var psuindex = _PSUs.FindIndex(x => x.ComponentId == item.ComponentId);
             if (psuindex != -1)
             {
                 _PSUs[psuindex] = item;
+                return true;
             }
+            return false;
         }
     }
 }
