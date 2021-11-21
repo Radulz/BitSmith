@@ -8,36 +8,36 @@ using PCPartsShop.Models;
 
 namespace PCPartsShop.Repositories
 {
-    public class GPURepository : IRepository<GPU>
+    public class GPURepository : IComponentRepository<GPU>
     {
-        public List<GPU> GPUs = new List<GPU>();
+        private readonly List<GPU> _GPUs;
         public GPURepository()
         {
-
+            _GPUs = new List<GPU>();
         }
         public void Add(GPU item)
         {
-            GPUs.Add(item);
+            _GPUs.Add(item);
         }
 
         public void Delete(Guid id)
         {
-            var gpu = GPUs.FirstOrDefault(item => item.ComponentId == id);
+            var gpu = _GPUs.FirstOrDefault(item => item.ComponentId == id);
             if (gpu != null)
             {
-                GPUs.Remove(gpu);
+                _GPUs.Remove(gpu);
             }
             
         }
 
         public IEnumerable<GPU> GetAll()
         {
-            return GPUs;
+            return _GPUs;
         }
 
         public GPU GetItem(Guid id)
         {
-            var gpu = GPUs.FirstOrDefault(item => item.ComponentId == id);
+            var gpu = _GPUs.FirstOrDefault(item => item.ComponentId == id);
 
             if (gpu != null)
             {
@@ -49,10 +49,10 @@ namespace PCPartsShop.Repositories
 
         public void Update(GPU item)
         {
-            var gpuindex = GPUs.FindIndex(x => x.ComponentId == item.ComponentId);
+            var gpuindex = _GPUs.FindIndex(x => x.ComponentId == item.ComponentId);
             if (gpuindex != -1)
             {
-                GPUs[gpuindex] = item;
+                _GPUs[gpuindex] = item;
             }
         }
     }

@@ -8,35 +8,35 @@ using PCPartsShop.Models;
 
 namespace PCPartsShop.Repositories
 {
-    public class RAMRepository : IRepository<RAM>
+    public class RAMRepository : IComponentRepository<RAM>
     {
-        public List<RAM> RAMs = new List<RAM>();
+        private readonly List<RAM> _RAMs;
         public RAMRepository()
         {
-
+            _RAMs = new List<RAM>();
         }
         public void Add(RAM item)
         {
-            RAMs.Add(item);
+            _RAMs.Add(item);
         }
 
         public void Delete(Guid id)
         {
-            var ram = RAMs.FirstOrDefault(item => item.ComponentId == id);
+            var ram = _RAMs.FirstOrDefault(item => item.ComponentId == id);
             if (ram != null)
             {
-                RAMs.Remove(ram);
+                _RAMs.Remove(ram);
             }
         }
 
         public IEnumerable<RAM> GetAll()
         {
-            return RAMs;
+            return _RAMs;
         }
 
         public RAM GetItem(Guid id)
         {
-            var ram = RAMs.FirstOrDefault(item => item.ComponentId == id);
+            var ram = _RAMs.FirstOrDefault(item => item.ComponentId == id);
 
             if (ram != null)
             {
@@ -48,10 +48,10 @@ namespace PCPartsShop.Repositories
 
         public void Update(RAM item)
         {
-            var ramindex = RAMs.FindIndex(x => x.ComponentId == item.ComponentId);
+            var ramindex = _RAMs.FindIndex(x => x.ComponentId == item.ComponentId);
             if (ramindex != -1)
             {
-                RAMs[ramindex] = item;
+                _RAMs[ramindex] = item;
             }
         }
     }

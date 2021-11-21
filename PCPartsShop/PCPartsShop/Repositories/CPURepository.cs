@@ -8,36 +8,36 @@ using PCPartsShop.Models;
 
 namespace PCPartsShop.Repositories
 {
-    public class CPURepository : IRepository<CPU>
+    public class CPURepository : IComponentRepository<CPU>
     {
-        public List<CPU> CPUs = new List<CPU>();
+        private readonly List<CPU> _CPUs;
         public CPURepository()
         {
-
+            _CPUs = new List<CPU>();
         }
 
         public void Add(CPU item)
         {
-            CPUs.Add(item);
+            _CPUs.Add(item);
         }
 
         public void Delete(Guid id)
         {
-            var cpu = CPUs.FirstOrDefault(item => item.ComponentId == id);
+            var cpu = _CPUs.FirstOrDefault(item => item.ComponentId == id);
             if (cpu != null)
             {
-                CPUs.Remove(cpu);
+                _CPUs.Remove(cpu);
             }
         }
 
         public IEnumerable<CPU> GetAll()
         {
-            return CPUs;
+            return _CPUs;
         }
 
         public CPU GetItem(Guid id)
         {
-            var cpu = CPUs.FirstOrDefault(item => item.ComponentId == id);
+            var cpu = _CPUs.FirstOrDefault(item => item.ComponentId == id);
             
             if(cpu != null)
             {
@@ -49,10 +49,10 @@ namespace PCPartsShop.Repositories
 
         public void Update(CPU item)
         {
-            var cpuindex = CPUs.FindIndex(x => x.ComponentId == item.ComponentId);
+            var cpuindex = _CPUs.FindIndex(x => x.ComponentId == item.ComponentId);
             if(cpuindex != -1)
             {
-                CPUs[cpuindex] = item;
+                _CPUs[cpuindex] = item;
             }
         }
     }

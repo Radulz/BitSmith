@@ -8,35 +8,35 @@ using PCPartsShop.Models;
 
 namespace PCPartsShop.Repositories
 {
-    public class MOBORepository : IRepository<MOBO>
+    public class MOBORepository : IComponentRepository<MOBO>
     {
-        public List<MOBO> MOBOs = new List<MOBO>();
+        private readonly List<MOBO> _MOBOs;
         public MOBORepository()
         {
-
+            _MOBOs = new List<MOBO>();
         }
         public void Add(MOBO item)
         {
-            MOBOs.Add(item);
+            _MOBOs.Add(item);
         }
 
         public void Delete(Guid id)
         {
-            var mobo = MOBOs.FirstOrDefault(item => item.ComponentId == id);
+            var mobo = _MOBOs.FirstOrDefault(item => item.ComponentId == id);
             if (mobo != null)
             {
-                MOBOs.Remove(mobo);
+                _MOBOs.Remove(mobo);
             }
         }
 
         public IEnumerable<MOBO> GetAll()
         {
-            return MOBOs;
+            return _MOBOs;
         }
 
         public MOBO GetItem(Guid id)
         {
-            var mobo = MOBOs.FirstOrDefault(item => item.ComponentId == id);
+            var mobo = _MOBOs.FirstOrDefault(item => item.ComponentId == id);
 
             if (mobo != null)
             {
@@ -48,10 +48,10 @@ namespace PCPartsShop.Repositories
 
         public void Update(MOBO item)
         {
-            var moboindex = MOBOs.FindIndex(x => x.ComponentId == item.ComponentId);
+            var moboindex = _MOBOs.FindIndex(x => x.ComponentId == item.ComponentId);
             if (moboindex != -1)
             {
-                MOBOs[moboindex] = item;
+                _MOBOs[moboindex] = item;
             }
         }
     }
