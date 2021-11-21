@@ -3,12 +3,21 @@ using PCPartsShop.Models;
 using PCPartsShop.Interfaces;
 using PCPartsShop.Repositories;
 using System.Collections.Generic;
+using MediatR;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using PCPartsShop.Commands.CPUCommands;
+using PCPartsShop.Commands.CPUCommands.GetAllCPUs;
+using PCPartsShop.Commands.CPUCommands.GetCPU;
+using PCPartsShop.Commands.CPUCommands.RemoveCPU;
+using PCPartsShop.Commands.CPUCommands.UpdateCPU;
 
 namespace PCPartsShop
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
             Component a, b, c, d, e;
             CPU aux, aux1;
@@ -30,7 +39,7 @@ namespace PCPartsShop
             f.Add(3200);
             
             aux = new CPU("intel", "i7", 250.57, "img1", 2.5, "LGA1200", 14, 2666, 125, 6);
-            a = new CPU();
+            a = new CPU("intel", "i5", 250.57, "img1", 2.5, "LGA1200", 14, 2666, 125, 6);
             b = new GPU();
             aux2 = new GPU("Nvidia", "GTX1060", 420.33, "img2", 1833, 6, "GDDR5", 8, 150, 223);
             c = new MOBO();
@@ -50,36 +59,36 @@ namespace PCPartsShop
             punits.Add((PSU)d);
             sticks.Add(aux8);
             sticks.Add((RAM)e);
-            foreach (CPU i in proc.CPUs)
-            {
-                Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
-            }
-            Console.WriteLine();
-            foreach (GPU i in gproc.GPUs)
-            {
-                Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
-            }
-            Console.WriteLine();
-            foreach (MOBO i in boards.MOBOs)
-            {
-                Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
-            }
-            Console.WriteLine();
-            foreach (PSU i in punits.PSUs)
-            {
-                Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
-            }
-            Console.WriteLine();
-            foreach (RAM i in sticks.RAMs)
-            {
-                Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
-            }
-            Console.WriteLine();
-            aux1 = proc.GetItem(aux.ComponentId);
-            aux3 = gproc.GetItem(b.ComponentId);
-            aux5 = boards.GetItem(c.ComponentId);
-            aux7 = punits.GetItem(aux6.ComponentId);
-            aux9 = sticks.GetItem(aux8.ComponentId);
+            //foreach (CPU i in proc._CPUs)
+            //{
+            //    Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
+            //}
+            //Console.WriteLine();
+            //foreach (GPU i in gproc.GPUs)
+            //{
+            //    Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
+            //}
+            //Console.WriteLine();
+            //foreach (MOBO i in boards.MOBOs)
+            //{
+            //    Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
+            //}
+            //Console.WriteLine();
+            //foreach (PSU i in punits.PSUs)
+            //{
+            //    Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
+            //}
+            //Console.WriteLine();
+            //foreach (RAM i in sticks.RAMs)
+            //{
+            //    Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
+            //}
+            //Console.WriteLine();
+            //aux1 = proc.GetItem(aux.ComponentId);
+            //aux3 = gproc.GetItem(b.ComponentId);
+            //aux5 = boards.GetItem(c.ComponentId);
+            //aux7 = punits.GetItem(aux6.ComponentId);
+            //aux9 = sticks.GetItem(aux8.ComponentId);
             //if (aux1 != null)
             //{
             //    Console.WriteLine(aux1.UniqueId);
@@ -93,33 +102,84 @@ namespace PCPartsShop
             //Console.WriteLine(aux7.UniqueId);
             //Console.WriteLine(aux9.UniqueId);
 
-            var gpu1 = new GPU
+            //var gpu1 = new GPU
+            //{
+            //    Make = "AMD",
+            //    Model = "RX7000XT",
+            //    Freq = 2000,
+            //    Memory = 8,
+            //    MemoryType = "GDDR6",
+            //    Tech = 8,
+            //    PowerC = 300,
+            //    Length = 250,
+            //};
+
+            //gpu1.ComponentId = aux2.ComponentId;
+            //gproc.Update(gpu1);
+
+            //aux6.ComponentId = d.ComponentId;
+            //punits.Update(aux6);
+            //Console.WriteLine();
+            //foreach (GPU i in gproc.GetAll())
+            //{
+            //    Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
+            //}
+            //foreach (PSU i in punits.GetAll())
+            //{
+            //    Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
+            //}
+            
+            var diContainer = new ServiceCollection()
+                .AddMediatR(typeof(IComponentRepository<CPU>))
+                .AddScoped<IComponentRepository<CPU>, CPURepository>()
+                .AddScoped<IComponentRepository<GPU>, GPURepository>()
+                .AddScoped<IComponentRepository<MOBO>, MOBORepository>()
+                .AddScoped<IComponentRepository<PSU>, PSURepository>()
+                .AddScoped<IComponentRepository<RAM>, RAMRepository>()
+                .BuildServiceProvider();
+            var mediator = diContainer.GetRequiredService<IMediator>();
+
+            var cpu1 = await mediator.Send(new CreateCPUCommand { Make = "AMD", Model = "Ryzen 5", Price = 299.99, Image = "no", Cores = 6, Freq = 5.0, MFreq = 3200, Socket = "AM4", TDP = 65, Tech = 7 });
+
+            Console.WriteLine(cpu1);
+
+            var cpu2 = await mediator.Send(new CreateCPUCommand { Make = "AMD", Model = "Ryzen 7", Price = 399.99, Image = "no", Cores = 8, Freq = 4.8, MFreq = 3200, Socket = "AM4", TDP = 90, Tech = 7 });
+
+            Console.WriteLine(cpu2);
+
+            var getcpus = await mediator.Send(new GetAllCPUsCommand());
+
+            foreach (var i in getcpus)
             {
+                Console.WriteLine(i.Make + " " + i.Model);
+            }
+
+            var getcpu2 = await mediator.Send(new GetCPUByIdCommand { CPUId = cpu2} );
+
+            Console.WriteLine(getcpu2.Make + " " + getcpu2.Model);
+
+            var delcpu2 = await mediator.Send(new RemoveCPUCommand { CPUId = new Guid() });
+            Console.WriteLine(delcpu2);
+
+            var cpu3 = new CPU
+            {
+                ComponentId = cpu2,
                 Make = "AMD",
-                Model = "RX7000XT",
-                Freq = 2000,
-                Memory = 8,
-                MemoryType = "GDDR6",
-                Tech = 8,
-                PowerC = 300,
-                Length = 250,
+                Model = "Ryzen 7",
+                Price = 359.99,
+                Image = "no",
+                Cores = 8,
+                Freq = 4.8,
+                MFreq = 3200,
+                Socket = "AM4",
+                TDP = 90,
+                Tech = 7,
             };
 
-            gpu1.ComponentId = aux2.ComponentId;
-            gproc.Update(gpu1);
+            var updatecpu2 = await mediator.Send(new UpdateCPUCommand { CPUId = cpu2, Make = "AMD", Model = "Ryzen 7", Price = 359.99, Image = "no", Cores = 8, Freq = 4.8, MFreq = 3200, Socket = "AM4", TDP = 90, Tech = 7 });
 
-            aux6.ComponentId = d.ComponentId;
-            punits.Update(aux6);
-            Console.WriteLine();
-            foreach (GPU i in gproc.GPUs)
-            {
-                Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
-            }
-            foreach (PSU i in punits.PSUs)
-            {
-                Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
-            }
-            
+            Console.WriteLine(updatecpu2);
+           
         }
     }
 }
