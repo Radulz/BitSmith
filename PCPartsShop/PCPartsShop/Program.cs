@@ -17,6 +17,21 @@ using PCPartsShop.Commands.GPUCommands.GetAllGPUs;
 using PCPartsShop.Commands.GPUCommands.GetGPU;
 using PCPartsShop.Commands.GPUCommands.RemoveGPU;
 using PCPartsShop.Commands.GPUCommands.UpdateGPU;
+using PCPartsShop.Commands.MOBOCommands.CreateMOBO;
+using PCPartsShop.Commands.MOBOCommands.GetAllMOBOs;
+using PCPartsShop.Commands.MOBOCommands.GetMOBO;
+using PCPartsShop.Commands.MOBOCommands.RemoveMOBO;
+using PCPartsShop.Commands.MOBOCommands.UpdateMOBO;
+using PCPartsShop.Commands.PSUCommands.CreatePSU;
+using PCPartsShop.Commands.PSUCommands.GetAllPSUs;
+using PCPartsShop.Commands.PSUCommands.GetPSU;
+using PCPartsShop.Commands.PSUCommands.RemovePSU;
+using PCPartsShop.Commands.PSUCommands.UpdatePSU;
+using PCPartsShop.Commands.RAMCommands.CreateRAM;
+using PCPartsShop.Commands.RAMCommands.GetAllRAMs;
+using PCPartsShop.Commands.RAMCommands.GetRAM;
+using PCPartsShop.Commands.RAMCommands.RemoveRAM;
+using PCPartsShop.Commands.RAMCommands.UpdateRAM;
 
 namespace PCPartsShop
 {
@@ -26,109 +41,12 @@ namespace PCPartsShop
         private static ServiceProvider _diContainer;
         private static async Task Main(string[] args)
         {
-            Component a, b, c, d, e;
-            CPU aux, aux1;
-            GPU aux2, aux3;
-            MOBO aux4, aux5;
-            PSU aux6, aux7;
-            RAM aux8, aux9;
-
-            CPURepository proc = new CPURepository();
-            GPURepository gproc = new GPURepository();
-            MOBORepository boards = new MOBORepository();
-            PSURepository punits = new PSURepository();
-            RAMRepository sticks = new RAMRepository();
-            List<int> f = new List<int>();
-            f.Add(2133);
-            f.Add(2400);
-            f.Add(2666);
-            f.Add(3000);
-            f.Add(3200);
-            
-            aux = new CPU("intel", "i7", 250.57, "img1", 2.5, "LGA1200", 14, 2666, 125, 6);
-            a = new CPU("intel", "i5", 250.57, "img1", 2.5, "LGA1200", 14, 2666, 125, 6);
-            b = new GPU();
-            aux2 = new GPU("Nvidia", "GTX1060", 420.33, "img2", 1833, 6, "GDDR5", 8, 150, 223);
-            c = new MOBO();
-            aux4 = new MOBO("MSI", "MPG", 155.89, "img3", "AM4", "ATX", "B550", f, "DDR4");
-            d = new PSU();
-            aux6 = new PSU("Corsair", "TX750", 150, "img4", 750, "Non-Modular");
-            e = new RAM();
-            aux8 = new RAM("HyperX", "Fury", 125.5, "img5", "DDR4", 16, 2400, 1.2);
-       
-            proc.Add(aux);
-            proc.Add((CPU)a);
-            gproc.Add(aux2);
-            gproc.Add((GPU)b);
-            boards.Add(aux4);
-            boards.Add((MOBO)c);
-            punits.Add(aux6);
-            punits.Add((PSU)d);
-            sticks.Add(aux8);
-            sticks.Add((RAM)e);
-            //foreach (CPU i in proc._CPUs)
-            //{
-            //    Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
-            //}
-            //Console.WriteLine();
-            //foreach (GPU i in gproc.GPUs)
-            //{
-            //    Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
-            //}
-            //Console.WriteLine();
-            //foreach (MOBO i in boards.MOBOs)
-            //{
-            //    Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
-            //}
-            //Console.WriteLine();
-            //foreach (PSU i in punits.PSUs)
-            //{
-            //    Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
-            //}
-            //Console.WriteLine();
-            //foreach (RAM i in sticks.RAMs)
-            //{
-            //    Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
-            //}
-            //Console.WriteLine();
-            //aux1 = proc.GetItem(aux.ComponentId);
-            //aux3 = gproc.GetItem(b.ComponentId);
-            //aux5 = boards.GetItem(c.ComponentId);
-            //aux7 = punits.GetItem(aux6.ComponentId);
-            //aux9 = sticks.GetItem(aux8.ComponentId);
-            //if (aux1 != null)
-            //{
-            //    Console.WriteLine(aux1.UniqueId);
-            //}
-            //else
-            //{
-            //    Console.WriteLine("This CPU doesn\'t exist");
-            //}
-            //Console.WriteLine(aux3.UniqueId);
-            //Console.WriteLine(aux5.UniqueId);
-            //Console.WriteLine(aux7.UniqueId);
-            //Console.WriteLine(aux9.UniqueId);
-
-
-
-            //gpu1.ComponentId = aux2.ComponentId;
-            //gproc.Update(gpu1);
-
-            //aux6.ComponentId = d.ComponentId;
-            //punits.Update(aux6);
-            //Console.WriteLine();
-            //foreach (GPU i in gproc.GetAll())
-            //{
-            //    Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
-            //}
-            //foreach (PSU i in punits.GetAll())
-            //{
-            //    Console.WriteLine(i.ComponentId + " " + i.Make + " " + i.Model);
-            //}
             ConfigureMediator();
             await TestCPURepo();
             await TestGPURepo();
-           
+            await TestMOBORepo();
+            await TestPSURepo();
+            await TestRAMRepo();
         }
 
         private static void ConfigureMediator()
@@ -167,15 +85,14 @@ namespace PCPartsShop
             Console.WriteLine(getcpu2.Make + " " + getcpu2.Model);
 
             var delcpu2 = await _mediator.Send(new RemoveCPUCommand { CPUId = new Guid() });
-            Console.WriteLine(delcpu2);
+            Console.WriteLine("Remove CPU response: " + delcpu2);
 
             var updatecpu2 = await _mediator.Send(new UpdateCPUCommand { CPUId = cpu2, Make = "AMD", Model = "Ryzen 7", Price = 359.99, Image = "no", Cores = 8, Freq = 4.8, MFreq = 3200, Socket = "AM4", TDP = 90, Tech = 7 });
 
-            Console.WriteLine(updatecpu2);
+            Console.WriteLine("Update CPU response: " + updatecpu2);
             Console.WriteLine();
             Console.WriteLine();
         }
-
         private static async Task TestGPURepo()
         {
             var gpu1 = await _mediator.Send(new CreateGPUCommand {Make = "AMD", Model = "RX7000XT", Price=1000.99, Image="none", Freq = 2000, Memory = 8, MemoryType = "GDDR6", Tech = 8, PowerC = 300, Length = 250});
@@ -196,8 +113,7 @@ namespace PCPartsShop
             Console.WriteLine(getgpu2.Make + " " + getgpu2.Model);
 
             var delgpu2 = await _mediator.Send(new RemoveGPUCommand { GPUId = gpu2 });
-            Console.WriteLine(delgpu2);
-            Console.WriteLine();
+            Console.WriteLine("Remove GPU response: " + delgpu2);
 
             foreach (var i in getgpus)
             {
@@ -206,9 +122,73 @@ namespace PCPartsShop
             
             var updategpu2 = await _mediator.Send(new UpdateGPUCommand { GPUId = gpu1, Make = "Nvidia", Model = "GTX1060", Price = 420.33, Image = "img2", Freq = 1833, Memory = 6, MemoryType = "GDDR5", Tech = 8, PowerC = 150, Length = 223 });
 
-            Console.WriteLine(updategpu2);
+            Console.WriteLine("Update GPU response: " + updategpu2);
             Console.WriteLine();
             Console.WriteLine();
+        }
+        private static async Task TestMOBORepo()
+        {
+            var m1 = await _mediator.Send(new CreateMOBOCommand { Make = "MSI", Model = "MPG", Price = 155.89, Image = "img3", Socket = "AM4", Format = "ATX", Chipset = "B550", MemoryFreqInf = 2133, MemoryFreqSup = 3200, MemoryType = "DDR4" });
+            Console.WriteLine(m1);
+
+            var m2 = await _mediator.Send(new CreateMOBOCommand { Make = "Gigabyte", Model = "Aorus elite", Price = 180, Image = "img8", Socket = "LGA1200", Format = "mATX", Chipset = "Z490", MemoryFreqInf = 2133, MemoryFreqSup = 2666, MemoryType = "DDR4" });
+            Console.WriteLine(m2);
+
+            var getmobos = await _mediator.Send(new GetAllMOBOsCommand());
+
+            foreach (var i in getmobos)
+            {
+                Console.WriteLine(i.Make + " " + i.Model);
+            }
+
+            var getm2 = await _mediator.Send(new GetMOBOByIdCommand { MOBOId = m2});
+            Console.WriteLine("Mobo by id:" + getm2.Make + " " + getm2.Model);
+
+            var delm2 = await _mediator.Send(new RemoveMOBOCommand { MOBOId = m2 });
+            Console.WriteLine("Remove mobo response: " + delm2);
+
+            var updatem2 = await _mediator.Send(new UpdateMOBOCommand { MOBOId = m2, Make = "Gigabyte", Model = "Aorus elite", Price = 180, Image = "img8", Socket = "LGA1200", Format = "mATX", Chipset = "Z490", MemoryFreqInf = 2133, MemoryFreqSup = 2666, MemoryType = "DDR4" });
+            Console.WriteLine("Update mobo response: " + updatem2);
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+        private static async Task TestPSURepo()
+        {
+            var p1 = await _mediator.Send(new CreatePSUCommand { Make = "Corsair", Model = "TX750", Price = 150, Image = "img4", Power = 750, Type = "Non-Modular" });
+            Console.WriteLine(p1);
+            var p2 = await _mediator.Send(new CreatePSUCommand { Make = "Gigabyte", Model = "Aorus etc", Price = 175, Image = "img10", Power = 500, Type = "Modular" });
+            Console.WriteLine(p2);
+            var getpsus = await _mediator.Send(new GetAllPSUsCommand());
+            foreach (var item in getpsus)
+            {
+                Console.WriteLine(item.Make + " " + item.Model);
+            }
+            var getp1 = await _mediator.Send(new GetPSUByIdCommand { PSUId = p1 });
+            Console.WriteLine(getp1.Make + " " + getp1.Model);
+            var delp1 = await _mediator.Send(new RemovePSUCommand { PSUId = p1 });
+            Console.WriteLine("Remove psu response: " + delp1);
+            var updatep2 = await _mediator.Send(new UpdatePSUCommand { PSUId = p2, Make = "Gigabyte", Model = "Aorus PRO", Price = 175, Image = "img10", Power = 500, Type = "Modular" });
+            Console.WriteLine("Update psu response: " + updatep2);
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+        private static async Task TestRAMRepo()
+        {
+            var r1 = await _mediator.Send(new CreateRAMCommand { Make = "HyperX", Model = "Fury", Price = 125.5, Image = "img5", Type = "DDR4", Capacity = 16, Freq = 2400, Voltage = 1.2 });
+            Console.WriteLine(r1);
+            var r2 = await _mediator.Send(new CreateRAMCommand { Make = "AData", Model = "XPG", Price = 100, Image = "none", Type = "DDR4", Capacity = 32, Freq = 3200, Voltage = 1.35 });
+            Console.WriteLine(r2);
+            var getrams = await _mediator.Send(new GetAllRAMsCommand());
+            foreach (var item in getrams)
+            {
+                Console.WriteLine(item.Make + " " + item.Model);
+            }
+            var getr2 = await _mediator.Send(new GetRAMByIdCommand { RAMId = r2 });
+            Console.WriteLine(getr2.Make + " " + getr2.Model);
+            var delr2 = await _mediator.Send(new RemoveRAMCommand { RAMId = r2 });
+            Console.WriteLine("Remove ram response: " + delr2);
+            var updater1 = await _mediator.Send(new UpdateRAMCommand { RAMId = r1, Make = "AData", Model = "XPG", Price = 100, Image = "none", Type = "DDR4", Capacity = 32, Freq = 3200, Voltage = 1.35 });
+            Console.WriteLine("Update ram response: " + updater1);
         }
     }
 }

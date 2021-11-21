@@ -6,24 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\MOBOCommands\CreateMOBO\" />
-    <Folder Include="Commands\MOBOCommands\GetAllMOBOs\" />
-    <Folder Include="Commands\MOBOCommands\GetMOBO\" />
-    <Folder Include="Commands\MOBOCommands\UpdateMOBO\" />
-    <Folder Include="Commands\MOBOCommands\RemoveMOBO\" />
-    <Folder Include="Commands\PSUCommands\CreatePSU\" />
-    <Folder Include="Commands\PSUCommands\GetAllPSUs\" />
-    <Folder Include="Commands\PSUCommands\GetPSU\" />
-    <Folder Include="Commands\PSUCommands\UpdatePSU\" />
-    <Folder Include="Commands\PSUCommands\RemovePSU\" />
-    <Folder Include="Commands\RAMCommands\CreateRAM\" />
-    <Folder Include="Commands\RAMCommands\GetAllRAMs\" />
-    <Folder Include="Commands\RAMCommands\GetRAM\" />
-    <Folder Include="Commands\RAMCommands\UpdateRAM\" />
-    <Folder Include="Commands\RAMCommands\RemoveRAM\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
