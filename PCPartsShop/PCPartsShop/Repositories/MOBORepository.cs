@@ -29,7 +29,7 @@ namespace PCPartsShop.Repositories
             }
         }
 
-        public List<MOBO> GetAll()
+        public IEnumerable<MOBO> GetAll()
         {
             return MOBOs;
         }

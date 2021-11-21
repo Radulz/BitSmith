@@ -29,7 +29,7 @@ namespace PCPartsShop.Repositories
             }
         }
 
-        public List<PSU> GetAll()
+        public IEnumerable<PSU> GetAll()
         {
             return PSUs;
         }

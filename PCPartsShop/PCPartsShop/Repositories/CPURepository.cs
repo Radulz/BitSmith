@@ -30,7 +30,7 @@ namespace PCPartsShop.Repositories
             }
         }
 
-        public List<CPU> GetAll()
+        public IEnumerable<CPU> GetAll()
         {
             return CPUs;
         }

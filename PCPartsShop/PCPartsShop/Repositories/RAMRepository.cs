@@ -29,7 +29,7 @@ namespace PCPartsShop.Repositories
             }
         }
 
-        public List<RAM> GetAll()
+        public IEnumerable<RAM> GetAll()
         {
             return RAMs;
         }

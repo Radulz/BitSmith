@@ -30,7 +30,7 @@ namespace PCPartsShop.Repositories
             
         }
 
-        public List<GPU> GetAll()
+        public IEnumerable<GPU> GetAll()
         {
             return GPUs;
         }
