@@ -6,9 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PCPartsShop.Commands.PSUCommands.GetAllPSUs
+namespace PCPartsShop.Commands.CPUCommands.GetCPU
 {
-    public class GetAllPSUsCommand : IRequest<IEnumerable<PSU>>
+    public class GetCPUByIdQuery : IRequest<CPU>
     {
+        public Guid CPUId { get; set; }
     }
 }

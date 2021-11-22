@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace PCPartsShop.Commands.CPUCommands.GetAllCPUs
 {
-    public class GetAllCPUsCommandHandler : IRequestHandler<GetAllCPUsCommand, IEnumerable<CPU>>
+    public class GetAllCPUsQueryHandler : IRequestHandler<GetAllCPUsQuery, IEnumerable<CPU>>
     {
         private readonly IComponentRepository<CPU> _CPUs;
 
-        public GetAllCPUsCommandHandler(IComponentRepository<CPU> repository)
+        public GetAllCPUsQueryHandler(IComponentRepository<CPU> repository)
         {
             _CPUs = repository;
         }
-        public Task<IEnumerable<CPU>> Handle(GetAllCPUsCommand request, CancellationToken cancellationToken)
+        public Task<IEnumerable<CPU>> Handle(GetAllCPUsQuery request, CancellationToken cancellationToken)
         {
             var result = _CPUs.GetAll();
             return Task.FromResult(result);

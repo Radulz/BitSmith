@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace PCPartsShop.Commands.MOBOCommands.GetMOBO
 {
-    public class GetMOBOByIdCommandHandler : IRequestHandler<GetMOBOByIdCommand, MOBO>
+    public class GetMOBOByIdQueryHandler : IRequestHandler<GetMOBOByIdQuery, MOBO>
     {
         private readonly IComponentRepository<MOBO> _MOBOs;
-        public GetMOBOByIdCommandHandler(IComponentRepository<MOBO> repository)
+        public GetMOBOByIdQueryHandler(IComponentRepository<MOBO> repository)
         {
             _MOBOs = repository;
         }
-        public Task<MOBO> Handle(GetMOBOByIdCommand request, CancellationToken cancellationToken)
+        public Task<MOBO> Handle(GetMOBOByIdQuery request, CancellationToken cancellationToken)
         {
             var m = _MOBOs.GetItem(request.MOBOId);
             return Task.FromResult(m);

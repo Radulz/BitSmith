@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace PCPartsShop.Commands.GPUCommands.GetGPU
 {
-    public class GetGPUByIdCommandHandler : IRequestHandler<GetGPUByIdCommand, GPU>
+    public class GetGPUByIdQueryHandler : IRequestHandler<GetGPUByIdQuery, GPU>
     {
         private readonly IComponentRepository<GPU> _GPUs;
-        public GetGPUByIdCommandHandler(IComponentRepository<GPU> repository)
+        public GetGPUByIdQueryHandler(IComponentRepository<GPU> repository)
         {
             _GPUs = repository;
         }
-        public Task<GPU> Handle(GetGPUByIdCommand request, CancellationToken cancellationToken)
+        public Task<GPU> Handle(GetGPUByIdQuery request, CancellationToken cancellationToken)
         {
             var gpu = _GPUs.GetItem(request.GPUId);
             return Task.FromResult(gpu);

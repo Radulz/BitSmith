@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PCPartsShop.Commands.MOBOCommands.GetAllMOBOs
+namespace PCPartsShop.Commands.GPUCommands.GetAllGPUs
 {
-    public class GetAllMOBOsCommand : IRequest<IEnumerable<MOBO>>
+    public class GetAllGPUsQuery : IRequest<IEnumerable<GPU>>
     {
     }
 }

@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace PCPartsShop.Commands.GPUCommands.GetAllGPUs
 {
-    public class GetAllGPUsCommandHandler : IRequestHandler<GetAllGPUsCommand, IEnumerable<GPU>>
+    public class GetAllGPUsQueryHandler : IRequestHandler<GetAllGPUsQuery, IEnumerable<GPU>>
     {
         private readonly IComponentRepository<GPU> _GPUs;
 
-        public GetAllGPUsCommandHandler(IComponentRepository<GPU> repository)
+        public GetAllGPUsQueryHandler(IComponentRepository<GPU> repository)
         {
             _GPUs = repository;
         }
-        public Task<IEnumerable<GPU>> Handle(GetAllGPUsCommand request, CancellationToken cancellationToken)
+        public Task<IEnumerable<GPU>> Handle(GetAllGPUsQuery request, CancellationToken cancellationToken)
         {
             var result = _GPUs.GetAll();
             return Task.FromResult(result);

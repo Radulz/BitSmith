@@ -6,9 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PCPartsShop.Commands.GPUCommands.GetAllGPUs
+namespace PCPartsShop.Commands.GPUCommands.GetGPU
 {
-    public class GetAllGPUsCommand : IRequest<IEnumerable<GPU>>
+    public class GetGPUByIdQuery : IRequest<GPU>
     {
+        public Guid GPUId { get; set; }
     }
 }

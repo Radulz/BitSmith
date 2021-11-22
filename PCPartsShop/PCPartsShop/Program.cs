@@ -73,14 +73,14 @@ namespace PCPartsShop
 
             Console.WriteLine(cpu2);
 
-            var getcpus = await _mediator.Send(new GetAllCPUsCommand());
+            var getcpus = await _mediator.Send(new GetAllCPUsQuery());
 
             foreach (var i in getcpus)
             {
                 Console.WriteLine(i.Make + " " + i.Model);
             }
 
-            var getcpu2 = await _mediator.Send(new GetCPUByIdCommand { CPUId = cpu2 });
+            var getcpu2 = await _mediator.Send(new GetCPUByIdQuery { CPUId = cpu2 });
 
             Console.WriteLine(getcpu2.Make + " " + getcpu2.Model);
 
@@ -101,14 +101,14 @@ namespace PCPartsShop
             var gpu2 = await _mediator.Send(new CreateGPUCommand { Make = "Nvidia", Model = "GTX1060", Price = 420.33, Image = "img2", Freq = 1833, Memory = 6, MemoryType = "GDDR5", Tech = 8, PowerC = 150, Length = 223 });
             Console.WriteLine(gpu2);
 
-            var getgpus = await _mediator.Send(new GetAllGPUsCommand());
+            var getgpus = await _mediator.Send(new GetAllGPUsQuery());
 
             foreach (var i in getgpus)
             {
                 Console.WriteLine(i.Make + " " + i.Model);
             }
 
-            var getgpu2 = await _mediator.Send(new GetGPUByIdCommand { GPUId = gpu2 });
+            var getgpu2 = await _mediator.Send(new GetGPUByIdQuery { GPUId = gpu2 });
 
             Console.WriteLine(getgpu2.Make + " " + getgpu2.Model);
 
@@ -134,14 +134,14 @@ namespace PCPartsShop
             var m2 = await _mediator.Send(new CreateMOBOCommand { Make = "Gigabyte", Model = "Aorus elite", Price = 180, Image = "img8", Socket = "LGA1200", Format = "mATX", Chipset = "Z490", MemoryFreqInf = 2133, MemoryFreqSup = 2666, MemoryType = "DDR4" });
             Console.WriteLine(m2);
 
-            var getmobos = await _mediator.Send(new GetAllMOBOsCommand());
+            var getmobos = await _mediator.Send(new GetAllMOBOsQuery());
 
             foreach (var i in getmobos)
             {
                 Console.WriteLine(i.Make + " " + i.Model);
             }
 
-            var getm2 = await _mediator.Send(new GetMOBOByIdCommand { MOBOId = m2});
+            var getm2 = await _mediator.Send(new GetMOBOByIdQuery { MOBOId = m2});
             Console.WriteLine("Mobo by id:" + getm2.Make + " " + getm2.Model);
 
             var delm2 = await _mediator.Send(new RemoveMOBOCommand { MOBOId = m2 });
@@ -158,12 +158,12 @@ namespace PCPartsShop
             Console.WriteLine(p1);
             var p2 = await _mediator.Send(new CreatePSUCommand { Make = "Gigabyte", Model = "Aorus etc", Price = 175, Image = "img10", Power = 500, Type = "Modular" });
             Console.WriteLine(p2);
-            var getpsus = await _mediator.Send(new GetAllPSUsCommand());
+            var getpsus = await _mediator.Send(new GetAllPSUsQuery());
             foreach (var item in getpsus)
             {
                 Console.WriteLine(item.Make + " " + item.Model);
             }
-            var getp1 = await _mediator.Send(new GetPSUByIdCommand { PSUId = p1 });
+            var getp1 = await _mediator.Send(new GetPSUByIdQuery { PSUId = p1 });
             Console.WriteLine(getp1.Make + " " + getp1.Model);
             var delp1 = await _mediator.Send(new RemovePSUCommand { PSUId = p1 });
             Console.WriteLine("Remove psu response: " + delp1);
@@ -178,12 +178,12 @@ namespace PCPartsShop
             Console.WriteLine(r1);
             var r2 = await _mediator.Send(new CreateRAMCommand { Make = "AData", Model = "XPG", Price = 100, Image = "none", Type = "DDR4", Capacity = 32, Freq = 3200, Voltage = 1.35 });
             Console.WriteLine(r2);
-            var getrams = await _mediator.Send(new GetAllRAMsCommand());
+            var getrams = await _mediator.Send(new GetAllRAMsQuery());
             foreach (var item in getrams)
             {
                 Console.WriteLine(item.Make + " " + item.Model);
             }
-            var getr2 = await _mediator.Send(new GetRAMByIdCommand { RAMId = r2 });
+            var getr2 = await _mediator.Send(new GetRAMByIdQuery { RAMId = r2 });
             Console.WriteLine(getr2.Make + " " + getr2.Model);
             var delr2 = await _mediator.Send(new RemoveRAMCommand { RAMId = r2 });
             Console.WriteLine("Remove ram response: " + delr2);

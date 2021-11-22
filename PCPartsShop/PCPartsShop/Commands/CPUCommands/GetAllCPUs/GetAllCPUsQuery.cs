@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PCPartsShop.Commands.CPUCommands.GetAllCPUs
 {
-    public class GetAllCPUsCommand : IRequest<IEnumerable<CPU>>
+    public class GetAllCPUsQuery : IRequest<IEnumerable<CPU>>
     {
     }
 }

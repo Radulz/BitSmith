@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace PCPartsShop.Commands.PSUCommands.GetAllPSUs
 {
-    public class GetAllPSUsCommandHandler : IRequestHandler<GetAllPSUsCommand, IEnumerable<PSU>>
+    public class GetAllPSUsQueryHandler : IRequestHandler<GetAllPSUsQuery, IEnumerable<PSU>>
     {
         private readonly IComponentRepository<PSU> _PSUs;
 
-        public GetAllPSUsCommandHandler(IComponentRepository<PSU> repository)
+        public GetAllPSUsQueryHandler(IComponentRepository<PSU> repository)
         {
             _PSUs = repository;
         }
-        public Task<IEnumerable<PSU>> Handle(GetAllPSUsCommand request, CancellationToken cancellationToken)
+        public Task<IEnumerable<PSU>> Handle(GetAllPSUsQuery request, CancellationToken cancellationToken)
         {
             var result = _PSUs.GetAll();
             return Task.FromResult(result);

@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace PCPartsShop.Commands.CPUCommands.GetCPU
 {
-    public class GetCPUByIdCommandHandler : IRequestHandler<GetCPUByIdCommand, CPU>
+    public class GetCPUByIdQueryHandler : IRequestHandler<GetCPUByIdQuery, CPU>
     {
         private readonly IComponentRepository<CPU> _CPUs;
-        public GetCPUByIdCommandHandler(IComponentRepository<CPU> repository)
+        public GetCPUByIdQueryHandler(IComponentRepository<CPU> repository)
         {
             _CPUs = repository;
         }
-        public Task<CPU> Handle(GetCPUByIdCommand request, CancellationToken cancellationToken)
+        public Task<CPU> Handle(GetCPUByIdQuery request, CancellationToken cancellationToken)
         {
             var cpu = _CPUs.GetItem(request.CPUId);
             return Task.FromResult(cpu);

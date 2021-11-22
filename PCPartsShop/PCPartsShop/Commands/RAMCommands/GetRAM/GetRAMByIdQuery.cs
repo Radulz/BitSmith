@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PCPartsShop.Commands.GPUCommands.GetGPU
+namespace PCPartsShop.Commands.RAMCommands.GetRAM
 {
-    public class GetGPUByIdCommand : IRequest<GPU>
+    public class GetRAMByIdQuery : IRequest<RAM>
     {
-        public Guid GPUId { get; set; }
+        public Guid RAMId { get; set; }
     }
 }

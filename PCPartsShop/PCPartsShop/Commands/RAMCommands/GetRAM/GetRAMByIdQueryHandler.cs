@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace PCPartsShop.Commands.RAMCommands.GetRAM
 {
-    public class GetRAMByIdCommandHandler : IRequestHandler<GetRAMByIdCommand, RAM>
+    public class GetRAMByIdQueryHandler : IRequestHandler<GetRAMByIdQuery, RAM>
     {
         private readonly IComponentRepository<RAM> _RAMs;
 
-        public GetRAMByIdCommandHandler(IComponentRepository<RAM> repository)
+        public GetRAMByIdQueryHandler(IComponentRepository<RAM> repository)
         {
             _RAMs = repository;
         }
-        public Task<RAM> Handle(GetRAMByIdCommand request, CancellationToken cancellationToken)
+        public Task<RAM> Handle(GetRAMByIdQuery request, CancellationToken cancellationToken)
         {
             var r = _RAMs.GetItem(request.RAMId);
             return Task.FromResult(r);

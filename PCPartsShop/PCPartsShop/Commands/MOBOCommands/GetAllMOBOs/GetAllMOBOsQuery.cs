@@ -6,10 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PCPartsShop.Commands.PSUCommands.GetPSU
+namespace PCPartsShop.Commands.MOBOCommands.GetAllMOBOs
 {
-    public class GetPSUByIdCommand : IRequest<PSU>
+    public class GetAllMOBOsQuery : IRequest<IEnumerable<MOBO>>
     {
-        public Guid PSUId { get; set; }
     }
 }

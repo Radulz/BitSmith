@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace PCPartsShop.Commands.MOBOCommands.GetAllMOBOs
 {
-    public class GetAllMOBOsCommandHandler : IRequestHandler<GetAllMOBOsCommand, IEnumerable<MOBO>>
+    public class GetAllMOBOsQueryHandler : IRequestHandler<GetAllMOBOsQuery, IEnumerable<MOBO>>
     {
         private readonly IComponentRepository<MOBO> _MOBOs;
 
-        public GetAllMOBOsCommandHandler(IComponentRepository<MOBO> repository)
+        public GetAllMOBOsQueryHandler(IComponentRepository<MOBO> repository)
         {
             _MOBOs = repository;
         }
-        public Task<IEnumerable<MOBO>> Handle(GetAllMOBOsCommand request, CancellationToken cancellationToken)
+        public Task<IEnumerable<MOBO>> Handle(GetAllMOBOsQuery request, CancellationToken cancellationToken)
         {
             var result = _MOBOs.GetAll();
             return Task.FromResult(result);

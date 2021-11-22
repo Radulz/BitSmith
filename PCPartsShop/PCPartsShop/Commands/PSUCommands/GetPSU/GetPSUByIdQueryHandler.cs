@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace PCPartsShop.Commands.PSUCommands.GetPSU
 {
-    public class GetPSUByIdCommandHandler : IRequestHandler<GetPSUByIdCommand, PSU>
+    public class GetPSUByIdQueryHandler : IRequestHandler<GetPSUByIdQuery, PSU>
     {
         private readonly IComponentRepository<PSU> _PSUs;
 
-        public GetPSUByIdCommandHandler(IComponentRepository<PSU> repository)
+        public GetPSUByIdQueryHandler(IComponentRepository<PSU> repository)
         {
             _PSUs = repository;
         }
 
-        public Task<PSU> Handle(GetPSUByIdCommand request, CancellationToken cancellationToken)
+        public Task<PSU> Handle(GetPSUByIdQuery request, CancellationToken cancellationToken)
         {
             var psu = _PSUs.GetItem(request.PSUId);
             return Task.FromResult(psu);

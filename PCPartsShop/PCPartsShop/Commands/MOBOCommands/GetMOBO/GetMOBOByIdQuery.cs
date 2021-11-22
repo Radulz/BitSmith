@@ -6,9 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PCPartsShop.Commands.RAMCommands.GetAllRAMs
+namespace PCPartsShop.Commands.MOBOCommands.GetMOBO
 {
-    public class GetAllRAMsCommand : IRequest<IEnumerable<RAM>>
+    public class GetMOBOByIdQuery : IRequest<MOBO>
     {
+        public Guid MOBOId { get; set; }
     }
 }

@@ -6,10 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PCPartsShop.Commands.RAMCommands.GetRAM
+namespace PCPartsShop.Commands.PSUCommands.GetAllPSUs
 {
-    public class GetRAMByIdCommand : IRequest<RAM>
+    public class GetAllPSUsQuery : IRequest<IEnumerable<PSU>>
     {
-        public Guid RAMId { get; set; }
     }
 }
