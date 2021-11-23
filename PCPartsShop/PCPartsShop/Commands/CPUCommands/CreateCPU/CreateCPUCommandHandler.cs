@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using PCPartsShop.Interfaces;
 using PCPartsShop.Models;
+using PCPartsShop.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +13,23 @@ namespace PCPartsShop.Commands.CPUCommands
 {
     public class CreateCPUCommandHandler : IRequestHandler<CreateCPUCommand, Guid>
     {
-        private readonly IComponentRepository<CPU> _cpurepo;
+        private IComponentRepository<CPU> _cpurepo;
 
-        public CreateCPUCommandHandler(IComponentRepository<CPU> repository)
+        public CreateCPUCommandHandler()
         {
-            _cpurepo = repository;
+            
+        }
+        private void EstablishConnection()
+        {
+            string connectionString = @"Server=RADULZ-DESKTOP\SQLEXPRESS;Database=Amdaris_PCPartsShop;Trusted_Connection=True;";
+            var dbContext = new PCPartsShopContext(connectionString);
+            dbContext.Database.EnsureCreated();
+            _cpurepo = new CPURepository(dbContext);
+
         }
         public Task<Guid> Handle(CreateCPUCommand request, CancellationToken cancellationToken)
         {
+            EstablishConnection();
             var cpu = new CPU
             {
                 Make = request.Make,

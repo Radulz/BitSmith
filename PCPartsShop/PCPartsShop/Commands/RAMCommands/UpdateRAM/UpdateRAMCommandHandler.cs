@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using PCPartsShop.Interfaces;
 using PCPartsShop.Models;
+using PCPartsShop.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +13,22 @@ namespace PCPartsShop.Commands.RAMCommands.UpdateRAM
 {
     public class UpdateRAMCommandHandler : IRequestHandler<UpdateRAMCommand, bool>
     {
-        private readonly IComponentRepository<RAM> _RAMs;
+        private  IComponentRepository<RAM> _RAMs;
 
-        public UpdateRAMCommandHandler(IComponentRepository<RAM> repository)
+        public UpdateRAMCommandHandler()
         {
-            _RAMs = repository;
+            
+        }
+        private void EstablishConnection()
+        {
+            string connectionString = @"Server=RADULZ-DESKTOP\SQLEXPRESS;Database=Amdaris_PCPartsShop;Trusted_Connection=True;";
+            var dbContext = new PCPartsShopContext(connectionString);
+            dbContext.Database.EnsureCreated();
+            _RAMs = new RAMRepository(dbContext);
         }
         public Task<bool> Handle(UpdateRAMCommand request, CancellationToken cancellationToken)
         {
+            EstablishConnection();
             var r = new RAM
             {
                 ComponentId = request.RAMId,

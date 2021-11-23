@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using PCPartsShop.Interfaces;
 using PCPartsShop.Models;
+using PCPartsShop.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,22 @@ namespace PCPartsShop.Commands.GPUCommands.UpdateGPU
 {
     public class UpdateGPUCommandHandler : IRequestHandler<UpdateGPUCommand, bool>
     {
-        private readonly IComponentRepository<GPU> _GPUs;
-        public UpdateGPUCommandHandler(IComponentRepository<GPU> repository)
+        private IComponentRepository<GPU> _GPUs;
+        public UpdateGPUCommandHandler()
         {
-            _GPUs = repository;
+           
+        }
+        private void EstablishConnection()
+        {
+            string connectionString = @"Server=RADULZ-DESKTOP\SQLEXPRESS;Database=Amdaris_PCPartsShop;Trusted_Connection=True;";
+            var dbContext = new PCPartsShopContext(connectionString);
+            dbContext.Database.EnsureCreated();
+            _GPUs = new GPURepository(dbContext);
+
         }
         public Task<bool> Handle(UpdateGPUCommand request, CancellationToken cancellationToken)
         {
+            EstablishConnection();
             var gpu = new GPU
             {
                 ComponentId = request.GPUId,

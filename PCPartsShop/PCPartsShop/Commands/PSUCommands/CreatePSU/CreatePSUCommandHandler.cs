@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using PCPartsShop.Interfaces;
 using PCPartsShop.Models;
+using PCPartsShop.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +13,23 @@ namespace PCPartsShop.Commands.PSUCommands.CreatePSU
 {
     public class CreatePSUCommandHandler : IRequestHandler<CreatePSUCommand, Guid>
     {
-        private readonly IComponentRepository<PSU> _PSUs;
+        private IComponentRepository<PSU> _PSUs;
 
-        public CreatePSUCommandHandler(IComponentRepository<PSU> repository)
+        public CreatePSUCommandHandler()
         {
-            _PSUs = repository;
+        
+        }
+        private void EstablishConnection()
+        {
+            string connectionString = @"Server=RADULZ-DESKTOP\SQLEXPRESS;Database=Amdaris_PCPartsShop;Trusted_Connection=True;";
+            var dbContext = new PCPartsShopContext(connectionString);
+            dbContext.Database.EnsureCreated();
+            _PSUs = new PSURepository(dbContext);
         }
 
         public Task<Guid> Handle(CreatePSUCommand request, CancellationToken cancellationToken)
         {
+            EstablishConnection();
             var psu = new PSU
             {
                 Make = request.Make,
