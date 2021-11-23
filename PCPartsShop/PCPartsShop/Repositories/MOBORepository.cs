@@ -10,22 +10,24 @@ namespace PCPartsShop.Repositories
 {
     public class MOBORepository : IComponentRepository<MOBO>
     {
-        private readonly List<MOBO> _MOBOs;
-        public MOBORepository()
+        private readonly PCPartsShopContext _dbContext;
+        public MOBORepository(PCPartsShopContext dbContext)
         {
-            _MOBOs = new List<MOBO>();
+            _dbContext = dbContext;
         }
         public void Add(MOBO item)
         {
-            _MOBOs.Add(item);
+            _dbContext.MOBOs.Add(item);
+            _dbContext.SaveChanges();
         }
 
         public bool Delete(Guid id)
         {
-            var mobo = _MOBOs.FirstOrDefault(item => item.ComponentId == id);
+            var mobo = _dbContext.MOBOs.FirstOrDefault(item => item.ComponentId == id);
             if (mobo != null)
             {
-                _MOBOs.Remove(mobo);
+                _dbContext.MOBOs.Remove(mobo);
+                _dbContext.SaveChanges();
                 return true;
             }
             return false;
@@ -33,12 +35,12 @@ namespace PCPartsShop.Repositories
 
         public IEnumerable<MOBO> GetAll()
         {
-            return _MOBOs;
+            return _dbContext.MOBOs;
         }
 
         public MOBO GetItem(Guid id)
         {
-            var mobo = _MOBOs.FirstOrDefault(item => item.ComponentId == id);
+            var mobo = _dbContext.MOBOs.FirstOrDefault(item => item.ComponentId == id);
 
             if (mobo != null)
             {
@@ -50,10 +52,20 @@ namespace PCPartsShop.Repositories
 
         public bool Update(MOBO item)
         {
-            var moboindex = _MOBOs.FindIndex(x => x.ComponentId == item.ComponentId);
-            if (moboindex != -1)
+            var mobo = _dbContext.MOBOs.FirstOrDefault(x => x.ComponentId == item.ComponentId);
+            if (mobo != null)
             {
-                _MOBOs[moboindex] = item;
+                mobo.Make = item.Make;
+                mobo.Model = item.Model;
+                mobo.Price = item.Price;
+                mobo.Image = item.Image;
+                mobo.Chipset = item.Chipset;
+                mobo.Format = item.Format;
+                mobo.MemoryFreqInf = item.MemoryFreqInf;
+                mobo.MemoryFreqSup = item.MemoryFreqSup;
+                mobo.MemoryType = item.MemoryType;
+                mobo.Socket = item.Socket;
+                _dbContext.SaveChanges();
                 return true;
             }
             return false;

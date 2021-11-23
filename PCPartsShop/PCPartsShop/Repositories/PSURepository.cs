@@ -10,22 +10,24 @@ namespace PCPartsShop.Repositories
 {
     public class PSURepository : IComponentRepository<PSU>
     {
-        private readonly List<PSU> _PSUs;
-        public PSURepository()
+        private readonly PCPartsShopContext _dbContext;
+        public PSURepository(PCPartsShopContext dbContext)
         {
-            _PSUs = new List<PSU>();
+            _dbContext = dbContext;
         }
         public void Add(PSU item)
         {
-            _PSUs.Add(item);
+            _dbContext.PSUs.Add(item);
+            _dbContext.SaveChanges();
         }
 
         public bool Delete(Guid id)
         {
-            var psu = _PSUs.FirstOrDefault(item => item.ComponentId == id);
+            var psu = _dbContext.PSUs.FirstOrDefault(item => item.ComponentId == id);
             if (psu != null)
             {
-                _PSUs.Remove(psu);
+                _dbContext.PSUs.Remove(psu);
+                _dbContext.SaveChanges();
                 return true;
             }
             return false;
@@ -33,12 +35,12 @@ namespace PCPartsShop.Repositories
 
         public IEnumerable<PSU> GetAll()
         {
-            return _PSUs;
+            return _dbContext.PSUs;
         }
 
         public PSU GetItem(Guid id)
         {
-            var psu = _PSUs.FirstOrDefault(item => item.ComponentId == id);
+            var psu = _dbContext.PSUs.FirstOrDefault(item => item.ComponentId == id);
 
             if (psu != null)
             {
@@ -50,10 +52,16 @@ namespace PCPartsShop.Repositories
 
         public bool Update(PSU item)
         {
-            var psuindex = _PSUs.FindIndex(x => x.ComponentId == item.ComponentId);
-            if (psuindex != -1)
+            var psu = _dbContext.PSUs.FirstOrDefault(x => x.ComponentId == item.ComponentId);
+            if (psu != null)
             {
-                _PSUs[psuindex] = item;
+                psu.Make = item.Make;
+                psu.Model = item.Model;
+                psu.Price = item.Price;
+                psu.Image = item.Image;
+                psu.Power = item.Power;
+                psu.Type = item.Type;
+                _dbContext.SaveChanges();
                 return true;
             }
             return false;

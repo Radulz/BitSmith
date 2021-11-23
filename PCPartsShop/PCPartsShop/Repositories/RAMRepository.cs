@@ -10,22 +10,24 @@ namespace PCPartsShop.Repositories
 {
     public class RAMRepository : IComponentRepository<RAM>
     {
-        private readonly List<RAM> _RAMs;
-        public RAMRepository()
+        private readonly PCPartsShopContext _dbContext;
+        public RAMRepository(PCPartsShopContext dbContext)
         {
-            _RAMs = new List<RAM>();
+            _dbContext = dbContext;
         }
         public void Add(RAM item)
         {
-            _RAMs.Add(item);
+            _dbContext.RAMs.Add(item);
+            _dbContext.SaveChanges();
         }
 
         public bool Delete(Guid id)
         {
-            var ram = _RAMs.FirstOrDefault(item => item.ComponentId == id);
+            var ram = _dbContext.RAMs.FirstOrDefault(item => item.ComponentId == id);
             if (ram != null)
             {
-                _RAMs.Remove(ram);
+                _dbContext.RAMs.Remove(ram);
+                _dbContext.SaveChanges();
                 return true;
             }
             return false;
@@ -33,12 +35,12 @@ namespace PCPartsShop.Repositories
 
         public IEnumerable<RAM> GetAll()
         {
-            return _RAMs;
+            return _dbContext.RAMs;
         }
 
         public RAM GetItem(Guid id)
         {
-            var ram = _RAMs.FirstOrDefault(item => item.ComponentId == id);
+            var ram = _dbContext.RAMs.FirstOrDefault(item => item.ComponentId == id);
 
             if (ram != null)
             {
@@ -50,10 +52,18 @@ namespace PCPartsShop.Repositories
 
         public bool Update(RAM item)
         {
-            var ramindex = _RAMs.FindIndex(x => x.ComponentId == item.ComponentId);
-            if (ramindex != -1)
+            var ram = _dbContext.RAMs.FirstOrDefault(x => x.ComponentId == item.ComponentId);
+            if (ram != null)
             {
-                _RAMs[ramindex] = item;
+                ram.Make = item.Make;
+                ram.Model = item.Model;
+                ram.Price = item.Price;
+                ram.Image = item.Image;
+                ram.Type = item.Type;
+                ram.Capacity = item.Capacity;
+                ram.Freq = item.Freq;
+                ram.Voltage = item.Voltage;
+                _dbContext.SaveChanges();
                 return true;
             }
             return false;

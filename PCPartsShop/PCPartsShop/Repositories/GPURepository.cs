@@ -10,22 +10,24 @@ namespace PCPartsShop.Repositories
 {
     public class GPURepository : IComponentRepository<GPU>
     {
-        private readonly List<GPU> _GPUs;
-        public GPURepository()
+        private readonly PCPartsShopContext _dbContext;
+        public GPURepository(PCPartsShopContext dbContext)
         {
-            _GPUs = new List<GPU>();
+            _dbContext = dbContext;
         }
         public void Add(GPU item)
         {
-            _GPUs.Add(item);
+            _dbContext.GPUs.Add(item);
+            _dbContext.SaveChanges();
         }
 
         public bool Delete(Guid id)
         {
-            var gpu = _GPUs.FirstOrDefault(item => item.ComponentId == id);
+            var gpu = _dbContext.GPUs.FirstOrDefault(item => item.ComponentId == id);
             if (gpu != null)
             {
-                _GPUs.Remove(gpu);
+                _dbContext.GPUs.Remove(gpu);
+                _dbContext.SaveChanges();
                 return true;
             }
             return false;
@@ -34,12 +36,12 @@ namespace PCPartsShop.Repositories
 
         public IEnumerable<GPU> GetAll()
         {
-            return _GPUs;
+            return _dbContext.GPUs;
         }
 
         public GPU GetItem(Guid id)
         {
-            var gpu = _GPUs.FirstOrDefault(item => item.ComponentId == id);
+            var gpu = _dbContext.GPUs.FirstOrDefault(item => item.ComponentId == id);
 
             if (gpu != null)
             {
@@ -51,10 +53,19 @@ namespace PCPartsShop.Repositories
 
         public bool Update(GPU item)
         {
-            var gpuindex = _GPUs.FindIndex(x => x.ComponentId == item.ComponentId);
-            if (gpuindex != -1)
+            var gpu = _dbContext.GPUs.FirstOrDefault(i => i.ComponentId == item.ComponentId);
+            if (gpu != null)
             {
-                _GPUs[gpuindex] = item;
+                gpu.Make = item.Make;
+                gpu.Model = item.Model;
+                gpu.Price = item.Price;
+                gpu.Image = item.Image;
+                gpu.Freq = item.Freq;
+                gpu.Memory = item.Memory;
+                gpu.MemoryType = item.MemoryType;
+                gpu.PowerC = item.PowerC;
+                gpu.Tech = item.Tech;
+                gpu.Length = item.Length;
                 return true;
             }
             return false;

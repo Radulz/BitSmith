@@ -10,23 +10,25 @@ namespace PCPartsShop.Repositories
 {
     public class CPURepository : IComponentRepository<CPU>
     {
-        private readonly List<CPU> _CPUs;
-        public CPURepository()
+        private readonly PCPartsShopContext _dbContext;
+        public CPURepository(PCPartsShopContext dbContext)
         {
-            _CPUs = new List<CPU>();
+            _dbContext = dbContext;
         }
 
         public void Add(CPU item)
         {
-            _CPUs.Add(item);
+            _dbContext.CPUs.Add(item);
+            _dbContext.SaveChanges();
         }
 
         public bool Delete(Guid id)
         {
-            var cpu = _CPUs.FirstOrDefault(item => item.ComponentId == id);
+            var cpu = _dbContext.CPUs.FirstOrDefault(item => item.ComponentId == id);
             if (cpu != null)
             {
-                _CPUs.Remove(cpu);
+                _dbContext.CPUs.Remove(cpu);
+                _dbContext.SaveChanges();
                 return true;
             }
             return false;
@@ -34,12 +36,12 @@ namespace PCPartsShop.Repositories
 
         public IEnumerable<CPU> GetAll()
         {
-            return _CPUs;
+            return _dbContext.CPUs;
         }
 
         public CPU GetItem(Guid id)
         {
-            var cpu = _CPUs.FirstOrDefault(item => item.ComponentId == id);
+            var cpu = _dbContext.CPUs.FirstOrDefault(item => item.ComponentId == id);
             
             if(cpu != null)
             {
@@ -51,10 +53,20 @@ namespace PCPartsShop.Repositories
 
         public bool Update(CPU item)
         {
-            var cpuindex = _CPUs.FindIndex(x => x.ComponentId == item.ComponentId);
-            if(cpuindex != -1)
+            var cpu = _dbContext.CPUs.FirstOrDefault(i => i.ComponentId == item.ComponentId);
+            if (cpu != null)
             {
-                _CPUs[cpuindex] = item;
+                cpu.Make = item.Make;
+                cpu.Model = item.Model;
+                cpu.Price = item.Price;
+                cpu.Image = item.Image;
+                cpu.Freq = item.Freq;
+                cpu.MFreq = item.MFreq;
+                cpu.Socket = item.Socket;
+                cpu.Tech = item.Tech;
+                cpu.TDP = item.TDP;
+                cpu.Cores = item.Cores;
+                _dbContext.SaveChanges();
                 return true;
             }
             return false;
