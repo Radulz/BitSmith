@@ -41,6 +41,10 @@ namespace PCPartsShop
         private static ServiceProvider _diContainer;
         private static async Task Main(string[] args)
         {
+            string connectionString = @"Server=RADULZ-DESKTOP\SQLEXPRESS;Database=Amdaris_PCPartsShop;Trusted_Connection=True;";
+            using var dbContext = new PCPartsShopContext(connectionString);
+            dbContext.Database.EnsureCreated();
+
             ConfigureMediator();
             await TestCPURepo();
             await TestGPURepo();
@@ -84,7 +88,7 @@ namespace PCPartsShop
 
             Console.WriteLine(getcpu2.Make + " " + getcpu2.Model);
 
-            var delcpu2 = await _mediator.Send(new RemoveCPUCommand { CPUId = new Guid() });
+            var delcpu2 = await _mediator.Send(new RemoveCPUCommand { CPUId = cpu1 });
             Console.WriteLine("Remove CPU response: " + delcpu2);
 
             var updatecpu2 = await _mediator.Send(new UpdateCPUCommand { CPUId = cpu2, Make = "AMD", Model = "Ryzen 7", Price = 359.99, Image = "no", Cores = 8, Freq = 4.8, MFreq = 3200, Socket = "AM4", TDP = 90, Tech = 7 });
@@ -144,10 +148,10 @@ namespace PCPartsShop
             var getm2 = await _mediator.Send(new GetMOBOByIdQuery { MOBOId = m2});
             Console.WriteLine("Mobo by id:" + getm2.Make + " " + getm2.Model);
 
-            var delm2 = await _mediator.Send(new RemoveMOBOCommand { MOBOId = m2 });
+            var delm2 = await _mediator.Send(new RemoveMOBOCommand { MOBOId = m1 });
             Console.WriteLine("Remove mobo response: " + delm2);
 
-            var updatem2 = await _mediator.Send(new UpdateMOBOCommand { MOBOId = m2, Make = "Gigabyte", Model = "Aorus elite", Price = 180, Image = "img8", Socket = "LGA1200", Format = "mATX", Chipset = "Z490", MemoryFreqInf = 2133, MemoryFreqSup = 2666, MemoryType = "DDR4" });
+            var updatem2 = await _mediator.Send(new UpdateMOBOCommand { MOBOId = m2, Make = "Gigabyte", Model = "Aorus elite", Price = 180, Image = "img8", Socket = "LGA1200", Format = "mATX", Chipset = "Z490", MemoryFreqInf = 2133, MemoryFreqSup = 3200, MemoryType = "DDR4" });
             Console.WriteLine("Update mobo response: " + updatem2);
             Console.WriteLine();
             Console.WriteLine();
