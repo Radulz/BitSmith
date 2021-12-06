@@ -16,23 +16,7 @@ namespace PCPartsShop.Infrastructure
         public DbSet<MOBO> MOBOs { get; set; }
         public DbSet<PSU> PSUs { get; set; }
         public DbSet<RAM> RAMs { get; set; }
-
-        private readonly string _connectionString;
-        public PCPartsShopContext(string connectionString) : base()
-        {
-            _connectionString = connectionString;
-        }
-        public PCPartsShopContext() : base()
-        {
-
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(_connectionString);
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        public PCPartsShopContext(DbContextOptions<PCPartsShopContext> options) : base(options)
         {
 
         }

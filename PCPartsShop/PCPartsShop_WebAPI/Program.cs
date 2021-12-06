@@ -15,9 +15,6 @@ namespace PCPartsShop_WebAPI
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-            string connectionString = @"Server=RADULZ-DESKTOP\SQLEXPRESS;Database=Amdaris_PCPartsShop;Trusted_Connection=True;";
-            using var dbContext = new PCPartsShopContext(connectionString);
-            dbContext.Database.EnsureCreated();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
