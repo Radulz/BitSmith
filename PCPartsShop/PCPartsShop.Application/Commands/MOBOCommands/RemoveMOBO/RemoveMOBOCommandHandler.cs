@@ -19,7 +19,7 @@ namespace PCPartsShop.Application.Commands.MOBOCommands.RemoveMOBO
         }
         public async Task<bool> Handle(RemoveMOBOCommand request, CancellationToken cancellationToken)
         {
-            var mobo = await _context.MOBOs.FirstOrDefaultAsync(m => m.ComponentId == request.GPUId);
+            var mobo = await _context.MOBOs.FirstOrDefaultAsync(m => m.ComponentId == request.MOBOId);
             if (mobo is null)
             {
                 return false;

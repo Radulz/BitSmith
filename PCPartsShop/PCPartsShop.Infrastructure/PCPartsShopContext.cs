@@ -22,6 +22,10 @@ namespace PCPartsShop.Infrastructure
         {
             _connectionString = connectionString;
         }
+        public PCPartsShopContext() : base()
+        {
+
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
