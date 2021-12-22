@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PCPartsShop.Domain.Models;
 using PCPartsShop_WebAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,9 @@ namespace PCPartsShop.Infrastructure
         public DbSet<MOBO> MOBOs { get; set; }
         public DbSet<PSU> PSUs { get; set; }
         public DbSet<RAM> RAMs { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
         public PCPartsShopContext(DbContextOptions<PCPartsShopContext> options) : base(options)
         {
 
