@@ -16,8 +16,9 @@ namespace PCPartsShop.Domain.Models
         public string UserCounty { get; set; }
         public string UserCity { get; set; }
         public string UserAddress { get; set; }
+        public double TotalPrice { get; set; }
         public bool IsShipped { get; set; }
 
-        public ICollection<Component> OrderItems { get; set; }
+        public ICollection<OrderItem> OrderItems { get; set; }
     }
 }
