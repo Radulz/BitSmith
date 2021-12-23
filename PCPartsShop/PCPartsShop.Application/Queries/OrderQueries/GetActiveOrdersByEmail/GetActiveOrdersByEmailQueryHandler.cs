@@ -23,7 +23,7 @@ namespace PCPartsShop.Application.Queries.OrderQueries.GetActiveOrdersByEmail
 
             foreach (var item in _context.Orders)
             {
-                if(item.UserEmail == request.UserEmail && item.IsShipped)
+                if(item.UserEmail == request.UserEmail && !item.IsShipped)
                 {
                     activeOrders.Add(item);
                 }
