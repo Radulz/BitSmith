@@ -15,11 +15,12 @@ namespace PCPartsShop_WebAPI.Models
 
             Power = power;
             Type = type;
+            ComponentType = "PSU";
         }
 
         public PSU() : base()
         {
-
+            ComponentType = "PSU";
         }
     }
 }

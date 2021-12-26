@@ -22,10 +22,11 @@ namespace PCPartsShop_WebAPI.Models
             Tech = tech;
             PowerC = power;
             Length = length;
+            ComponentType = "GPU";
         }
         public GPU() : base()
         {
-
+            ComponentType = "GPU";
         }
     }
 }

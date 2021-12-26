@@ -22,11 +22,12 @@ namespace PCPartsShop_WebAPI.Models
             MemoryFreqInf = inf;
             MemoryFreqSup = sup;
             MemoryType = memorytype;
+            ComponentType = "MOBO";
         }
 
         public MOBO() : base()
         {
-
+            ComponentType = "MOBO";
         }
     }
 }

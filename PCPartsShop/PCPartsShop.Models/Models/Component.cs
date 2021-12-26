@@ -8,6 +8,7 @@ namespace PCPartsShop_WebAPI.Models
     public abstract class Component
     {
         public Guid ComponentId { get; set; }
+        public string ComponentType { get; set; }
         public string Make { get; set; }
         public string Model { get; set; }
         public double Price { get; set; }

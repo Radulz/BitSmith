@@ -18,11 +18,12 @@ namespace PCPartsShop_WebAPI.Models
             Capacity = capacity;
             Freq = frequency;
             Voltage = volts;
+            ComponentType = "RAM";
         }
 
         public RAM() : base()
         {
-
+            ComponentType = "RAM";
         }
     }
 }

@@ -22,10 +22,11 @@ namespace PCPartsShop_WebAPI.Models
             MFreq = mfreq;
             TDP = tdp;
             Cores = corenr;
+            ComponentType = "CPU";
         }
         public CPU() : base()
         {
-
+            ComponentType = "CPU";
         }
     }
 }

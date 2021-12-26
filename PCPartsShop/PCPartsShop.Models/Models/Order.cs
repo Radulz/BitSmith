@@ -19,6 +19,6 @@ namespace PCPartsShop.Domain.Models
         public double TotalPrice { get; set; }
         public bool IsShipped { get; set; }
 
-        public ICollection<OrderItem> OrderItems { get; set; }
+        public ICollection<OrderItem> Items { get; set; }
     }
 }
