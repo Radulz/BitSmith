@@ -30,7 +30,7 @@ namespace PCPartsShop.Application.Commands.OrderCommands.UpdateOrder
                 UserAddress = request.UserAddress,
                 IsShipped = request.IsShipped,
                 TotalPrice = request.TotalPrice,
-                OrderItems = request.OrderItems
+                Items = request.Items
             };
             _context.Orders.Update(order);
             await _context.SaveChangesAsync();

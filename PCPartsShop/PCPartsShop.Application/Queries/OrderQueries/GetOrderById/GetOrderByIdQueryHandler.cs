@@ -20,7 +20,7 @@ namespace PCPartsShop.Application.Queries.OrderQueries.GetOrderById
         }
         public async Task<Order> Handle(GetOrderByIdQuery request, CancellationToken cancellationToken)
         {
-            var order = await _context.Orders.Include(p => p.OrderItems).FirstOrDefaultAsync(o => o.OrderId == request.OrderId);
+            var order = await _context.Orders.Include(p => p.Items).FirstOrDefaultAsync(o => o.OrderId == request.OrderId);
             if(order is null)
             {
                 return null;

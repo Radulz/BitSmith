@@ -20,7 +20,7 @@ namespace PCPartsShop.Application.Queries.OrderQueries.GetAllOrders
         }
         public async Task<ICollection<Order>> Handle(GetAllOrdersQuery request, CancellationToken cancellationToken)
         {
-            var orders = await _context.Orders.Include(p => p.OrderItems).ToListAsync();
+            var orders = await _context.Orders.Include(p => p.Items).ToListAsync();
             return orders;
         }
     }

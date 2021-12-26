@@ -22,6 +22,7 @@ namespace PCPartsShop.Application.Commands.UserCommands.CreateUser
             var user = new User
             {
                 Email = request.Email,
+                Password = request.Password,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 County = request.County,

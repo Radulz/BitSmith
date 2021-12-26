@@ -20,7 +20,7 @@ namespace PCPartsShop.Application.Commands.OrderCommands.UpdateOrder
         }
         public async Task<Order> Handle(UpdateOrderItemListCommand request, CancellationToken cancellationToken)
         {
-            var order = await _context.Orders.Include(p=>p.OrderItems).FirstOrDefaultAsync(o => o.OrderId == request.OrderId);
+            var order = await _context.Orders.Include(p=>p.Items).FirstOrDefaultAsync(o => o.OrderId == request.OrderId);
             if(order is null)
             {
                 return null;
@@ -34,7 +34,7 @@ namespace PCPartsShop.Application.Commands.OrderCommands.UpdateOrder
                 ComponentPrice = request.ComponentPrice,
                 ComponentType = request.ComponentType,
             };
-            order.OrderItems.Add(orderItem);
+            order.Items.Add(orderItem);
             _context.Orders.Update(order);
             await _context.SaveChangesAsync();
             return order;

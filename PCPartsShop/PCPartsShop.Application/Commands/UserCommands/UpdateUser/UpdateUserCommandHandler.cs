@@ -23,6 +23,7 @@ namespace PCPartsShop.Application.Commands.UserCommands.UpdateUser
             {
                 UserId = request.UserId,
                 Email = request.Email,
+                Password = request.Password,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 County = request.County,

@@ -29,7 +29,7 @@ namespace PCPartsShop.Application.Commands.OrderCommands.CreateOrder
                 UserAddress = request.UserAddress,
                 TotalPrice = request.TotalPrice,
                 IsShipped = false,
-                OrderItems = new List<OrderItem>(),
+                Items = new List<OrderItem>(),
             };
 
             _context.Orders.Add(order);
