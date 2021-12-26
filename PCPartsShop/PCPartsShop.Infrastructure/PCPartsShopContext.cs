@@ -11,7 +11,7 @@ namespace PCPartsShop.Infrastructure
 {
     public class PCPartsShopContext : DbContext
     {
-        public DbSet<Component> Components { get; set; }
+        //public DbSet<Component> Components { get; set; }
         public DbSet<CPU> CPUs { get; set; }
         public DbSet<GPU> GPUs { get; set; }
         public DbSet<MOBO> MOBOs { get; set; }
@@ -23,6 +23,16 @@ namespace PCPartsShop.Infrastructure
         public PCPartsShopContext(DbContextOptions<PCPartsShopContext> options) : base(options)
         {
 
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CPU>().HasKey(p => p.ComponentId);
+            modelBuilder.Entity<GPU>().HasKey(p => p.ComponentId);
+            modelBuilder.Entity<MOBO>().HasKey(p => p.ComponentId);
+            modelBuilder.Entity<PSU>().HasKey(p => p.ComponentId);
+            modelBuilder.Entity<RAM>().HasKey(p => p.ComponentId);
+            modelBuilder.Entity<User>().HasKey(p => p.UserId);
+            modelBuilder.Entity<Order>().HasKey(p => p.OrderId);
         }
     }
 }
