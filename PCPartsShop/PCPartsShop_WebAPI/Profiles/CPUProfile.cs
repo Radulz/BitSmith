@@ -14,7 +14,6 @@ namespace PCPartsShop.Profiles
         public CPUProfile()
         {
             CreateMap<CPU, GetCPUDto>()
-                .ForMember(c => c.CPUId, opt => opt.MapFrom(c1 => c1.ComponentId))
                 .ForMember(c => c.Frequency, opt => opt.MapFrom(c1 => c1.Freq))
                 .ForMember(c => c.Technology, opt => opt.MapFrom(c1 => c1.Tech))
                 .ForMember(c => c.MemoryFrequency, opt => opt.MapFrom(c1 => c1.MFreq))

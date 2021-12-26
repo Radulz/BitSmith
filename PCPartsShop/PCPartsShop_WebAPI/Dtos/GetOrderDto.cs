@@ -18,6 +18,6 @@ namespace PCPartsShop.WebAPI.Dtos
         public double TotalPrice { get; set; }
         public bool ShippingStatus { get; set; }
 
-        public ICollection<OrderItem> OrderItems { get; set; }
+        public ICollection<OrderItem> Items { get; set; }
     }
 }

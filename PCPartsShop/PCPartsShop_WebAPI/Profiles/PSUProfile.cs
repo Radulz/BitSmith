@@ -14,7 +14,6 @@ namespace PCPartsShop.Profiles
         public PSUProfile()
         {
             CreateMap<PSU, GetPSUDto>()
-                .ForMember(p => p.PowerUnitId, opt => opt.MapFrom(p1 => p1.ComponentId))
                 .ForMember(p => p.Modularity, opt => opt.MapFrom(p1 => p1.Type));
 
             CreateMap<CreatePSUDto, CreatePSUCommand>()

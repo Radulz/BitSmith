@@ -14,7 +14,6 @@ namespace PCPartsShop.Profiles
         public MOBOProfile()
         {
             CreateMap<MOBO, GetMOBODto>()
-                .ForMember(m => m.MotherboardId, opt => opt.MapFrom(m1 => m1.ComponentId))
                 .ForMember(m => m.LowestFrequencySupported, opt => opt.MapFrom(m1 => m1.MemoryFreqInf))
                 .ForMember(m => m.HighestFrequencySupported, opt => opt.MapFrom(m1 => m1.MemoryFreqSup));
 

@@ -7,11 +7,12 @@ namespace PCPartsShop.Dtos
 {
     public class GetGPUDto
     {
-        public Guid GPUId { get; set; }
+        public Guid ComponentId { get; set; }
         public string Make { get; set; }
         public string Model { get; set; }
         public double Price { get; set; }
         public string Image { get; set; }
+        public string ComponentType { get; set; }
         public int Frequency { get; set; }
         public int MemoryCapacity { get; set; }
         public string MemoryType { get; set; }

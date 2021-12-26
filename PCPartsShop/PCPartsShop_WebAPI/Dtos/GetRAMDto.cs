@@ -7,11 +7,12 @@ namespace PCPartsShop.Dtos
 {
     public class GetRAMDto
     {
-        public Guid RamStickId { get; set; }
+        public Guid ComponentId { get; set; }
         public string Make { get; set; }
         public string Model { get; set; }
         public double Price { get; set; }
         public string Image { get; set; }
+        public string ComponentType { get; set; }
         public string Type { get; set; }
         public int Capacity { get; set; }
         public int Frequency { get; set; }

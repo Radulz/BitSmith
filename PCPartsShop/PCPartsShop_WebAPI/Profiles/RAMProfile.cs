@@ -14,7 +14,6 @@ namespace PCPartsShop.Profiles
         public RAMProfile()
         {
             CreateMap<RAM, GetRAMDto>()
-                .ForMember(r => r.RamStickId, opt => opt.MapFrom(r1 => r1.ComponentId))
                 .ForMember(r => r.Frequency, opt => opt.MapFrom(r1 => r1.Freq));
 
             CreateMap<CreateRAMDto, CreateRAMCommand>()

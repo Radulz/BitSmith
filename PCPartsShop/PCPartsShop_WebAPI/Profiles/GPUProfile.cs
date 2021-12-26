@@ -14,7 +14,6 @@ namespace PCPartsShop.Profiles
         public GPUProfile()
         {
             CreateMap<GPU, GetGPUDto>()
-                .ForMember(g => g.GPUId, opt => opt.MapFrom(g1 => g1.ComponentId))
                 .ForMember(g => g.Frequency, opt => opt.MapFrom(g1 => g1.Freq))
                 .ForMember(g => g.MemoryCapacity, opt => opt.MapFrom(g1 => g1.Memory))
                 .ForMember(g => g.Technology, opt => opt.MapFrom(g1 => g1.Tech))
