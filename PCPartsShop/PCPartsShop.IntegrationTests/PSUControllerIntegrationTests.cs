@@ -58,7 +58,7 @@ namespace PCPartsShop.IntegrationTests
             var psus = JsonConvert.DeserializeObject<List<GetPSUDto>>(result);
             var psu = psus[0];
 
-            response = await client.GetAsync($"/api/v1/PSU/{psu.PowerUnitId}");
+            response = await client.GetAsync($"/api/v1/PSU/{psu.ComponentId}");
             result = await response.Content.ReadAsStringAsync();
 
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
@@ -73,7 +73,7 @@ namespace PCPartsShop.IntegrationTests
             var psus = JsonConvert.DeserializeObject<List<GetPSUDto>>(result);
             var psu = psus[0];
 
-            response = await client.GetAsync($"/api/v1/PSU/{psu.PowerUnitId}");
+            response = await client.GetAsync($"/api/v1/PSU/{psu.ComponentId}");
             result = await response.Content.ReadAsStringAsync();
             var testPsu = JsonConvert.DeserializeObject<GetPSUDto>(result);
 
@@ -131,7 +131,7 @@ namespace PCPartsShop.IntegrationTests
             var response = await client.GetAsync("/api/v1/PSU");
             var result = await response.Content.ReadAsStringAsync();
             var psus = JsonConvert.DeserializeObject<List<GetPSUDto>>(result);
-            var psuId = psus[0].PowerUnitId;
+            var psuId = psus[0].ComponentId;
             var psu = new CreatePSUDto
             {
                 Make = "IntegrationTest",
@@ -152,7 +152,7 @@ namespace PCPartsShop.IntegrationTests
             var response = await client.GetAsync("/api/v1/PSU");
             var result = await response.Content.ReadAsStringAsync();
             var psus = JsonConvert.DeserializeObject<List<GetPSUDto>>(result);
-            var psuId = psus[0].PowerUnitId;
+            var psuId = psus[0].ComponentId;
             var psu = new CreatePSUDto
             {
                 Make = "IntegrationTest",
@@ -181,7 +181,7 @@ namespace PCPartsShop.IntegrationTests
             var response = await client.GetAsync("/api/v1/PSU");
             var result = await response.Content.ReadAsStringAsync();
             var psus = JsonConvert.DeserializeObject<List<GetPSUDto>>(result);
-            var psuId = psus[0].PowerUnitId;
+            var psuId = psus[0].ComponentId;
 
             response = await client.DeleteAsync($"/api/v1/PSU/{psuId}");
             Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode);

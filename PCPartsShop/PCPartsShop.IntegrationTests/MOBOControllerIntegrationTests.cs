@@ -58,7 +58,7 @@ namespace PCPartsShop.IntegrationTests
             var mobos = JsonConvert.DeserializeObject<List<GetMOBODto>>(result);
             var mobo = mobos[0];
 
-            response = await client.GetAsync($"/api/v1/MOBO/{mobo.MotherboardId}");
+            response = await client.GetAsync($"/api/v1/MOBO/{mobo.ComponentId}");
             result = await response.Content.ReadAsStringAsync();
 
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
@@ -73,7 +73,7 @@ namespace PCPartsShop.IntegrationTests
             var mobos = JsonConvert.DeserializeObject<List<GetMOBODto>>(result);
             var mobo = mobos[0];
 
-            response = await client.GetAsync($"/api/v1/MOBO/{mobo.MotherboardId}");
+            response = await client.GetAsync($"/api/v1/MOBO/{mobo.ComponentId}");
             result = await response.Content.ReadAsStringAsync();
             var testMobo = JsonConvert.DeserializeObject<GetMOBODto>(result);
 
@@ -143,7 +143,7 @@ namespace PCPartsShop.IntegrationTests
             var response = await client.GetAsync("/api/v1/MOBO");
             var result = await response.Content.ReadAsStringAsync();
             var mobos = JsonConvert.DeserializeObject<List<GetMOBODto>>(result);
-            var moboId = mobos[0].MotherboardId;
+            var moboId = mobos[0].ComponentId;
             var mobo = new CreateMOBODto
             {
                 Make = "IntegrationTest",
@@ -168,7 +168,7 @@ namespace PCPartsShop.IntegrationTests
             var response = await client.GetAsync("/api/v1/MOBO");
             var result = await response.Content.ReadAsStringAsync();
             var mobos = JsonConvert.DeserializeObject<List<GetMOBODto>>(result);
-            var moboId = mobos[0].MotherboardId;
+            var moboId = mobos[0].ComponentId;
             var mobo = new CreateMOBODto
             {
                 Make = "IntegrationTest",
@@ -205,7 +205,7 @@ namespace PCPartsShop.IntegrationTests
             var response = await client.GetAsync("/api/v1/MOBO");
             var result = await response.Content.ReadAsStringAsync();
             var mobos = JsonConvert.DeserializeObject<List<GetMOBODto>>(result);
-            var moboId = mobos[0].MotherboardId;
+            var moboId = mobos[0].ComponentId;
 
             response = await client.DeleteAsync($"/api/v1/MOBO/{moboId}");
             Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode);

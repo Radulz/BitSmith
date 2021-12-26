@@ -58,7 +58,7 @@ namespace PCPartsShop.IntegrationTests
             var gpus = JsonConvert.DeserializeObject<List<GetGPUDto>>(result);
             var gpu = gpus[0];
 
-            response = await client.GetAsync($"/api/v1/GPU/{gpu.GPUId}");
+            response = await client.GetAsync($"/api/v1/GPU/{gpu.ComponentId}");
             result = await response.Content.ReadAsStringAsync();
 
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
@@ -73,7 +73,7 @@ namespace PCPartsShop.IntegrationTests
             var gpus = JsonConvert.DeserializeObject<List<GetGPUDto>>(result);
             var gpu = gpus[0];
 
-            response = await client.GetAsync($"/api/v1/GPU/{gpu.GPUId}");
+            response = await client.GetAsync($"/api/v1/GPU/{gpu.ComponentId}");
             result = await response.Content.ReadAsStringAsync();
             var testGpu = JsonConvert.DeserializeObject<GetGPUDto>(result);
 
@@ -143,7 +143,7 @@ namespace PCPartsShop.IntegrationTests
             var response = await client.GetAsync("/api/v1/GPU");
             var result = await response.Content.ReadAsStringAsync();
             var gpus = JsonConvert.DeserializeObject<List<GetGPUDto>>(result);
-            var gpuId = gpus[0].GPUId;
+            var gpuId = gpus[0].ComponentId;
             var gpu = new CreateGPUDto
             {
                 Make = "IntegrationTest",
@@ -168,7 +168,7 @@ namespace PCPartsShop.IntegrationTests
             var response = await client.GetAsync("/api/v1/GPU");
             var result = await response.Content.ReadAsStringAsync();
             var gpus = JsonConvert.DeserializeObject<List<GetGPUDto>>(result);
-            var gpuId = gpus[0].GPUId;
+            var gpuId = gpus[0].ComponentId;
             var gpu = new CreateGPUDto
             {
                 Make = "IntegrationTest",
@@ -205,7 +205,7 @@ namespace PCPartsShop.IntegrationTests
             var response = await client.GetAsync("/api/v1/GPU");
             var result = await response.Content.ReadAsStringAsync();
             var gpus = JsonConvert.DeserializeObject<List<GetGPUDto>>(result);
-            var gpuId = gpus[0].GPUId;
+            var gpuId = gpus[0].ComponentId;
 
             response = await client.DeleteAsync($"/api/v1/GPU/{gpuId}");
             Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode);

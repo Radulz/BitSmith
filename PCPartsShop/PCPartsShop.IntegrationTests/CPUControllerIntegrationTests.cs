@@ -59,7 +59,7 @@ namespace PCPartsShop.IntegrationTests
             var cpus = JsonConvert.DeserializeObject<List<GetCPUDto>>(result);
             var cpu = cpus[0];
 
-            response = await client.GetAsync($"/api/v1/CPU/{cpu.CPUId}");
+            response = await client.GetAsync($"/api/v1/CPU/{cpu.ComponentId}");
             result = await response.Content.ReadAsStringAsync();
 
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
@@ -74,7 +74,7 @@ namespace PCPartsShop.IntegrationTests
             var cpus = JsonConvert.DeserializeObject<List<GetCPUDto>>(result);
             var cpu = cpus[0];
 
-            response = await client.GetAsync($"/api/v1/CPU/{cpu.CPUId}");
+            response = await client.GetAsync($"/api/v1/CPU/{cpu.ComponentId}");
             result = await response.Content.ReadAsStringAsync();
             var testCpu = JsonConvert.DeserializeObject<GetCPUDto>(result);
 
@@ -144,7 +144,7 @@ namespace PCPartsShop.IntegrationTests
             var response = await client.GetAsync("/api/v1/CPU");
             var result = await response.Content.ReadAsStringAsync();
             var cpus = JsonConvert.DeserializeObject<List<GetCPUDto>>(result);
-            var cpuId = cpus[0].CPUId;
+            var cpuId = cpus[0].ComponentId;
             var cpu = new CreateCPUDto
             {
                 Make = "IntegrationTest",
@@ -169,7 +169,7 @@ namespace PCPartsShop.IntegrationTests
             var response = await client.GetAsync("/api/v1/CPU");
             var result = await response.Content.ReadAsStringAsync();
             var cpus = JsonConvert.DeserializeObject<List<GetCPUDto>>(result);
-            var cpuId = cpus[0].CPUId;
+            var cpuId = cpus[0].ComponentId;
             var cpu = new CreateCPUDto
             {
                 Make = "IntegrationTest",
@@ -206,7 +206,7 @@ namespace PCPartsShop.IntegrationTests
             var response = await client.GetAsync("/api/v1/CPU");
             var result = await response.Content.ReadAsStringAsync();
             var cpus = JsonConvert.DeserializeObject<List<GetCPUDto>>(result);
-            var cpuId = cpus[1].CPUId;
+            var cpuId = cpus[1].ComponentId;
 
             response = await client.DeleteAsync($"/api/v1/CPU/{cpuId}");
             Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode);

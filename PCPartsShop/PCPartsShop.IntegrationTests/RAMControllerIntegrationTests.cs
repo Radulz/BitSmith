@@ -58,7 +58,7 @@ namespace PCPartsShop.IntegrationTests
             var rams = JsonConvert.DeserializeObject<List<GetRAMDto>>(result);
             var ram = rams[0];
 
-            response = await client.GetAsync($"/api/v1/RAM/{ram.RamStickId}");
+            response = await client.GetAsync($"/api/v1/RAM/{ram.ComponentId}");
             result = await response.Content.ReadAsStringAsync();
 
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
@@ -73,7 +73,7 @@ namespace PCPartsShop.IntegrationTests
             var rams = JsonConvert.DeserializeObject<List<GetRAMDto>>(result);
             var ram = rams[0];
 
-            response = await client.GetAsync($"/api/v1/RAM/{ram.RamStickId}");
+            response = await client.GetAsync($"/api/v1/RAM/{ram.ComponentId}");
             result = await response.Content.ReadAsStringAsync();
             var testRam = JsonConvert.DeserializeObject<GetRAMDto>(result);
 
@@ -137,7 +137,7 @@ namespace PCPartsShop.IntegrationTests
             var response = await client.GetAsync("/api/v1/RAM");
             var result = await response.Content.ReadAsStringAsync();
             var rams = JsonConvert.DeserializeObject<List<GetRAMDto>>(result);
-            var ramId = rams[0].RamStickId;
+            var ramId = rams[0].ComponentId;
             var ram = new CreateRAMDto
             {
                 Make = "IntegrationTest",
@@ -160,7 +160,7 @@ namespace PCPartsShop.IntegrationTests
             var response = await client.GetAsync("/api/v1/RAM");
             var result = await response.Content.ReadAsStringAsync();
             var rams = JsonConvert.DeserializeObject<List<GetRAMDto>>(result);
-            var ramId = rams[0].RamStickId;
+            var ramId = rams[0].ComponentId;
             var ram = new CreateRAMDto
             {
                 Make = "IntegrationTest",
@@ -193,7 +193,7 @@ namespace PCPartsShop.IntegrationTests
             var response = await client.GetAsync("/api/v1/RAM");
             var result = await response.Content.ReadAsStringAsync();
             var rams = JsonConvert.DeserializeObject<List<GetRAMDto>>(result);
-            var ramId = rams[0].RamStickId;
+            var ramId = rams[0].ComponentId;
 
             response = await client.DeleteAsync($"/api/v1/RAM/{ramId}");
             Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode);
