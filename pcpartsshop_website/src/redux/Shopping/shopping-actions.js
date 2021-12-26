@@ -11,19 +11,19 @@ import axios from "axios";
 export const fetchProducts = () => {
   return async (dispatch, getState) => {
     dispatch({ type: FETCHING_PRODUCTS });
-    var result = await axios.get("https://localhost:44326/CPU");
+    var result = await axios.get(process.env.REACT_APP_API_URL + "CPU");
     const cpus = result.data;
 
-    result = await axios.get("https://localhost:44326/GPU");
+    result = await axios.get(process.env.REACT_APP_API_URL + "GPU");
     const gpus = result.data;
 
-    result = await axios.get("https://localhost:44326/MOBO");
+    result = await axios.get(process.env.REACT_APP_API_URL + "MOBO");
     const mobos = result.data;
 
-    result = await axios.get("https://localhost:44326/PSU");
+    result = await axios.get(process.env.REACT_APP_API_URL + "PSU");
     const psus = result.data;
 
-    result = await axios.get("https://localhost:44326/RAM");
+    result = await axios.get(process.env.REACT_APP_API_URL + "RAM");
     const rams = result.data;
 
     const products = [].concat(cpus, gpus, mobos, psus, rams);

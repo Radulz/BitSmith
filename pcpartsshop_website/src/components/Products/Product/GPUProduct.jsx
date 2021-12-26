@@ -30,14 +30,14 @@ const GPUProduct = (props) => {
         </div>
         <Typography
           dangerouslySetInnerHTML={{
-            __html: "Frequency: " + product.freq + " MHz ",
+            __html: "Frequency: " + product.frequency + " MHz ",
           }}
           variant="body2"
           color="textSecondary"
         />
         <Typography
           dangerouslySetInnerHTML={{
-            __html: "Virtual Memory: " + product.memory + " GB",
+            __html: "Virtual Memory: " + product.memoryCapacity + " GB",
           }}
           variant="body2"
           color="textSecondary"
@@ -51,7 +51,7 @@ const GPUProduct = (props) => {
         />
         <Typography
           dangerouslySetInnerHTML={{
-            __html: "Technology: " + product.tech + " nm",
+            __html: "Technology: " + product.technology + " nm",
           }}
           variant="body2"
           color="textSecondary"
@@ -65,7 +65,8 @@ const GPUProduct = (props) => {
         />
         <Typography
           dangerouslySetInnerHTML={{
-            __html: "Maximum power consumption: " + product.powerC + " W",
+            __html:
+              "Maximum power consumption: " + product.powerConsumption + " W",
           }}
           variant="body2"
           color="textSecondary"

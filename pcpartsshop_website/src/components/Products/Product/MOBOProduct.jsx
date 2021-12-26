@@ -51,9 +51,9 @@ const MOBOProduct = (props) => {
           dangerouslySetInnerHTML={{
             __html:
               "Supported memory frequencies: [" +
-              product.memoryFrequencyInf +
+              product.lowestFrequencySupported +
               ", " +
-              product.memoryFrequencySup +
+              product.highestFrequencySupported +
               "] MHz",
           }}
           variant="body2"

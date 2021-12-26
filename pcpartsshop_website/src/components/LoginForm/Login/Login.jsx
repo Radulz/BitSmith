@@ -29,7 +29,7 @@ const Login = ({ logIn }) => {
     let existantEmail;
     try {
       response = await axios.get(
-        `https://localhost:44326/User/userByEmail/${email}`
+        process.env.REACT_APP_API_URL + `User/users/${email}`
       );
       if (response.data) {
         existantEmail = true;
@@ -46,7 +46,7 @@ const Login = ({ logIn }) => {
     let response;
     try {
       response = await axios.get(
-        `https://localhost:44326/User/userByEmail/${email}`
+        process.env.REACT_APP_API_URL + `User/users/${email}`
       );
       if (response.data) {
         if (pass === response.data.password) {
@@ -86,8 +86,8 @@ const Login = ({ logIn }) => {
     }
     console.log("Existant email " + existantEmail);
     console.log("Checked pass " + checkedPassword);
-    let response = await axios
-      .get(`https://localhost:44326/User/userByEmail/${data.email}`)
+    const response = await axios
+      .get(process.env.REACT_APP_API_URL + `User/users/${data.email}`)
       .catch((e) => {
         console.log("Error");
       });
@@ -132,7 +132,7 @@ const Login = ({ logIn }) => {
                       fullWidth
                       {...register("email", {
                         required: true,
-                        maxLength: 20,
+                        maxLength: 50,
                       })}
                     />
                   </FormControl>
@@ -145,7 +145,7 @@ const Login = ({ logIn }) => {
                       error
                       {...register("email", {
                         required: true,
-                        maxLength: 20,
+                        maxLength: 50,
                       })}
                       onChange={(e) => {
                         setExistantEmail(true);

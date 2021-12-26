@@ -37,7 +37,7 @@ const RAMProduct = (props) => {
         />
         <Typography
           dangerouslySetInnerHTML={{
-            __html: "Frequency: " + product.freq + " MHz ",
+            __html: "Frequency: " + product.frequency + " MHz ",
           }}
           variant="body2"
           color="textSecondary"

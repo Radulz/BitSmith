@@ -35,35 +35,35 @@ const CPUProduct = (props) => {
         />
         <Typography
           dangerouslySetInnerHTML={{
-            __html: "Frequency: " + product.freq + " GHz ",
+            __html: "Frequency: " + product.frequency + " GHz ",
           }}
           variant="body2"
           color="textSecondary"
         />
         <Typography
           dangerouslySetInnerHTML={{
-            __html: "Technology: " + product.tech + " nm",
+            __html: "Technology: " + product.technology + " nm",
           }}
           variant="body2"
           color="textSecondary"
         />
         <Typography
           dangerouslySetInnerHTML={{
-            __html: "Number of cores: " + product.cores,
+            __html: "Number of cores: " + product.numberOfCores,
           }}
           variant="body2"
           color="textSecondary"
         />
         <Typography
           dangerouslySetInnerHTML={{
-            __html: "Memory frequency: " + product.mFreq + " MHz",
+            __html: "Memory frequency: " + product.memoryFrequency + " MHz",
           }}
           variant="body2"
           color="textSecondary"
         />
         <Typography
           dangerouslySetInnerHTML={{
-            __html: "TDP: " + product.tdp + " W",
+            __html: "TDP: " + product.thermalDesignPower + " W",
           }}
           variant="body2"
           color="textSecondary"

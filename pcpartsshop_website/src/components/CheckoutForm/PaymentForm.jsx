@@ -9,7 +9,6 @@ import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 
 import Review from "./Review";
-import { connect } from "react-redux";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PRIVATE_KEY);
 
@@ -53,26 +52,36 @@ const PaymentForm = ({
     if (error) {
       console.log(error);
     } else {
-      const orderId = await axios.post("https://localhost:44326/Order", {
-        userEmail: shippingData.email,
-        userFirstName: shippingData.firstName,
-        userLastName: shippingData.lastName,
-        userCity: shippingData.city,
-        userCounty: shippingData.county,
-        userAddress1: shippingData.address1,
-        totalPrice: totalPrice,
-      });
+      const orderId = await axios.post(
+        process.env.REACT_APP_API_URL + "Order",
+        {
+          userEmail: shippingData.email,
+          userFirstName: shippingData.firstName,
+          userLastName: shippingData.lastName,
+          userCity: shippingData.city,
+          userCounty: shippingData.county,
+          userAddress: shippingData.address1,
+          totalPrice: totalPrice,
+        }
+      );
       console.log(orderId.data.orderId);
       for (const p of productsAddedToCart) {
-        const ItemId = await axios.post("https://localhost:44326/OrderItem", {
-          itemId: p.componentId,
-          itemQty: p.qty,
-          orderId: orderId.data.orderId,
-        });
-        console.log(ItemId);
-        await axios.patch(
-          `https://localhost:44326/Order/${orderId.data.orderId}/orderItems/${ItemId.data.orderItemId}`
-        );
+        const item = await axios
+          .patch(
+            process.env.REACT_APP_API_URL +
+              `Order/${orderId.data.orderId}/orderItems`,
+            {
+              componentId: p.componentId,
+              componentMake: p.make,
+              componentModel: p.model,
+              componentImage: p.image,
+              componentType: p.componentType,
+              componentPrice: p.price,
+              orderId: orderId.data.orderId,
+            }
+          )
+          .catch((e) => console.log(e));
+        console.log(item.data);
       }
       //resetare cart
       removeAllFromCart();

@@ -46,10 +46,12 @@ const Products = (props) => {
     case "Remove Filter":
       filteredProducts = products;
       console.log(filteredProducts);
+
       break;
     default:
       filteredProducts = products;
       console.log(filteredProducts);
+      console.log(process.env.REACT_APP_API_URL);
   }
 
   return (

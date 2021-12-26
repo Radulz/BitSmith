@@ -35,7 +35,7 @@ const PSUProduct = (props) => {
         />
         <Typography
           dangerouslySetInnerHTML={{
-            __html: "Type: " + product.type,
+            __html: "Type: " + product.modularity,
           }}
           variant="body2"
           color="textSecondary"

@@ -63,7 +63,7 @@ const Register = (props) => {
     let existantEmail;
     try {
       response = await axios.get(
-        `https://localhost:44326/User/userByEmail/${email}`
+        process.env.REACT_APP_API_URL + `User/users/${email}`
       );
       if (response.data) {
         existantEmail = true;
@@ -100,16 +100,19 @@ const Register = (props) => {
     }
     if (sw) {
       setExistantEmail(false);
-      const response = await axios.post("https://localhost:44326/User", {
-        email: data.email,
-        password: data.password,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        city: data.city,
-        county: data.county,
-        address1: data.address,
-        admin: false,
-      });
+      const response = await axios.post(
+        process.env.REACT_APP_API_URL + "User",
+        {
+          email: data.email,
+          password: data.password,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          city: data.city,
+          county: data.county,
+          address: data.address,
+          admin: false,
+        }
+      );
       if (response) {
         notify(true);
       } else {
@@ -138,7 +141,7 @@ const Register = (props) => {
                         fullWidth
                         {...register("email", {
                           required: true,
-                          maxLength: 20,
+                          maxLength: 50,
                         })}
                       />
                     </FormControl>
@@ -151,7 +154,7 @@ const Register = (props) => {
                         error
                         {...register("email", {
                           required: true,
-                          maxLength: 20,
+                          maxLength: 50,
                         })}
                         onChange={(e) => {
                           setValidEmail(true);
