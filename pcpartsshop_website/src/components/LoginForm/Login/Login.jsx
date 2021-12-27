@@ -98,7 +98,7 @@ const Login = ({ logIn }) => {
       response.data.lastName,
       response.data.county,
       response.data.city,
-      response.data.address1,
+      response.data.address,
       response.data.admin
     );
     notify(data);

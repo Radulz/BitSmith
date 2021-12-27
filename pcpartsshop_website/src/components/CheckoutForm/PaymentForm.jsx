@@ -60,7 +60,7 @@ const PaymentForm = ({
           userLastName: shippingData.lastName,
           userCity: shippingData.city,
           userCounty: shippingData.county,
-          userAddress: shippingData.address1,
+          userAddress: shippingData.address,
           totalPrice: totalPrice,
         }
       );
@@ -77,6 +77,7 @@ const PaymentForm = ({
               componentImage: p.image,
               componentType: p.componentType,
               componentPrice: p.price,
+              orderItemQuantity: p.qty,
               orderId: orderId.data.orderId,
             }
           )
