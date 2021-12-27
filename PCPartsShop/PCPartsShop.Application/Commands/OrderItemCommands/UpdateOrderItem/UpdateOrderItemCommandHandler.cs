@@ -28,6 +28,7 @@ namespace PCPartsShop.Application.Commands.OrderItemCommands.UpdateOrderItem
                 ComponentImage = request.ComponentImage,
                 ComponentPrice = request.ComponentPrice,
                 ComponentType = request.ComponentType,
+                OrderItemQuantity = request.OrderItemQuantity,
                 OrderId = request.OrderId,
             };
             _context.OrderItems.Update(orderItem);

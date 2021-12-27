@@ -27,6 +27,7 @@ namespace PCPartsShop.Application.Commands.OrderItemCommands.CreateOrderItem
                 ComponentModel = request.ComponentModel,
                 ComponentPrice = request.ComponentPrice,
                 ComponentType = request.ComponentType,
+                OrderItemQuantity = request.OrderItemQuantity,
                 OrderId = request.OrderId,
             };
             _context.OrderItems.Add(item);

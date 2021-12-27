@@ -17,5 +17,6 @@ namespace PCPartsShop.Application.Commands.OrderCommands.UpdateOrder
         public string ComponentImage { get; set; }
         public string ComponentType { get; set; }
         public double ComponentPrice { get; set; }
+        public int OrderItemQuantity { get; set; }
     }
 }

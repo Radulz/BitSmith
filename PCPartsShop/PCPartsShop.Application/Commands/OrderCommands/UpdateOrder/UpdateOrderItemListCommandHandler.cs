@@ -33,6 +33,7 @@ namespace PCPartsShop.Application.Commands.OrderCommands.UpdateOrder
                 ComponentImage = request.ComponentImage,
                 ComponentPrice = request.ComponentPrice,
                 ComponentType = request.ComponentType,
+                OrderItemQuantity = request.OrderItemQuantity,
             };
             order.Items.Add(orderItem);
             _context.Orders.Update(order);
