@@ -4,7 +4,7 @@ import ListSubheader from "@mui/material/ListSubheader";
 import List from "@mui/material/List";
 import useStyles from "./styles";
 import ListCommand from "./ListCommand";
-import AddCPUForm from "./Forms/CPU/AddCPUForm";
+import FormSelector from "./FormSelector";
 
 const AdminPage = () => {
   const [formSelect, setFormSelect] = useState("");
@@ -50,8 +50,8 @@ const AdminPage = () => {
                 <Typography variant="h5" gutterBottom align="center">
                   {formSelect && formSelect + " form"}
                 </Typography>
-                <Divider />
-                <AddCPUForm />
+                <Divider style={{ marginBottom: "20px" }} />
+                <FormSelector formKeyword={formSelect} />
               </Paper>
             </main>
           </div>
