@@ -1,0 +1,19 @@
+export const ORDERID = "orderId";
+export const USEREMAIL = "userEmail";
+export const USERFIRSTNAME = "userFirstName";
+export const USERLASTNAME = "userLastName";
+export const USERCOUNTY = "userCounty";
+export const USERCITY = "userCity";
+export const USERADDRESS = "userAddress";
+export const TOTALPRICE = "totalPrice";
+export const SHIPPINGSTATUS = "shippingStatus";
+
+export const ORDERID_LABEL = "orderId";
+export const USEREMAIL_LABEL = "userEmail";
+export const USERFIRSTNAME_LABEL = "userFirstName";
+export const USERLASTNAME_LABEL = "userLastName";
+export const USERCOUNTY_LABEL = "userCounty";
+export const USERCITY_LABEL = "userCity";
+export const USERADDRESS_LABEL = "userAddress";
+export const TOTALPRICE_LABEL = "totalPrice";
+export const SHIPPINGSTATUS_LABEL = "shippingStatus";
