@@ -124,7 +124,7 @@ const AddCPUForm = () => {
                 {errors.image ? (
                   <FormHelperText error>URL. Field required.</FormHelperText>
                 ) : (
-                  <FormHelperText>Link To Image</FormHelperText>
+                  <FormHelperText>URL to image</FormHelperText>
                 )}
               </FormControl>
             )}
@@ -143,7 +143,7 @@ const AddCPUForm = () => {
                 {errors.frequency ? (
                   <FormHelperText error>Number. Field required.</FormHelperText>
                 ) : (
-                  <FormHelperText>Decimal Number (GHz)</FormHelperText>
+                  <FormHelperText>Decimal number (GHz)</FormHelperText>
                 )}
               </FormControl>
             )}
@@ -162,7 +162,7 @@ const AddCPUForm = () => {
                 {errors.socket ? (
                   <FormHelperText error>Field required.</FormHelperText>
                 ) : (
-                  <FormHelperText disabled> </FormHelperText>
+                  <FormHelperText>ex. LGA1200 </FormHelperText>
                 )}
               </FormControl>
             )}
@@ -200,7 +200,7 @@ const AddCPUForm = () => {
                 {errors.memoryFrequency ? (
                   <FormHelperText error>Number. Field required.</FormHelperText>
                 ) : (
-                  <FormHelperText>Integer Number (MHz)</FormHelperText>
+                  <FormHelperText>Integer number (MHz)</FormHelperText>
                 )}
               </FormControl>
             )}
