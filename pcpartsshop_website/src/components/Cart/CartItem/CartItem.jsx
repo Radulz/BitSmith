@@ -39,7 +39,8 @@ const CartItem = ({ product, removeFromCart, adjustQty }) => {
       adjustQty(product.componentId, product.qty - 1);
     }
   };
-  const productPrice = parseFloat(product.price.toFixed(2)) * product.qty;
+  const price = product.price * product.qty;
+  const productPrice = Math.round((price + Number.EPSILON) * 100) / 100;
   return (
     <Card>
       <CardMedia

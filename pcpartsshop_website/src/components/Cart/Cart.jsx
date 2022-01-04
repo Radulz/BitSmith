@@ -25,7 +25,7 @@ const Cart = ({
       items += item.qty;
       price += item.qty * item.price;
     });
-
+    price = Math.round((price + Number.EPSILON) * 100) / 100;
     setTotalPrice(price);
     setTotalItems(items);
   }, [

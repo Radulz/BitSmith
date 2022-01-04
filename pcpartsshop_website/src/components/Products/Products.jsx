@@ -71,7 +71,7 @@ const Products = (props) => {
         <div className={classes.smallContainer}>
           <Grid
             container
-            justify="center"
+            justifyContent="center"
             spacing={4}
             style={{ height: "100 vh" }}
             lg={8}
