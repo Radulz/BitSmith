@@ -10,7 +10,10 @@ import {
 } from "@material-ui/core";
 import "./styles.scss";
 import { ColorButton } from "../ColorButton";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers/joi";
+import * as constants from "../../../constants/UserConstants";
+import Joi from "joi";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,10 +21,27 @@ import { logIn } from "../../../redux/User/user-actions";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+const schema = Joi.object({
+  email: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required(),
+  password: Joi.string().min(8).max(64).required(),
+});
+
 const Login = ({ logIn }) => {
   const [existantEmail, setExistantEmail] = useState(true);
   const [checkedPassword, setCheckedPassword] = useState(true);
-  const { register, handleSubmit } = useForm({ criteriaMode: "all" });
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    resolver: joiResolver(schema),
+  });
   const navigate = useNavigate();
 
   const validateExistantEmail = async (email) => {
@@ -63,12 +83,12 @@ const Login = ({ logIn }) => {
     if (response) {
       toast.success("Login successful!", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000,
+        autoClose: 2000,
       });
     } else {
       toast.error("Something went wrong.", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000,
+        autoClose: 2000,
       });
     }
   };
@@ -108,92 +128,77 @@ const Login = ({ logIn }) => {
       } else {
         navigate("/");
       }
-    }, 3000);
+    }, 2000);
     console.log(data);
   };
 
   return (
     <div className="base-container" style={{ marginTop: "100px" }}>
-      {/* <div className="header">Login</div> */}
       <div className="content">
         <div className="image">
           <img src={LoginLogo} alt="" />
         </div>
-
-        <FormProvider>
-          <form className="form-group" onSubmit={handleSubmit(onSubmit)}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={12}>
-                {existantEmail ? (
+        <form className="form-group" onSubmit={handleSubmit(onSubmit)}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={12}>
+              <Controller
+                name={constants.EMAIL}
+                control={control}
+                render={({ field }) => (
                   <FormControl>
-                    <InputLabel htmlFor="component-simple">Email</InputLabel>
+                    <InputLabel htmlFor="component-simple">
+                      {" "}
+                      {constants.EMAIL_LABEL}{" "}
+                    </InputLabel>
                     <Input
-                      id="email"
-                      fullWidth
-                      {...register("email", {
-                        required: true,
-                        maxLength: 50,
-                      })}
+                      {...field}
+                      error={!!errors.email || !existantEmail}
                     />
-                  </FormControl>
-                ) : (
-                  <FormControl>
-                    <InputLabel htmlFor="component-simple">Email</InputLabel>
-                    <Input
-                      id="email"
-                      fullWidth
-                      error
-                      {...register("email", {
-                        required: true,
-                        maxLength: 50,
-                      })}
-                      onChange={(e) => {
-                        setExistantEmail(true);
-                      }}
-                    />
-                    <FormHelperText id="component-error-text">
-                      This account doesn't exist.
-                    </FormHelperText>
+                    {errors.email ? (
+                      <FormHelperText error>Ex. name@domain.com</FormHelperText>
+                    ) : existantEmail ? (
+                      <FormHelperText>Ex. name@domain.com</FormHelperText>
+                    ) : (
+                      <FormHelperText error>
+                        This account does not exist.
+                      </FormHelperText>
+                    )}
                   </FormControl>
                 )}
-              </Grid>
-              <Grid item xs={12} sm={12}>
-                {checkedPassword ? (
-                  <FormControl>
-                    <InputLabel htmlFor="component-simple">Password</InputLabel>
-                    <Input
-                      id="password"
-                      type="password"
-                      fullWidth
-                      {...register("password", {
-                        required: true,
-                        maxLength: 20,
-                      })}
-                    />
-                  </FormControl>
-                ) : (
-                  <FormControl>
-                    <InputLabel htmlFor="component-simple">Password</InputLabel>
-                    <Input
-                      id="password"
-                      type="password"
-                      error
-                      fullWidth
-                      {...register("password", {
-                        required: true,
-                        maxLength: 20,
-                      })}
-                      onChange={(e) => setCheckedPassword(true)}
-                    />
-                    <FormHelperText id="component-error-text">
-                      Wrong password.
-                    </FormHelperText>
-                  </FormControl>
-                )}
-              </Grid>
+              />
             </Grid>
-          </form>
-        </FormProvider>
+            <Grid item xs={12} sm={12}>
+              <Controller
+                name={constants.PASSWORD}
+                control={control}
+                render={({ field }) => (
+                  <FormControl>
+                    <InputLabel htmlFor="component-simple">
+                      {" "}
+                      {constants.PASSWORD_LABEL}{" "}
+                    </InputLabel>
+                    <Input
+                      {...field}
+                      error={!!errors.password || !checkedPassword}
+                      type="password"
+                    />
+                    {errors.password ? (
+                      <FormHelperText error>
+                        Length between 8 and 64 symbols
+                      </FormHelperText>
+                    ) : checkedPassword ? (
+                      <FormHelperText>
+                        Length between 8 and 64 symbols
+                      </FormHelperText>
+                    ) : (
+                      <FormHelperText error>Wrong password.</FormHelperText>
+                    )}
+                  </FormControl>
+                )}
+              />
+            </Grid>
+          </Grid>
+        </form>
         <ColorButton
           variant="contained"
           type="submit"
