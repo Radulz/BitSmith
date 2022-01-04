@@ -1,10 +1,30 @@
 import React from "react";
 import * as constants from "../../constants/AddressFormConstants";
-import { Button, Grid, Typography } from "@material-ui/core";
-import { useForm, FormProvider } from "react-hook-form";
+import {
+  Button,
+  Grid,
+  Typography,
+  FormControl,
+  Input,
+  InputLabel,
+  FormHelperText,
+} from "@material-ui/core";
+import { useForm, Controller } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers/joi";
+import Joi from "joi";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import FormInputField from "../FormInputField/FormInputField";
+
+const schema = Joi.object({
+  email: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required(),
+  firstName: Joi.string().required(),
+  lastName: Joi.string().required(),
+  county: Joi.string().required(),
+  city: Joi.string().required(),
+  address: Joi.string().required(),
+});
 
 const AddressForm = ({
   next,
@@ -16,7 +36,22 @@ const AddressForm = ({
   address,
   isLoggedIn,
 }) => {
-  const { register, handleSubmit } = useForm();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      county: county,
+      city: city,
+      address: address,
+    },
+    resolver: joiResolver(schema),
+  });
+  console.log(errors);
   const onSubmit = (data) => {
     next(data);
   };
@@ -25,112 +60,140 @@ const AddressForm = ({
       <Typography variant="h6" gutterBottom>
         Shipping Address
       </Typography>
-      <FormProvider>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Grid container spacing={4}>
-            {!isLoggedIn ? (
-              <>
-                <FormInputField
-                  name={constants.FIRST_NAME}
-                  labelText={constants.FIRST_NAME_LABEL}
-                  register={register}
-                  isLoggedIn={false}
-                />
-                <FormInputField
-                  name={constants.LAST_NAME}
-                  labelText={constants.LAST_NAME_LABEL}
-                  register={register}
-                  isLoggedIn={false}
-                />
-                <FormInputField
-                  name={constants.EMAIL}
-                  labelText={constants.EMAIL_LABEL}
-                  register={register}
-                  isLoggedIn={false}
-                />
-                <FormInputField
-                  name={constants.COUNTY}
-                  labelText={constants.COUNTY_LABEL}
-                  register={register}
-                  isLoggedIn={false}
-                />
-                <FormInputField
-                  name={constants.CITY}
-                  labelText={constants.CITY_LABEL}
-                  register={register}
-                  isLoggedIn={false}
-                />
-                <FormInputField
-                  name={constants.ADDRESS}
-                  labelText={constants.ADDRESS_LABEL}
-                  register={register}
-                  isLoggedIn={false}
-                />
-              </>
-            ) : (
-              <>
-                <FormInputField
-                  name={constants.FIRST_NAME}
-                  labelText={constants.FIRST_NAME_LABEL}
-                  register={register}
-                  defaultValue={firstName}
-                  isLoggedIn={true}
-                />
-                <FormInputField
-                  name={constants.LAST_NAME}
-                  labelText={constants.LAST_NAME_LABEL}
-                  register={register}
-                  defaultValue={lastName}
-                  isLoggedIn={true}
-                />
-                <FormInputField
-                  name={constants.EMAIL}
-                  labelText={constants.EMAIL_LABEL}
-                  register={register}
-                  defaultValue={email}
-                  isLoggedIn={true}
-                />
-                <FormInputField
-                  name={constants.COUNTY}
-                  labelText={constants.COUNTY_LABEL}
-                  register={register}
-                  defaultValue={county}
-                  isLoggedIn={true}
-                />
-                <FormInputField
-                  name={constants.CITY}
-                  labelText={constants.CITY_LABEL}
-                  register={register}
-                  defaultValue={city}
-                  isLoggedIn={true}
-                />
-                <FormInputField
-                  name={constants.ADDRESS}
-                  labelText={constants.ADDRESS_LABEL}
-                  register={register}
-                  defaultValue={address}
-                  isLoggedIn={true}
-                />
-              </>
-            )}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Grid container spacing={4}>
+          <Grid item xs={12} sm={6}>
+            <Controller
+              name={constants.FIRST_NAME}
+              control={control}
+              render={({ field }) => (
+                <FormControl>
+                  <InputLabel htmlFor="component-simple">
+                    {constants.FIRST_NAME_LABEL}
+                  </InputLabel>
+                  <Input {...field} error={!!errors.firstName} />
+                  {errors.firstName ? (
+                    <FormHelperText error>Field required.</FormHelperText>
+                  ) : (
+                    <FormHelperText disabled> </FormHelperText>
+                  )}
+                </FormControl>
+              )}
+            />
           </Grid>
-          <br />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginTop: "25px",
-            }}
-          >
-            <Button component={Link} to="/cart" variant="outlined">
-              Back to Cart
-            </Button>
-            <Button type="submit" variant="contained" color="primary">
-              Next
-            </Button>
-          </div>
-        </form>
-      </FormProvider>
+          <Grid item xs={12} sm={6}>
+            <Controller
+              name={constants.LAST_NAME}
+              control={control}
+              render={({ field }) => (
+                <FormControl>
+                  <InputLabel htmlFor="component-simple">
+                    {constants.LAST_NAME_LABEL}
+                  </InputLabel>
+                  <Input {...field} error={!!errors.lastName} />
+                  {errors.lastName ? (
+                    <FormHelperText error>Field required.</FormHelperText>
+                  ) : (
+                    <FormHelperText disabled> </FormHelperText>
+                  )}
+                </FormControl>
+              )}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Controller
+              name={constants.EMAIL}
+              control={control}
+              render={({ field }) => (
+                <FormControl>
+                  <InputLabel htmlFor="component-simple">
+                    {" "}
+                    {constants.EMAIL_LABEL}{" "}
+                  </InputLabel>
+                  <Input {...field} error={!!errors.email} />
+                  {errors.email ? (
+                    <FormHelperText error>Field required.</FormHelperText>
+                  ) : (
+                    <FormHelperText>ex. something@domain.com </FormHelperText>
+                  )}
+                </FormControl>
+              )}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Controller
+              name={constants.COUNTY}
+              control={control}
+              render={({ field }) => (
+                <FormControl>
+                  <InputLabel htmlFor="component-simple">
+                    {constants.COUNTY_LABEL}
+                  </InputLabel>
+                  <Input {...field} error={!!errors.county} />
+                  {errors.county ? (
+                    <FormHelperText error>Field required.</FormHelperText>
+                  ) : (
+                    <FormHelperText disabled> </FormHelperText>
+                  )}
+                </FormControl>
+              )}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Controller
+              name={constants.CITY}
+              control={control}
+              render={({ field }) => (
+                <FormControl>
+                  <InputLabel htmlFor="component-simple">
+                    {constants.CITY_LABEL}
+                  </InputLabel>
+                  <Input {...field} error={!!errors.city} />
+                  {errors.city ? (
+                    <FormHelperText error>Field required.</FormHelperText>
+                  ) : (
+                    <FormHelperText disabled></FormHelperText>
+                  )}
+                </FormControl>
+              )}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Controller
+              name={constants.ADDRESS}
+              control={control}
+              render={({ field }) => (
+                <FormControl>
+                  <InputLabel htmlFor="component-simple">
+                    {constants.ADDRESS_LABEL}
+                  </InputLabel>
+                  <Input {...field} error={!!errors.address} />
+                  {errors.address ? (
+                    <FormHelperText error>Field required.</FormHelperText>
+                  ) : (
+                    <FormHelperText disabled></FormHelperText>
+                  )}
+                </FormControl>
+              )}
+            />
+          </Grid>
+        </Grid>
+        <br />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "25px",
+          }}
+        >
+          <Button component={Link} to="/cart" variant="outlined">
+            Back to Cart
+          </Button>
+          <Button type="submit" variant="contained" color="primary">
+            Next
+          </Button>
+        </div>
+      </form>
     </>
   );
 };
