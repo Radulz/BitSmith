@@ -5,6 +5,7 @@ import List from "@mui/material/List";
 import useStyles from "./styles";
 import ListCommand from "./ListCommand";
 import FormSelector from "./FormSelector";
+import LoginLogo from "../../images/LoginLogo.png";
 
 const AdminPage = () => {
   const [formSelect, setFormSelect] = useState("");
@@ -46,12 +47,31 @@ const AdminPage = () => {
         <Grid item lg={10} md={9} sm={8} xs={6}>
           <div className={classes.smallContainer}>
             <main className={classes.layout}>
-              <Paper className={classes.paper} elevation="6">
-                <Typography variant="h5" gutterBottom align="center">
-                  {formSelect && formSelect + " form"}
-                </Typography>
-                <Divider style={{ marginBottom: "20px" }} />
-                <FormSelector formKeyword={formSelect} />
+              <Paper className={classes.paper} elevation={6}>
+                {!formSelect ? (
+                  <div
+                    className="image"
+                    style={{
+                      display: "flex",
+                      marginTop: "25px",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Typography variant="h4" gutterBottom align="center">
+                      Admin Page
+                    </Typography>
+                    <img src={LoginLogo} alt="" />
+                  </div>
+                ) : (
+                  <>
+                    <Typography variant="h5" gutterBottom align="center">
+                      {formSelect && formSelect + " form"}
+                    </Typography>
+                    <Divider style={{ marginBottom: "20px" }} />
+                    <FormSelector formKeyword={formSelect} />
+                  </>
+                )}
               </Paper>
             </main>
           </div>
