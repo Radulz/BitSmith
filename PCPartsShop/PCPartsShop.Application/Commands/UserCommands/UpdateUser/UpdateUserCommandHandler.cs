@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using PCPartsShop.Domain.Models;
 using PCPartsShop.Infrastructure;
 using System;
@@ -19,6 +20,11 @@ namespace PCPartsShop.Application.Commands.UserCommands.UpdateUser
         }
         public async Task<User> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
+            var res = _context.Users.FirstOrDefaultAsync(u => u.UserId == request.UserId);
+            if(res is null)
+            {
+                return null;
+            }
             var user = new User
             {
                 UserId = request.UserId,

@@ -81,11 +81,15 @@ namespace PCPartsShop.WebAPI.Controllers
             return Ok(response);
         }
         [HttpPatch]
-        [Route("userId")]
+        [Route("{userId}")]
         public async Task<IActionResult> UpdateUserAsAdmin(Guid userId)
         {
             var command = new UpdateUserAsAdminCommand { UserId = userId };
             var response = await _mediator.Send(command);
+            if(response is null)
+            {
+                return NotFound();
+            }
             return Ok(response);
         }
     }

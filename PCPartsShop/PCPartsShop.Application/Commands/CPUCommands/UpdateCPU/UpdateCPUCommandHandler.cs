@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using PCPartsShop.Infrastructure;
 using PCPartsShop_WebAPI.Models;
 using System;
@@ -19,6 +20,11 @@ namespace PCPartsShop.Application.Commands.CPUCommands.UpdateCPU
         }
         public async Task<CPU> Handle(UpdateCPUCommand request, CancellationToken cancellationToken)
         {
+            var res = _context.CPUs.FirstOrDefaultAsync(u => u.ComponentId == request.CPUId);
+            if (res is null)
+            {
+                return null;
+            }
             var cpu = new CPU
             {
                 ComponentId = request.CPUId,

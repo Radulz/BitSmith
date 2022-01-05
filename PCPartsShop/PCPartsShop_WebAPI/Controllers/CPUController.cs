@@ -91,6 +91,10 @@ namespace PCPartsShop.Controllers
                 Tech = cpuToUpdate.Technology,
             };
             var res = await _mediator.Send(command);
+            if(res is null)
+            {
+                return NotFound();
+            }
             return Ok(_mapper.Map<GetCPUDto>(res));
         }
     }

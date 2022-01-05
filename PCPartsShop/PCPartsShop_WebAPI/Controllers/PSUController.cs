@@ -86,6 +86,10 @@ namespace PCPartsShop.Controllers
                 Type = psuToUpdate.Modularity
             };
             var res = await _mediator.Send(command);
+            if (res is null)
+            {
+                return NotFound();
+            }
             return Ok(_mapper.Map<GetPSUDto>(res));
         }
     }

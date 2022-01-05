@@ -88,6 +88,10 @@ namespace PCPartsShop.Controllers
                 Voltage = ramToUpdate.Voltage,
             };
             var res = await _mediator.Send(command);
+            if (res is null)
+            {
+                return NotFound();
+            }
             return Ok(_mapper.Map<GetRAMDto>(res));
         }
     }

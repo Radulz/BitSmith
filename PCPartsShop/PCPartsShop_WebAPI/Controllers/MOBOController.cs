@@ -90,6 +90,10 @@ namespace PCPartsShop.Controllers
                 MemoryFreqSup = moboToUpdate.HighestFrequencySupported
             };
             var res = await _mediator.Send(command);
+            if (res is null)
+            {
+                return NotFound();
+            }
             return Ok(_mapper.Map<GetMOBODto>(res));
         }
     }

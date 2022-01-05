@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using PCPartsShop.Infrastructure;
 using PCPartsShop_WebAPI.Models;
 using System;
@@ -19,6 +20,11 @@ namespace PCPartsShop.Application.Commands.PSUCommands.UpdatePSU
         }
         public async Task<PSU> Handle(UpdatePSUCommand request, CancellationToken cancellationToken)
         {
+            var res = _context.PSUs.FirstOrDefaultAsync(u => u.ComponentId == request.PSUId);
+            if (res is null)
+            {
+                return null;
+            }
             var psu = new PSU
             {
                 ComponentId = request.PSUId,
