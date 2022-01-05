@@ -4,13 +4,10 @@ import {
   Toolbar,
   IconButton,
   Badge,
-  MenuItem,
-  Menu,
   Typography,
   Button,
 } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
-//import Button from "@mui/material/Button";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/LoginLogo.png";
 import useStyles from "./styles";
