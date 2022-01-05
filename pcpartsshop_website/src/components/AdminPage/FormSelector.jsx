@@ -1,16 +1,30 @@
 import React from "react";
 import AddCPUForm from "./Forms/CPU/AddCPUForm";
+import RemoveCPUForm from "./Forms/CPU/RemoveCPUForm";
+import GetCPUForm from "./Forms/CPU/GetCPUForm";
 import UpdateCPUForm from "./Forms/CPU/UpdateCPUForm";
 import AddGPUForm from "./Forms/GPU/AddGPUForm";
+import RemoveGPUForm from "./Forms/GPU/RemoveGPUForm";
+import GetGPUForm from "./Forms/GPU/GetGPUForm";
 import UpdateGPUForm from "./Forms/GPU/UpdateGPUForm";
 import AddMOBOForm from "./Forms/MOBO/AddMOBOForm";
+import RemoveMOBOForm from "./Forms/MOBO/RemoveMOBOForm";
+import GetMOBOForm from "./Forms/MOBO/GetMOBOForm";
 import UpdateMOBOForm from "./Forms/MOBO/UpdateMOBOForm";
 import AddPSUForm from "./Forms/PSU/AddPSUForm";
+import RemovePSUForm from "./Forms/PSU/RemovePSUForm";
+import GetPSUForm from "./Forms/PSU/GetPSUForm";
 import UpdatePSUForm from "./Forms/PSU/UpdatePSUForm";
 import AddRAMForm from "./Forms/RAM/AddRAMForm";
+import RemoveRAMForm from "./Forms/RAM/RemoveRAMForm";
+import GetRAMForm from "./Forms/RAM/GetRAMForm";
 import UpdateRAMForm from "./Forms/RAM/UpdateRAMForm";
 import AddUserForm from "./Forms/User/AddUserForm";
+import RemoveUserForm from "./Forms/User/RemoveUserForm";
+import GetUserForm from "./Forms/User/GetUserForm";
 import UpdateUserForm from "./Forms/User/UpdateUserForm";
+import GetUserByEmailForm from "./Forms/User/GetUserByEmailForm";
+import UpdateUserAsAdmin from "./Forms/User/UpdateUserAsAdmin";
 
 const FormSelector = ({ formKeyword }) => {
   switch (formKeyword) {
@@ -26,6 +40,18 @@ const FormSelector = ({ formKeyword }) => {
       return <AddRAMForm />;
     case "Add User":
       return <AddUserForm />;
+    case "Remove CPU":
+      return <RemoveCPUForm />;
+    case "Remove GPU":
+      return <RemoveGPUForm />;
+    case "Remove Motherboard":
+      return <RemoveMOBOForm />;
+    case "Remove Power Unit":
+      return <RemovePSUForm />;
+    case "Remove RAM Stick":
+      return <RemoveRAMForm />;
+    case "Remove User":
+      return <RemoveUserForm />;
     case "Update CPU":
       return <UpdateCPUForm />;
     case "Update GPU":
@@ -38,6 +64,22 @@ const FormSelector = ({ formKeyword }) => {
       return <UpdateRAMForm />;
     case "Update User":
       return <UpdateUserForm />;
+    case "Get CPU":
+      return <GetCPUForm />;
+    case "Get GPU":
+      return <GetGPUForm />;
+    case "Get Motherboard":
+      return <GetMOBOForm />;
+    case "Get Power Unit":
+      return <GetPSUForm />;
+    case "Get RAM Stick":
+      return <GetRAMForm />;
+    case "Get User":
+      return <GetUserForm />;
+    case "Get User by email":
+      return <GetUserByEmailForm />;
+    case "Update User as admin":
+      return <UpdateUserAsAdmin />;
     default:
       return null;
   }

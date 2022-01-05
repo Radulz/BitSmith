@@ -50,6 +50,22 @@ const ListCommand = ({ listText, setFormSelect }) => {
             op="Info"
             setFormSelect={setFormSelect}
           />
+          {listText === "User" && (
+            <>
+              <Divider variant="inset" />
+              <SubListCommand
+                text={"Get " + listText + " by email"}
+                op="Info"
+                setFormSelect={setFormSelect}
+              />
+              <Divider variant="inset" />
+              <SubListCommand
+                text={"Update " + listText + " as admin"}
+                op="Info"
+                setFormSelect={setFormSelect}
+              />
+            </>
+          )}
         </List>
       </Collapse>
     </>
