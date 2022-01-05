@@ -3,7 +3,7 @@ import { Typography, Grid } from "@material-ui/core";
 import Product from "./Product/Product";
 import useStyles from "./styles";
 import Dropdown from "./Dropdown/Dropdown";
-
+import FilterDropdown from "./FilterDropdown/FilterDropdown";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as shoppingActions from "../../redux/Shopping/shopping-actions";
@@ -27,23 +27,23 @@ const Products = (props) => {
       filteredProducts = products.filter((p) => p.componentType === "CPU");
       console.log(filteredProducts);
       break;
-    case "GPU":
+    case "Graphics card":
       filteredProducts = products.filter((p) => p.componentType === "GPU");
       console.log(filteredProducts);
       break;
-    case "Motherboards":
+    case "Motherboard":
       filteredProducts = products.filter((p) => p.componentType === "MOBO");
       console.log(filteredProducts);
       break;
-    case "Power Units":
+    case "Power unit":
       filteredProducts = products.filter((p) => p.componentType === "PSU");
       console.log(filteredProducts);
       break;
-    case "Ram memory sticks":
+    case "Ram memory stick":
       filteredProducts = products.filter((p) => p.componentType === "RAM");
       console.log(filteredProducts);
       break;
-    case "Remove Filter":
+    case "Remove filter":
       filteredProducts = products;
       console.log(filteredProducts);
 
@@ -57,43 +57,41 @@ const Products = (props) => {
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />
-      <div className={classes.container}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "start",
-            alignSelf: "flex-start",
-            maxWidth: "200px",
-          }}
-        >
-          <Dropdown selected={selected} setSelected={setSelected}></Dropdown>
-        </div>
-        <div className={classes.smallContainer}>
-          <Grid
-            container
-            justifyContent="center"
-            spacing={4}
-            style={{ height: "100 vh" }}
-            lg={8}
-          >
-            {filteredProducts &&
-              filteredProducts.map((product, key) => (
-                <Grid
-                  item
-                  key={product.componentId}
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  lg={4}
-                >
-                  <Product product={product} addToCart={props.addToCart} />
-                </Grid>
-              ))}
-
-            {console.log(selected)}
-          </Grid>
-        </div>
-      </div>
+      <Grid container>
+        <Grid item lg={2} md={3} sm={4} xs={6}>
+          <div className={classes.dashboardMenu}>
+            <FilterDropdown selected={selected} setSelected={setSelected} />
+          </div>
+        </Grid>
+        <Grid item lg={10} md={9} sm={8} xs={6}>
+          <div className={classes.smallContainer}>
+            <Grid
+              container
+              justifyContent="center"
+              spacing={3}
+              style={{ height: "100 vh" }}
+              lg={10}
+              md={8}
+              sm={6}
+              xs={4}
+            >
+              {filteredProducts &&
+                filteredProducts.map((product, key) => (
+                  <Grid
+                    item
+                    key={product.componentId}
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    lg={3}
+                  >
+                    <Product product={product} addToCart={props.addToCart} />
+                  </Grid>
+                ))}
+            </Grid>
+          </div>
+        </Grid>
+      </Grid>
     </main>
   );
 };

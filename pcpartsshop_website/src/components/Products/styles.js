@@ -15,6 +15,12 @@ export default makeStyles((theme) => ({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 48,
+  },
+  dashboardMenu: {
+    display: "flex",
+    justifyContent: "start",
+    alignSelf: "flex-start",
   },
   // container: {
   //   display: "block",
