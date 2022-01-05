@@ -14,6 +14,9 @@ import { useForm, Controller } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import * as constants from "../../../../constants/UserConstants";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const schema = Joi.object({
   userId: Joi.string().guid().required(),
@@ -49,8 +52,49 @@ const UpdateUserForm = () => {
     resolver: joiResolver(schema),
   });
   console.log(errors);
-  const onSubmit = (data) => {
+  const notify = (response) => {
+    if (!response) {
+      toast.error("Something went wrong.", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: false,
+      });
+    } else if (response.status === 200) {
+      toast.success(
+        `User with ID: ${response.data.userId} was updated successfully.`,
+        {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: false,
+        }
+      );
+    }
+  };
+  const onSubmit = async (data) => {
     console.log(data);
+    const user = await axios
+      .get(process.env.REACT_APP_API_URL + `User/users/${data.email}`)
+      .catch((e) => console.log(e));
+    if (user && user.data.userId !== data.userId) {
+      toast.error("User cannot be updated. Read the note!", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: false,
+      });
+      return;
+    } else if (!user || user.data.userId === data.userId) {
+      const response = await axios
+        .put(process.env.REACT_APP_API_URL + `User/${data.userId}`, {
+          userId: data.userId,
+          email: data.email,
+          password: data.password,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          county: data.county,
+          city: data.city,
+          address: data.address,
+          admin: data.admin,
+        })
+        .catch((e) => console.log(e));
+      notify(response);
+    }
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

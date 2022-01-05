@@ -13,6 +13,9 @@ import { useForm, Controller } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import * as constants from "../../../../constants/UserConstants";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const schema = Joi.object({
   email: Joi.string()
@@ -46,8 +49,49 @@ const AddUserForm = () => {
     resolver: joiResolver(schema),
   });
   console.log(errors);
-  const onSubmit = (data) => {
+  const notify = (response) => {
+    if (!response) {
+      toast.error("Something went wrong.", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: false,
+      });
+    } else if (response.status === 201) {
+      toast.success(
+        `User ${response.data.email} was registered with ID: ${response.data.userId}`,
+        {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: false,
+        }
+      );
+    }
+  };
+  const onSubmit = async (data) => {
     console.log(data);
+    const user = await axios
+      .get(process.env.REACT_APP_API_URL + `User/users/${data.email}`)
+      .catch((e) => console.log(e));
+    if (user) {
+      toast.error("This user is already registered.", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: false,
+      });
+      return;
+    } else {
+      const response = await axios.post(
+        process.env.REACT_APP_API_URL + "User",
+        {
+          email: data.email,
+          password: data.password,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          county: data.county,
+          city: data.city,
+          address: data.address,
+          admin: data.admin,
+        }
+      );
+      notify(response);
+    }
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

@@ -11,6 +11,9 @@ import { useForm, Controller } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import * as constants from "../../../../constants/MOBOConstants";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const schema = Joi.object({
   componentId: Joi.string().guid().required(),
@@ -48,8 +51,39 @@ const UpdateMOBOForm = () => {
     resolver: joiResolver(schema),
   });
   console.log(errors);
-  const onSubmit = (data) => {
+  const notify = (response) => {
+    if (!response) {
+      toast.error("Something went wrong.", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: false,
+      });
+    } else if (response.status === 200) {
+      toast.success(
+        `Component with ID: ${response.data.componentId} updated successfully.`,
+        {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: false,
+        }
+      );
+    }
+  };
+  const onSubmit = async (data) => {
     console.log(data);
+    const response = await axios
+      .put(process.env.REACT_APP_API_URL + `MOBO/${data.componentId}`, {
+        make: data.make,
+        model: data.model,
+        price: data.price,
+        image: data.image,
+        socket: data.socket,
+        format: data.format,
+        chipset: data.chipset,
+        lowestFrequencySupported: data.lowestFrequencySupported,
+        highestFrequencySupported: data.highestFrequencySupported,
+        memoryType: data.memoryType,
+      })
+      .catch((e) => console.log(e));
+    notify(response);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
