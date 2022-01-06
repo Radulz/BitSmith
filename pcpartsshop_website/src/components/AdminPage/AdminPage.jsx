@@ -41,6 +41,10 @@ const AdminPage = () => {
                 Users controls
               </ListSubheader>
               <ListCommand listText="User" setFormSelect={setFormSelect} />
+              <ListSubheader component="div" id="nested-list-subheader">
+                Order controls
+              </ListSubheader>
+              <ListCommand listText="Order" setFormSelect={setFormSelect} />
             </List>
           </div>
         </Grid>

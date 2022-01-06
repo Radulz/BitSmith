@@ -27,29 +27,53 @@ const ListCommand = ({ listText, setFormSelect }) => {
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <SubListCommand
-            text={"Add " + listText}
-            op="Add"
-            setFormSelect={setFormSelect}
-          />
-          <Divider variant="inset" />
-          <SubListCommand
-            text={"Remove " + listText}
-            op="Remove"
-            setFormSelect={setFormSelect}
-          />
-          <Divider variant="inset" />
-          <SubListCommand
-            text={"Update " + listText}
-            op="Update"
-            setFormSelect={setFormSelect}
-          />
-          <Divider variant="inset" />
-          <SubListCommand
-            text={"Get " + listText}
-            op="Info"
-            setFormSelect={setFormSelect}
-          />
+          {listText === "Order" ? (
+            <>
+              <SubListCommand
+                text={"Update " + listText + " status"}
+                op="Update"
+                setFormSelect={setFormSelect}
+              />
+              <Divider variant="inset" />
+              <SubListCommand
+                text={"Get " + listText + " details"}
+                op="Info"
+                setFormSelect={setFormSelect}
+              />
+            </>
+          ) : (
+            <>
+              <SubListCommand
+                text={"Add " + listText}
+                op="Add"
+                setFormSelect={setFormSelect}
+              />
+              <Divider variant="inset" />
+              <SubListCommand
+                text={"Remove " + listText}
+                op="Remove"
+                setFormSelect={setFormSelect}
+              />
+              <Divider variant="inset" />
+              <SubListCommand
+                text={"Update " + listText}
+                op="Update"
+                setFormSelect={setFormSelect}
+              />
+              <Divider variant="inset" />
+              <SubListCommand
+                text={"Get " + listText}
+                op="Info"
+                setFormSelect={setFormSelect}
+              />
+              <Divider variant="inset" />
+              <SubListCommand
+                text={"Get all " + listText + "s"}
+                op="Info"
+                setFormSelect={setFormSelect}
+              />
+            </>
+          )}
           {listText === "User" && (
             <>
               <Divider variant="inset" />
@@ -61,7 +85,7 @@ const ListCommand = ({ listText, setFormSelect }) => {
               <Divider variant="inset" />
               <SubListCommand
                 text={"Update " + listText + " as admin"}
-                op="Info"
+                op="Update"
                 setFormSelect={setFormSelect}
               />
             </>

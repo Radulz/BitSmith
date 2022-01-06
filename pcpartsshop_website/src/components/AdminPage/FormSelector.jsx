@@ -25,6 +25,14 @@ import GetUserForm from "./Forms/User/GetUserForm";
 import UpdateUserForm from "./Forms/User/UpdateUserForm";
 import GetUserByEmailForm from "./Forms/User/GetUserByEmailForm";
 import UpdateUserAsAdmin from "./Forms/User/UpdateUserAsAdmin";
+import SeeOrderDetailsForm from "./Forms/Order/SeeOrderDetailsForm";
+import UpdateOrderStatusForm from "./Forms/Order/UpdateOrderStatusForm";
+import GetAllCPUsTable from "./Forms/CPU/GetAllCPUsTable";
+import GetAllGPUsTable from "./Forms/GPU/GetAllGPUsTable";
+import GetAllMOBOsTable from "./Forms/MOBO/GetAllMOBOsTable";
+import GetAllPSUsTable from "./Forms/PSU/GetAllPSUsTable";
+import GetAllRAMsTable from "./Forms/RAM/GetAllRAMsTable";
+import GetAllUsersTable from "./Forms/User/GetAllUsersTable";
 
 const FormSelector = ({ formKeyword }) => {
   switch (formKeyword) {
@@ -80,6 +88,22 @@ const FormSelector = ({ formKeyword }) => {
       return <GetUserByEmailForm />;
     case "Update User as admin":
       return <UpdateUserAsAdmin />;
+    case "Get Order details":
+      return <SeeOrderDetailsForm />;
+    case "Update Order status":
+      return <UpdateOrderStatusForm />;
+    case "Get all CPUs":
+      return <GetAllCPUsTable />;
+    case "Get all GPUs":
+      return <GetAllGPUsTable />;
+    case "Get all Motherboards":
+      return <GetAllMOBOsTable />;
+    case "Get all Power Units":
+      return <GetAllPSUsTable />;
+    case "Get all RAM Sticks":
+      return <GetAllRAMsTable />;
+    case "Get all Users":
+      return <GetAllUsersTable />;
     default:
       return null;
   }
