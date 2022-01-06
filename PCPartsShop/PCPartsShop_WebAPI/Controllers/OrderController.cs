@@ -122,9 +122,14 @@ namespace PCPartsShop.WebAPI.Controllers
         }
         [HttpPatch]
         [Route("{orderId}")]
-        public async Task<IActionResult> UpdateShippingStatus([FromBody] UpdateOrderShippingStatusCommand command)
+        public async Task<IActionResult> UpdateShippingStatus(int orderId)
         {
+            var command = new UpdateOrderShippingStatusCommand { OrderId = orderId };
             var response = await _mediator.Send(command);
+            if(response is null)
+            {
+                return NotFound($"Order {orderId} was not found!");
+            }
             return Ok(_mapper.Map<GetOrderDto>(response));
         }
     }

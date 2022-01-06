@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using PCPartsShop.Domain.Models;
 using PCPartsShop.Infrastructure;
 using System;
@@ -20,7 +21,7 @@ namespace PCPartsShop.Application.Queries.OrderQueries.GetOrderByEmail
         public async Task<ICollection<Order>> Handle(GetOrdersByEmailQuery request, CancellationToken cancellationToken)
         {
             List<Order> orders = new List<Order>();
-            foreach (var item in _context.Orders)
+            foreach (var item in _context.Orders.Include(o => o.Items))
             {
                 if(item.UserEmail == request.UserEmail)
                 {
