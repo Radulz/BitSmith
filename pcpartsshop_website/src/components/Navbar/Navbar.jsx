@@ -7,14 +7,16 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
-import { ShoppingCart } from "@material-ui/icons";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/LoginLogo.png";
 import useStyles from "./styles";
 import { connect } from "react-redux";
 import { logOut } from "../../redux/User/user-actions";
+import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
-const NavBar = ({ productsAddedToCart, isLoggedIn, logOut, email }) => {
+const NavBar = ({ productsAddedToCart, isLoggedIn, logOut, email, admin }) => {
   const [cartCount, setCartCount] = useState(0);
   useEffect(() => {
     let count = 0;
@@ -46,16 +48,18 @@ const NavBar = ({ productsAddedToCart, isLoggedIn, logOut, email }) => {
         <div className={classes.grow} />
         {location.pathname === "/" && (
           <div className={classes.button}>
-            <IconButton
-              component={Link}
-              to="/cart"
-              aria-label="Show cart items"
-              color="inherit"
-            >
-              <Badge badgeContent={cartCount} color="secondary">
-                <ShoppingCart />
-              </Badge>
-            </IconButton>
+            {(!admin || !isLoggedIn) && (
+              <IconButton
+                component={Link}
+                to="/cart"
+                aria-label="Show cart items"
+                color="inherit"
+              >
+                <Badge badgeContent={cartCount} color="secondary">
+                  <ShoppingCartOutlinedIcon />
+                </Badge>
+              </IconButton>
+            )}
             {!isLoggedIn ? (
               <Button
                 component={Link}
@@ -65,14 +69,32 @@ const NavBar = ({ productsAddedToCart, isLoggedIn, logOut, email }) => {
               >
                 Login
               </Button>
+            ) : admin ? (
+              <>
+                <IconButton component={Link} to="/adminPage">
+                  <AdminPanelSettingsOutlinedIcon />
+                </IconButton>
+                <Button
+                  variant="outlined"
+                  style={{ marginLeft: "20px" }}
+                  onClick={() => logOut(email)}
+                >
+                  Logout
+                </Button>
+              </>
             ) : (
-              <Button
-                variant="outlined"
-                style={{ marginLeft: "20px" }}
-                onClick={() => logOut(email)}
-              >
-                Logout
-              </Button>
+              <>
+                <IconButton component={Link} to="/">
+                  <AccountCircleOutlinedIcon />
+                </IconButton>
+                <Button
+                  variant="outlined"
+                  style={{ marginLeft: "20px" }}
+                  onClick={() => logOut(email)}
+                >
+                  Logout
+                </Button>
+              </>
             )}
           </div>
         )}
@@ -86,6 +108,7 @@ const mapStateToProps = (state) => {
     productsAddedToCart: state.shopReducer.productsAddedToCart,
     isLoggedIn: state.userReducer.isLoggedIn,
     email: state.userReducer.email,
+    admin: state.userReducer.admin,
   };
 };
 
