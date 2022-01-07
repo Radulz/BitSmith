@@ -84,7 +84,7 @@ const NavBar = ({ productsAddedToCart, isLoggedIn, logOut, email, admin }) => {
               </>
             ) : (
               <>
-                <IconButton component={Link} to="/">
+                <IconButton component={Link} to="/profilePage">
                   <AccountCircleOutlinedIcon />
                 </IconButton>
                 <Button

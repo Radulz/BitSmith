@@ -5,6 +5,7 @@ import {
   Checkout,
   LoginForm,
   AdminPage,
+  ProfilePage,
 } from "./components";
 //import Cart from "./components/Cart/Cart";
 //import Checkout from "./components/CheckoutForm/Checkout/Checkout";
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/checkout" element={<Checkout />} />
           <Route exact path="/login" element={<LoginForm />} />
           <Route exact path="/adminPage" element={<AdminPage />} />
+          <Route exact path="/profilePage" element={<ProfilePage />} />
         </Routes>
       </div>
     </Router>
