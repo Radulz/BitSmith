@@ -6,10 +6,15 @@ import useStyles from "./styles";
 import ListCommand from "./ListCommand";
 import FormSelector from "./FormSelector";
 import LoginLogo from "../../images/LoginLogo.png";
+import { connect } from "react-redux";
+import { Navigate } from "react-router-dom";
 
-const AdminPage = () => {
+const AdminPage = ({ admin, isLoggedIn }) => {
   const [formSelect, setFormSelect] = useState("");
   const classes = useStyles();
+  if (!admin || !isLoggedIn) {
+    return <Navigate to="/" />;
+  }
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />
@@ -85,4 +90,11 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.userReducer.isLoggedIn,
+    admin: state.userReducer.admin,
+  };
+};
+
+export default connect(mapStateToProps)(AdminPage);
