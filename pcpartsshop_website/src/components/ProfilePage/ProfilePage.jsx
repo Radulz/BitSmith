@@ -3,7 +3,6 @@ import { Typography, Grid } from "@material-ui/core";
 import OrderAccordion from "./OrderAccordion/OrderAccordion";
 import useStyles from "./styles";
 import { connect } from "react-redux";
-import ProfileMenu from "./ProfileMenu";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 
@@ -87,11 +86,15 @@ const ProfilePage = ({
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <div className={classes.smallContainer}>
             <Typography variant="h5">Order History</Typography>
-            <OrderAccordion
-              email={email}
-              size={0.65 * screenWidth}
-              data={orders}
-            />
+            {orders.length === 0 ? (
+              <Typography variant="h5">You don't have any orders!</Typography>
+            ) : (
+              <OrderAccordion
+                email={email}
+                size={0.65 * screenWidth}
+                data={orders}
+              />
+            )}
           </div>
         </Grid>
       </Grid>

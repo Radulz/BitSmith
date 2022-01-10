@@ -29,8 +29,17 @@ const OrderAccordion = ({ size, data }) => {
             <Typography sx={{ width: "33%", flexShrink: 0 }}>
               Order Number:
             </Typography>
-            <Typography sx={{ color: "text.secondary", marginLeft: 25 }}>
+            <Typography
+              sx={{ color: "text.secondary", marginLeft: 20 }}
+              align="center"
+            >
               {o.orderId}
+            </Typography>
+            <Typography
+              sx={{ color: "text.secondary", marginLeft: 25 }}
+              align="center"
+            >
+              {o.status}
             </Typography>
           </AccordionSummary>
           <AccordionDetails sx={{ width: size }}>

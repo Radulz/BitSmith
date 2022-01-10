@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { removeAllFromCart } from "../../redux/Shopping/shopping-actions";
 
 import { Container, Typography, Button, Grid } from "@material-ui/core";
@@ -51,7 +50,7 @@ const Cart = ({
       <Grid container spacing={3}>
         {productsAddedToCart &&
           productsAddedToCart.map((item) => (
-            <Grid item xs={12} sm={4} key={item.componentId}>
+            <Grid item xs={12} sm={4} lg={4} md={4} key={item.componentId}>
               <CartItem product={item} key={item.componentId} />
             </Grid>
           ))}
@@ -87,6 +86,7 @@ const Cart = ({
             </Button>
           </div>
         </div>
+        <br />
       </Grid>
     </>
   );

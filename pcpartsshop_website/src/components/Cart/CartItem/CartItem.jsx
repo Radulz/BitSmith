@@ -7,7 +7,6 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  TextField,
   IconButton,
   Input,
 } from "@material-ui/core";
@@ -44,6 +43,7 @@ const CartItem = ({ product, removeFromCart, adjustQty }) => {
   return (
     <Card>
       <CardMedia
+        component="img"
         image={product.image}
         alt={product.make + " " + product.model}
         className={classes.media}
