@@ -33,6 +33,7 @@ import GetAllMOBOsTable from "./Forms/MOBO/GetAllMOBOsTable";
 import GetAllPSUsTable from "./Forms/PSU/GetAllPSUsTable";
 import GetAllRAMsTable from "./Forms/RAM/GetAllRAMsTable";
 import GetAllUsersTable from "./Forms/User/GetAllUsersTable";
+import GetAllOrdersForm from "./Forms/Order/GetAllOrdersForm";
 
 const FormSelector = ({ formKeyword }) => {
   switch (formKeyword) {
@@ -104,6 +105,8 @@ const FormSelector = ({ formKeyword }) => {
       return <GetAllRAMsTable />;
     case "Get all Users":
       return <GetAllUsersTable />;
+    case "Get all Orders details":
+      return <GetAllOrdersForm />;
     default:
       return null;
   }

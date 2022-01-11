@@ -40,6 +40,12 @@ const ListCommand = ({ listText, setFormSelect }) => {
                 op="Info"
                 setFormSelect={setFormSelect}
               />
+              <Divider variant="inset" />
+              <SubListCommand
+                text={"Get all " + listText + "s details"}
+                op="Info"
+                setFormSelect={setFormSelect}
+              />
             </>
           ) : (
             <>
