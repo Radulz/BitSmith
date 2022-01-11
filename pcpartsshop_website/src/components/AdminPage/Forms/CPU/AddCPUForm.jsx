@@ -7,6 +7,7 @@ import {
   InputLabel,
   FormHelperText,
 } from "@material-ui/core";
+import useStyles from "../../styles";
 import { useForm, Controller } from "react-hook-form";
 import * as constants from "../../../../constants/CPUConstants";
 import { joiResolver } from "@hookform/resolvers/joi";
@@ -48,6 +49,7 @@ const AddCPUForm = () => {
     },
     resolver: joiResolver(schema),
   });
+  const classes = useStyles();
   console.log(errors);
   const notify = (response) => {
     if (!response) {
@@ -86,7 +88,7 @@ const AddCPUForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.MAKE}
             control={control}
@@ -106,7 +108,7 @@ const AddCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.MODEL}
             control={control}
@@ -126,7 +128,7 @@ const AddCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.PRICE}
             control={control}
@@ -145,7 +147,7 @@ const AddCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.IMAGE}
             control={control}
@@ -164,7 +166,7 @@ const AddCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.FREQUENCY}
             control={control}
@@ -183,7 +185,7 @@ const AddCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.SOCKET}
             control={control}
@@ -202,7 +204,7 @@ const AddCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.TECHNOLOGY}
             control={control}
@@ -221,7 +223,7 @@ const AddCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.MEMORYFREQUENCY}
             control={control}
@@ -240,7 +242,7 @@ const AddCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.THERMALDESGINPOWER}
             control={control}
@@ -259,7 +261,7 @@ const AddCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.NUMBEROFCORES}
             control={control}

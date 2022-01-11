@@ -10,6 +10,7 @@ import {
   Select,
 } from "@material-ui/core";
 import { useForm, Controller } from "react-hook-form";
+import useStyles from "../../styles";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import * as constants from "../../../../constants/UserConstants";
@@ -49,6 +50,7 @@ const AddUserForm = () => {
     resolver: joiResolver(schema),
   });
   console.log(errors);
+  const classes = useStyles();
   const notify = (response) => {
     if (!response) {
       toast.error("Something went wrong.", {
@@ -96,7 +98,7 @@ const AddUserForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.EMAIL}
             control={control}
@@ -116,7 +118,7 @@ const AddUserForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.PASSWORD}
             control={control}
@@ -138,7 +140,7 @@ const AddUserForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.FIRST_NAME}
             control={control}
@@ -157,7 +159,7 @@ const AddUserForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.LAST_NAME}
             control={control}
@@ -176,7 +178,7 @@ const AddUserForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.COUNTY}
             control={control}
@@ -195,7 +197,7 @@ const AddUserForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.CITY}
             control={control}
@@ -214,7 +216,7 @@ const AddUserForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.ADDRESS}
             control={control}
@@ -233,7 +235,7 @@ const AddUserForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.ADMIN}
             control={control}

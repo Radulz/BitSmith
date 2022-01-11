@@ -7,6 +7,7 @@ import {
   InputLabel,
   FormHelperText,
 } from "@material-ui/core";
+import useStyles from "../../styles";
 import { useForm, Controller } from "react-hook-form";
 import * as constants from "../../../../constants/CPUConstants";
 import { joiResolver } from "@hookform/resolvers/joi";
@@ -51,6 +52,7 @@ const UpdateCPUForm = () => {
     resolver: joiResolver(schema),
   });
   console.log(errors);
+  const classes = useStyles();
   const notify = (response) => {
     if (!response) {
       toast.error("Something went wrong.", {
@@ -59,7 +61,7 @@ const UpdateCPUForm = () => {
       });
     } else if (response.status === 200) {
       toast.success(
-        `Component with ID: ${response.data.componentId} updated successfully.`,
+        `Component with ID: ${response.data.componentId} was updated successfully.`,
         {
           position: toast.POSITION.TOP_CENTER,
           autoClose: false,
@@ -88,7 +90,7 @@ const UpdateCPUForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.COMPONENTID}
             control={control}
@@ -108,7 +110,7 @@ const UpdateCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.MAKE}
             control={control}
@@ -128,7 +130,7 @@ const UpdateCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.MODEL}
             control={control}
@@ -148,7 +150,7 @@ const UpdateCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.PRICE}
             control={control}
@@ -167,7 +169,7 @@ const UpdateCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.IMAGE}
             control={control}
@@ -186,7 +188,7 @@ const UpdateCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.FREQUENCY}
             control={control}
@@ -205,7 +207,7 @@ const UpdateCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.SOCKET}
             control={control}
@@ -224,7 +226,7 @@ const UpdateCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.TECHNOLOGY}
             control={control}
@@ -243,7 +245,7 @@ const UpdateCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.MEMORYFREQUENCY}
             control={control}
@@ -262,7 +264,7 @@ const UpdateCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.THERMALDESGINPOWER}
             control={control}
@@ -281,7 +283,7 @@ const UpdateCPUForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.NUMBEROFCORES}
             control={control}

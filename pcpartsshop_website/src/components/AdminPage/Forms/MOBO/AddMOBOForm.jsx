@@ -8,6 +8,7 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 import { useForm, Controller } from "react-hook-form";
+import useStyles from "../../styles";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import * as constants from "../../../../constants/MOBOConstants";
@@ -49,6 +50,7 @@ const AddMOBOForm = () => {
     resolver: joiResolver(schema),
   });
   console.log(errors);
+  const classes = useStyles();
   const notify = (response) => {
     if (!response) {
       toast.error("Something went wrong.", {
@@ -86,7 +88,7 @@ const AddMOBOForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.MAKE}
             control={control}
@@ -106,7 +108,7 @@ const AddMOBOForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.MODEL}
             control={control}
@@ -126,7 +128,7 @@ const AddMOBOForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.PRICE}
             control={control}
@@ -145,7 +147,7 @@ const AddMOBOForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.IMAGE}
             control={control}
@@ -164,7 +166,7 @@ const AddMOBOForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.SOCKET}
             control={control}
@@ -183,7 +185,7 @@ const AddMOBOForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.FORMAT}
             control={control}
@@ -202,7 +204,7 @@ const AddMOBOForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.CHIPSET}
             control={control}
@@ -221,7 +223,7 @@ const AddMOBOForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.LOWESTFREQUENCYSUPPORTED}
             control={control}
@@ -240,7 +242,7 @@ const AddMOBOForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.HIGHESTFREQUENCYSUPPORTED}
             control={control}
@@ -259,7 +261,7 @@ const AddMOBOForm = () => {
             )}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.MEMORYTYPE}
             control={control}
