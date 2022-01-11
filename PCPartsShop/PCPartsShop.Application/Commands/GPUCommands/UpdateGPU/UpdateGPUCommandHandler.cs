@@ -20,11 +20,6 @@ namespace PCPartsShop.Application.Commands.GPUCommands.UpdateGPU
         }
         public async Task<GPU> Handle(UpdateGPUCommand request, CancellationToken cancellationToken)
         {
-            var res = _context.GPUs.FirstOrDefaultAsync(u => u.ComponentId == request.GPUId);
-            if (res is null)
-            {
-                return null;
-            }
             var gpu = new GPU
             {
                 ComponentId = request.GPUId,

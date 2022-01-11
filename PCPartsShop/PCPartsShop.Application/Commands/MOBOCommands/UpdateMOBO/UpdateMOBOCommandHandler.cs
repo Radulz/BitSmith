@@ -20,11 +20,6 @@ namespace PCPartsShop.Application.Commands.MOBOCommands.UpdateMOBO
         }
         public async Task<MOBO> Handle(UpdateMOBOCommand request, CancellationToken cancellationToken)
         {
-            var res = _context.MOBOs.FirstOrDefaultAsync(u => u.ComponentId == request.MOBOId);
-            if (res is null)
-            {
-                return null;
-            }
             var m = new MOBO
             {
                 ComponentId = request.MOBOId,

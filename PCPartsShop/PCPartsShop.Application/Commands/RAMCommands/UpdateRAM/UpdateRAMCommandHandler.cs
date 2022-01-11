@@ -21,11 +21,6 @@ namespace PCPartsShop.Application.Commands.RAMCommands.UpdateRAM
 
         public async Task<RAM> Handle(UpdateRAMCommand request, CancellationToken cancellationToken)
         {
-            var res = _context.RAMs.FirstOrDefaultAsync(u => u.ComponentId == request.RAMId);
-            if (res is null)
-            {
-                return null;
-            }
             var r = new RAM
             {
                 ComponentId = request.RAMId,
