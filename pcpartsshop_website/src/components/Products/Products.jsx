@@ -70,10 +70,6 @@ const Products = (props) => {
               justifyContent="center"
               spacing={3}
               style={{ height: "100 vh" }}
-              lg={10}
-              md={8}
-              sm={6}
-              xs={4}
             >
               {filteredProducts &&
                 filteredProducts.map((product, key) => (
