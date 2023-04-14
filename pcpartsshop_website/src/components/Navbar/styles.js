@@ -65,4 +65,12 @@ export default makeStyles((theme) => ({
       width: "20ch",
     },
   },
+  loginButton: {
+    backgroundColor: "#046380",
+    marginLeft: "20px",
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "#1b2271",
+    },
+  },
 }));

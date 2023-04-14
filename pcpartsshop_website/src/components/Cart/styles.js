@@ -16,6 +16,11 @@ export default makeStyles((theme) => ({
   },
   checkoutButton: {
     minWidth: "150px",
+    backgroundColor: "#046380",
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "#1b2271",
+    },
   },
   link: {
     textDecoration: "none",

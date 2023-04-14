@@ -7,6 +7,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import useStyles from "./styles";
 
 import Review from "./Review";
 
@@ -89,6 +90,7 @@ const PaymentForm = ({
       nextStep();
     }
   };
+  const classes = useStyles();
   return (
     <>
       <Review
@@ -114,7 +116,7 @@ const PaymentForm = ({
                   type="submit"
                   variant="contained"
                   disabled={!stripe}
-                  color="primary"
+                  className={classes.nextButton}
                 >
                   Pay {totalPrice} $
                 </Button>

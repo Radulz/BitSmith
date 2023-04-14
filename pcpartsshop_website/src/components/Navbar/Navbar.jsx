@@ -8,13 +8,14 @@ import {
   Button,
 } from "@material-ui/core";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../../images/LoginLogo.png";
+import logo from "../../images/BitSmithLogoV2.png";
 import useStyles from "./styles";
 import { connect } from "react-redux";
 import { logOut } from "../../redux/User/user-actions";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { ColorButton } from "../Common/ColorButton";
 
 const NavBar = ({ productsAddedToCart, isLoggedIn, logOut, email, admin }) => {
   const [cartCount, setCartCount] = useState(0);
@@ -43,7 +44,7 @@ const NavBar = ({ productsAddedToCart, isLoggedIn, logOut, email, admin }) => {
             height="25px"
             className={classes.image}
           />
-          PCPartsShop
+          BitSmith
         </Typography>
         <div className={classes.grow} />
         {location.pathname === "/" && (
@@ -65,7 +66,7 @@ const NavBar = ({ productsAddedToCart, isLoggedIn, logOut, email, admin }) => {
                 component={Link}
                 to="/login"
                 variant="outlined"
-                style={{ marginLeft: "20px" }}
+                className={classes.loginButton}
               >
                 Login
               </Button>
@@ -76,8 +77,8 @@ const NavBar = ({ productsAddedToCart, isLoggedIn, logOut, email, admin }) => {
                 </IconButton>
                 <Button
                   variant="outlined"
-                  style={{ marginLeft: "20px" }}
                   onClick={() => logOut(email)}
+                  className={classes.loginButton}
                 >
                   Logout
                 </Button>
@@ -89,7 +90,7 @@ const NavBar = ({ productsAddedToCart, isLoggedIn, logOut, email, admin }) => {
                 </IconButton>
                 <Button
                   variant="outlined"
-                  style={{ marginLeft: "20px" }}
+                  className={classes.loginButton}
                   onClick={() => logOut(email)}
                 >
                   Logout

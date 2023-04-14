@@ -5,3 +5,4 @@ export { default as Checkout } from "./CheckoutForm/Checkout/Checkout";
 export { default as LoginForm } from "./LoginForm/LoginForm";
 export { default as AdminPage } from "./AdminPage/AdminPage";
 export { default as ProfilePage } from "./ProfilePage/ProfilePage";
+export { default as Footer } from "./Footer/Footer";

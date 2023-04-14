@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PCPartsShop.Application.Commands.CPUCommands.CreateCPU;
 using PCPartsShop.Infrastructure;
+using PCPartsShop.WebAPI;
 
 namespace PCPartsShop_WebAPI
 {
@@ -20,7 +21,7 @@ namespace PCPartsShop_WebAPI
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            ConnectionString = configuration.GetConnectionString("PCPartsShopConnection");
+            ConnectionString = configuration.GetConnectionString(Constants.DatabaseConnections.PCPartsShopDatabase);
         }
 
         public IConfiguration Configuration { get; }

@@ -14,6 +14,7 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import useStyles from "./styles";
 
 const schema = Joi.object({
   email: Joi.string()
@@ -55,6 +56,7 @@ const AddressForm = ({
   const onSubmit = (data) => {
     next(data);
   };
+  const classes = useStyles();
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -189,7 +191,11 @@ const AddressForm = ({
           <Button component={Link} to="/cart" variant="outlined">
             Back to Cart
           </Button>
-          <Button type="submit" variant="contained" color="primary">
+          <Button
+            type="submit"
+            variant="contained"
+            className={classes.nextButton}
+          >
             Next
           </Button>
         </div>

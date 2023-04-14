@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Typography, Grid } from "@material-ui/core";
 import Product from "./Product/Product";
 import useStyles from "./styles";
-import Dropdown from "./Dropdown/Dropdown";
 import FilterDropdown from "./FilterDropdown/FilterDropdown";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as shoppingActions from "../../redux/Shopping/shopping-actions";
 
 const Products = (props) => {
-  const { products = [], isLoadingParts = false } = props;
+  const { products = [], isLoadingParts = false, admin = false } = props;
   const [selected, setSelected] = useState("");
   const classes = useStyles();
   useEffect(() => {
@@ -46,7 +45,6 @@ const Products = (props) => {
     case "Remove filter":
       filteredProducts = products;
       console.log(filteredProducts);
-
       break;
     default:
       filteredProducts = products;
@@ -81,7 +79,11 @@ const Products = (props) => {
                     md={4}
                     lg={3}
                   >
-                    <Product product={product} addToCart={props.addToCart} />
+                    <Product
+                      product={product}
+                      addToCart={props.addToCart}
+                      isAdmin={admin}
+                    />
                   </Grid>
                 ))}
             </Grid>
@@ -101,8 +103,8 @@ function mapStateToProps(state) {
       const isAddedToCart = productsAddedToCart.includes(p.componentId);
       return { ...p, isAddedToCart };
     }),
-
     isLoadingProducts,
+    admin: state.userReducer.admin,
   };
 }
 

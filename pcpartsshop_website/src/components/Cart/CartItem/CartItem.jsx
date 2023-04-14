@@ -54,7 +54,7 @@ const CartItem = ({ product, removeFromCart, adjustQty }) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing className={classes.cartActions}>
-        <div class={classes.cartActionsDivLeft}>
+        <div className={classes.cartActionsDivLeft}>
           <IconButton type="button" size="medium" onClick={minusOneQty}>
             -
           </IconButton>
@@ -75,7 +75,7 @@ const CartItem = ({ product, removeFromCart, adjustQty }) => {
             +
           </IconButton>
         </div>
-        <div class={classes.cartActionsDivRight}>
+        <div className={classes.cartActionsDivRight}>
           <Typography variant="h6" style={{ marginRight: "10px" }}>
             {productPrice + "$"}
           </Typography>

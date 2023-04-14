@@ -1,5 +1,5 @@
 import React from "react";
-import LoginLogo from "../../../images/LoginLogo.png";
+import LoginLogo from "../../../images/BitSmithLogoV2.png";
 import { useState } from "react";
 import {
   FormControl,
@@ -9,7 +9,7 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 import "./styles.scss";
-import { ColorButton } from "../ColorButton";
+import { ColorButton } from "../../Common/ColorButton";
 import { useForm, Controller } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import * as constants from "../../../constants/UserConstants";
@@ -130,10 +130,10 @@ const Register = (props) => {
     //then, encrypt pass and send data to the api
   };
   return (
-    <div className="base-container" style={{ marginTop: "50px" }}>
+    <div className="base-container" style={{ marginTop: "30px" }}>
       <div className="content">
         <div className="image">
-          <img src={LoginLogo} alt="logo" />
+          <img className="logo" src={LoginLogo} alt="logo" />
         </div>
         <form className="form-group" onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={1}>

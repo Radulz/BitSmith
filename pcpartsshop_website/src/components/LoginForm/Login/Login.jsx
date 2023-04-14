@@ -1,5 +1,5 @@
 import React from "react";
-import LoginLogo from "../../../images/LoginLogo.png";
+import LoginLogo from "../../../images/BitSmithLogoV2.png";
 import { useState } from "react";
 import {
   FormControl,
@@ -9,7 +9,7 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 import "./styles.scss";
-import { ColorButton } from "../ColorButton";
+import { ColorButton } from "../../Common/ColorButton";
 import { useForm, Controller } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import * as constants from "../../../constants/UserConstants";
@@ -136,9 +136,9 @@ const Login = ({ logIn }) => {
     <div className="base-container" style={{ marginTop: "100px" }}>
       <div className="content">
         <div className="image">
-          <img src={LoginLogo} alt="" />
+          <img className="logo" src={LoginLogo} alt="" />
         </div>
-        <form className="form-group" onSubmit={handleSubmit(onSubmit)}>
+        <form className="form-group-login" onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12}>
               <Controller

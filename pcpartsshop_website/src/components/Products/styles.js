@@ -21,6 +21,7 @@ export default makeStyles((theme) => ({
     display: "flex",
     justifyContent: "start",
     alignSelf: "flex-start",
+    marginRight: "10px",
   },
   // container: {
   //   display: "block",

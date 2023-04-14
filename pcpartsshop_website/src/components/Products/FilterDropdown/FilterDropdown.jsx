@@ -19,7 +19,11 @@ const FilterDropdown = ({ selected, setSelected }) => {
   };
   return (
     <List
-      sx={{ width: "100%", maxWidth: 250, bgcolor: "background.paper" }}
+      sx={{
+        width: "100%",
+        maxWidth: 250,
+        bgcolor: "background.paper",
+      }}
       component="nav"
       aria-labelledby="nested-list-subheader"
       subheader={

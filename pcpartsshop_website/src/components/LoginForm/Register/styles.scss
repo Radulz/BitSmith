@@ -28,7 +28,7 @@
     flex-direction: column;
     justify-content: center;
     height: 90%;
-    background-color: #da680f;
+    background-color: #046380;
     width: 100%;
     position: absolute;
     right: -34%;
@@ -67,15 +67,20 @@
   font-size: 21px;
   padding: 5px 20px;
   border: 0;
-  background-color: #da680f;
+  background-color: #046380;
   color: #fff;
   border-radius: 3px;
   transition: all 250ms ease-in-out;
   cursor: pointer;
   &:hover {
-    background-color: #da680f;
+    background-color: #046380;
   }
   &:focus {
     outline: none;
   }
+}
+
+.logo {
+  width: 217px;
+  height: 200px;
 }

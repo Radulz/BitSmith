@@ -6,9 +6,8 @@ import {
   LoginForm,
   AdminPage,
   ProfilePage,
+  Footer,
 } from "./components";
-//import Cart from "./components/Cart/Cart";
-//import Checkout from "./components/CheckoutForm/Checkout/Checkout";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -25,6 +24,7 @@ function App() {
           <Route exact path="/adminPage" element={<AdminPage />} />
           <Route exact path="/profilePage" element={<ProfilePage />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );
