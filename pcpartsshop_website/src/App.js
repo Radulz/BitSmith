@@ -10,11 +10,12 @@ import {
 } from "./components";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "./App.css";
 
 function App() {
   return (
     <Router>
-      <div>
+      <div className="app-container">
         <Navbar />
         <Routes>
           <Route exact path="/" element={<Products />} />

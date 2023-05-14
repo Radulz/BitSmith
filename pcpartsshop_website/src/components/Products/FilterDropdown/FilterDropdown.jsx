@@ -10,8 +10,10 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { Divider } from "@material-ui/core";
 import SubListFilter from "./SubListFilter";
+import useStyles from "./styles";
 
 const FilterDropdown = ({ selected, setSelected }) => {
+  const classes = useStyles();
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -19,11 +21,7 @@ const FilterDropdown = ({ selected, setSelected }) => {
   };
   return (
     <List
-      sx={{
-        width: "100%",
-        maxWidth: 250,
-        bgcolor: "background.paper",
-      }}
+      className={classes.filterDropdown}
       component="nav"
       aria-labelledby="nested-list-subheader"
       subheader={
@@ -40,7 +38,7 @@ const FilterDropdown = ({ selected, setSelected }) => {
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
+        <List component="div" disablePadding className={classes.subListItem}>
           <SubListFilter
             text="CPU"
             selected={selected}

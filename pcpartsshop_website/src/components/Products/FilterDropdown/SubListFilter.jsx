@@ -9,6 +9,7 @@ const SubListFilter = ({ text, selected, setSelected }) => {
   const handleClick = () => {
     setSelected(text);
   };
+
   return (
     <ListItemButton sx={{ pl: 4 }} onClick={handleClick}>
       <ListItemIcon>

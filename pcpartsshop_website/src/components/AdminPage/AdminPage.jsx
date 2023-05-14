@@ -5,7 +5,7 @@ import List from "@mui/material/List";
 import useStyles from "./styles";
 import ListCommand from "./ListCommand";
 import FormSelector from "./FormSelector";
-import LoginLogo from "../../images/LoginLogo.png";
+import LoginLogo from "../../images/BitSmithLogo.png";
 import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 

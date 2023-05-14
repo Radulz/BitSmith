@@ -6,6 +6,8 @@ export default makeStyles(() => ({
     flexDirection: "column",
     maxWidth: "100%",
     minHeight: "430px",
+    boxShadow:
+      "0px -3px 4px 0px rgba(107, 126, 190, 4%), 0px 8px 16px 0px rgba(107, 126, 190, 16%)",
   },
   media: {
     height: 0,

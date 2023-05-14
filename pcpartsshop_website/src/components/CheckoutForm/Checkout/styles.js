@@ -49,4 +49,13 @@ export default makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
   },
+  stepIconRoot: {
+    color: "#046380",
+    "&.MuiStepIcon-active": {
+      color: "#046380",
+    },
+    "&.MuiStepIcon-completed": {
+      color: "green",
+    },
+  },
 }));

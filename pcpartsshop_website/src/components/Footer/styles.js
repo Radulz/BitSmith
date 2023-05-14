@@ -8,6 +8,10 @@ export default makeStyles((theme) => ({
     borderTop: "1px solid white",
     marginTop: "4rem",
     paddingTop: "1rem",
+    paddingBottom: "1rem",
+    paddingLeft: "0px",
+    margin: "-8px",
+    overflow: "hidden",
     "& a": {
       color: "#FFF",
       textDecoration: "none",
@@ -25,6 +29,8 @@ export default makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
     borderBottom: "2px solid white",
+    margin: "0px",
+    width: "100%",
   },
 
   footerLinks: {

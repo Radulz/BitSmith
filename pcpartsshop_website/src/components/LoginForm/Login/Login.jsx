@@ -155,9 +155,11 @@ const Login = ({ logIn }) => {
                       error={!!errors.email || !existantEmail}
                     />
                     {errors.email ? (
-                      <FormHelperText error>Ex. name@domain.com</FormHelperText>
+                      <FormHelperText error>
+                        E.g. name@domain.com
+                      </FormHelperText>
                     ) : existantEmail ? (
-                      <FormHelperText>Ex. name@domain.com</FormHelperText>
+                      <FormHelperText>E.g. name@domain.com</FormHelperText>
                     ) : (
                       <FormHelperText error>
                         This account does not exist.

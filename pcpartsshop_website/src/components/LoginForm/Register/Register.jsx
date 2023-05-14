@@ -127,7 +127,6 @@ const Register = (props) => {
         notify(false);
       }
     }
-    //then, encrypt pass and send data to the api
   };
   return (
     <div className="base-container" style={{ marginTop: "30px" }}>
@@ -149,13 +148,15 @@ const Register = (props) => {
                     </InputLabel>
                     <Input {...field} error={!!errors.email || existantEmail} />
                     {errors.email ? (
-                      <FormHelperText error>Ex. name@domain.com</FormHelperText>
+                      <FormHelperText error>
+                        E.g. name@domain.com
+                      </FormHelperText>
                     ) : existantEmail ? (
                       <FormHelperText error>
                         Email already exists.
                       </FormHelperText>
                     ) : (
-                      <FormHelperText>Ex. name@domain.com</FormHelperText>
+                      <FormHelperText>E.g. name@domain.com</FormHelperText>
                     )}
                   </FormControl>
                 )}
@@ -246,7 +247,7 @@ const Register = (props) => {
                       error={!!errors.password}
                       type="password"
                     />
-                    <FormHelperText>
+                    <FormHelperText error={!!errors.password}>
                       Length between 8 and 64 symbols
                     </FormHelperText>
                   </FormControl>

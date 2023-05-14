@@ -4,8 +4,8 @@ export default makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(3),
+    marginTop: "75px",
+    padding: "0px 40px 0px 20px",
   },
   root: {
     flexGrow: 1,
@@ -23,8 +23,13 @@ export default makeStyles((theme) => ({
     alignSelf: "flex-start",
     marginRight: "10px",
   },
-  // container: {
-  //   display: "block",
-  //   position: "relative",
-  // },
+  searchFilter: {
+    width: "100%",
+    backgroundColor: "#fff",
+    [theme.breakpoints.between("xs", "sm")]: {
+      maxWidth: "100vw",
+    },
+    boxShadow:
+      "0px -3px 4px 0px rgba(107, 126, 190, 4%), 0px 8px 16px 0px rgba(107, 126, 190, 16%)",
+  },
 }));

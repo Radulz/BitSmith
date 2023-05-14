@@ -72,7 +72,11 @@ const Checkout = ({ productsAddedToCart, removeAllFromCart }) => {
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map((step) => (
               <Step key={step}>
-                <StepLabel>{step}</StepLabel>
+                <StepLabel
+                  StepIconProps={{ classes: { root: classes.stepIconRoot } }}
+                >
+                  {step}
+                </StepLabel>
               </Step>
             ))}
           </Stepper>
