@@ -1,30 +1,30 @@
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PCPartsShop.Application.Commands.CPUCommands.CreateCPU;
 using PCPartsShop.Infrastructure;
 using PCPartsShop.WebAPI;
+using PCPartsShop.Application.Interfaces;
+using PCPartsShop.Application.Services;
+using PCPartsShop.Domain.ConfigurationDtos;
 
 namespace PCPartsShop_WebAPI
 {
     public class Startup
     {
         public string ConnectionString { get; set; }
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
             ConnectionString = configuration.GetConnectionString(Constants.DatabaseConnections.PCPartsShopDatabase);
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -38,6 +38,9 @@ namespace PCPartsShop_WebAPI
             services.AddDbContext<PCPartsShopContext>(options => options.UseSqlServer(ConnectionString));
             services.AddMediatR(typeof(CreateCPUCommand));
             services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<ICompatibilityChecker, CompatibilityChecker>();
+            services.Configure<BrevoConfig>(Configuration.GetSection(nameof(BrevoEmailProvider)));
+            services.AddScoped<IEmailProvider, BrevoEmailProvider>();
 
         }
 

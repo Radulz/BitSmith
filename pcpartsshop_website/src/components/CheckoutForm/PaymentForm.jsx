@@ -8,6 +8,7 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import useStyles from "./styles";
+import { toast } from "react-toastify";
 
 import Review from "./Review";
 
@@ -65,7 +66,7 @@ const PaymentForm = ({
           totalPrice: totalPrice,
         }
       );
-      console.log(orderId.data.orderId);
+
       for (const p of productsAddedToCart) {
         const item = await axios
           .patch(
@@ -83,9 +84,25 @@ const PaymentForm = ({
             }
           )
           .catch((e) => console.log(e));
-        console.log(item.data);
       }
-      //resetare cart
+
+      const email = await axios
+        .post(
+          process.env.REACT_APP_API_URL +
+            `Email/compose/${orderId.data.orderId}`
+        )
+        .catch((e) => console.log(e));
+
+      if (email.data.messageId) {
+        toast.success(
+          `An order confirmation email has been sent to ${shippingData.email}.`,
+          {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 3000,
+          }
+        );
+      }
+
       removeAllFromCart();
       nextStep();
     }

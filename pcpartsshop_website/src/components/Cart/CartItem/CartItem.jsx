@@ -60,7 +60,6 @@ const CartItem = ({ product, removeFromCart, adjustQty }) => {
           </IconButton>
           <Input
             id="quantity"
-            //margin="normal"
             min="1"
             type="readonly"
             value={input}
@@ -76,7 +75,7 @@ const CartItem = ({ product, removeFromCart, adjustQty }) => {
           </IconButton>
         </div>
         <div className={classes.cartActionsDivRight}>
-          <Typography variant="h6" style={{ marginRight: "10px" }}>
+          <Typography variant="subtitle1" style={{ marginRight: "5px" }}>
             {productPrice + "$"}
           </Typography>
           <Button

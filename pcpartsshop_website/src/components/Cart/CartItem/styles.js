@@ -26,6 +26,7 @@ export default makeStyles(() => ({
     display: "flex",
     alignSelf: "end",
     marginLeft: "auto",
+    alignItems: "center",
   },
   buttons: {
     display: "flex",
