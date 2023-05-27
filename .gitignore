@@ -426,3 +426,4 @@ FodyWeavers.xsd
 .env
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,visualstudiocode,react
+pcpartsshop_website/.env
