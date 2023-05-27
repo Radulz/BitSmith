@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using PCPartsShop.Domain.Models;
+using PCPartsShop.Domain.Dtos;
 using PCPartsShop.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -8,23 +9,26 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace PCPartsShop.Application.Commands.UserCommands.UpdateUser
 {
-    public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, User>
+    public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, UserDto>
     {
         private readonly PCPartsShopContext _context;
-        public UpdateUserCommandHandler(PCPartsShopContext context)
+        private readonly IMapper _mapper;
+
+        public UpdateUserCommandHandler(PCPartsShopContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
-        public async Task<User> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+        public async Task<UserDto> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
             var user = new User
             {
                 UserId = request.UserId,
                 Email = request.Email,
-                Password = request.Password,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 County = request.County,
@@ -34,7 +38,7 @@ namespace PCPartsShop.Application.Commands.UserCommands.UpdateUser
             };
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
-            return user;
+            return _mapper.Map<UserDto>(user);
         }
     }
 }

@@ -65,13 +65,15 @@ const Login = ({ logIn }) => {
   const checkPassword = async (email, pass) => {
     let response;
     try {
-      response = await axios.get(
-        process.env.REACT_APP_API_URL + `User/users/${email}`
+      response = await axios.post(
+        process.env.REACT_APP_API_URL + `User/login`,
+        {
+          email: email,
+          password: pass,
+        }
       );
       if (response.data) {
-        if (pass === response.data.password) {
-          return true;
-        }
+        return response.data.isLoggedIn;
       }
     } catch (e) {
       return false;
@@ -96,22 +98,23 @@ const Login = ({ logIn }) => {
   const onSubmit = async (data) => {
     const emailValidation = await validateExistantEmail(data.email);
     const passwordChecked = await checkPassword(data.email, data.password);
+
     if (!emailValidation) {
       setExistantEmail(false);
       return;
     }
+
     if (!passwordChecked) {
       setCheckedPassword(false);
       return;
     }
-    console.log("Existant email " + existantEmail);
-    console.log("Checked pass " + checkedPassword);
+
     const response = await axios
       .get(process.env.REACT_APP_API_URL + `User/users/${data.email}`)
       .catch((e) => {
         console.log("Error");
       });
-    console.log(response);
+
     logIn(
       response.data.email,
       response.data.firstName,
@@ -122,6 +125,7 @@ const Login = ({ logIn }) => {
       response.data.admin
     );
     notify(data);
+
     setTimeout(() => {
       if (response.data.admin) {
         navigate("/adminPage");
@@ -129,7 +133,6 @@ const Login = ({ logIn }) => {
         navigate("/");
       }
     }, 2000);
-    console.log(data);
   };
 
   return (
@@ -193,7 +196,7 @@ const Login = ({ logIn }) => {
                         Length between 8 and 64 symbols
                       </FormHelperText>
                     ) : (
-                      <FormHelperText error>Wrong password.</FormHelperText>
+                      <FormHelperText error>Wrong credentials</FormHelperText>
                     )}
                   </FormControl>
                 )}

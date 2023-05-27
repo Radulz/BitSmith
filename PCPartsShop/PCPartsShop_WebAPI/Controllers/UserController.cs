@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PCPartsShop.Application.Commands.UserCommands.CreateUser;
+using PCPartsShop.Application.Commands.UserCommands.LoginUser;
 using PCPartsShop.Application.Commands.UserCommands.RemoveUser;
 using PCPartsShop.Application.Commands.UserCommands.UpdateUser;
 using PCPartsShop.Application.Queries.UserQueries.GetAllUsers;
@@ -28,6 +29,14 @@ namespace PCPartsShop.WebAPI.Controllers
         {
             var response = await _mediator.Send(command);
             return CreatedAtAction(nameof(GetUserById), new { UserId = response.UserId }, response);
+        }
+
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> LoginUser([FromBody] LoginUserCommand command)
+        {
+            var response = await _mediator.Send(command);
+            return Ok(response);
         }
 
         [HttpGet]

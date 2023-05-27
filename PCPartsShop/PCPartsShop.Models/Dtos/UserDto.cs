@@ -1,14 +1,12 @@
-﻿using MediatR;
-using PCPartsShop.Domain.Dtos;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PCPartsShop.Application.Commands.UserCommands.UpdateUser
+namespace PCPartsShop.Domain.Dtos
 {
-    public class UpdateUserCommand : IRequest<UserDto>
+    public class UserDto
     {
         public Guid UserId { get; set; }
         public string Email { get; set; }
@@ -18,5 +16,6 @@ namespace PCPartsShop.Application.Commands.UserCommands.UpdateUser
         public string City { get; set; }
         public string Address { get; set; }
         public bool Admin { get; set; }
+
     }
 }

@@ -24,7 +24,6 @@ const schema = Joi.object({
   email: Joi.string()
     .email({ tlds: { allow: false } })
     .required(),
-  password: Joi.string().min(8).max(64).required(),
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
   county: Joi.string().required(),
@@ -42,7 +41,6 @@ const UpdateUserForm = () => {
     defaultValues: {
       userId: "",
       email: "",
-      password: "",
       firstName: "",
       lastName: "",
       county: "",
@@ -86,7 +84,6 @@ const UpdateUserForm = () => {
         .put(process.env.REACT_APP_API_URL + `User/${data.userId}`, {
           userId: data.userId,
           email: data.email,
-          password: data.password,
           firstName: data.firstName,
           lastName: data.lastName,
           county: data.county,
@@ -136,28 +133,6 @@ const UpdateUserForm = () => {
                   <FormHelperText error>Field required.</FormHelperText>
                 ) : (
                   <FormHelperText>ex. something@domain.com </FormHelperText>
-                )}
-              </FormControl>
-            )}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} className={classes.gridItem}>
-          <Controller
-            name={constants.PASSWORD}
-            control={control}
-            render={({ field }) => (
-              <FormControl>
-                <InputLabel htmlFor="component-simple">
-                  {" "}
-                  {constants.PASSWORD_LABEL}{" "}
-                </InputLabel>
-                <Input {...field} error={!!errors.password} type="password" />
-                {errors.password ? (
-                  <FormHelperText error>Field required.</FormHelperText>
-                ) : (
-                  <FormHelperText>
-                    Length between 8 and 64 symbols
-                  </FormHelperText>
                 )}
               </FormControl>
             )}

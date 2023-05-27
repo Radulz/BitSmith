@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using PCPartsShop.Domain.Models;
+using PCPartsShop.Domain.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PCPartsShop.Application.Queries.UserQueries.GetAllUsers
 {
-    public class GetAllUsersQuery : IRequest<ICollection<User>>
+    public class GetAllUsersQuery : IRequest<ICollection<UserDto>>
     {
     }
 }
