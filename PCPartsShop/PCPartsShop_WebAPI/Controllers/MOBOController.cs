@@ -33,7 +33,7 @@ namespace PCPartsShop.Controllers
             var createdMobo = await _mediator.Send(command);
             var dto = _mapper.Map<GetMOBODto>(createdMobo);
 
-            return CreatedAtAction(nameof(GetMOBOById), new { moboId = createdMobo.ComponentId }, dto);
+            return CreatedAtAction(nameof(CreateMOBO), new { moboId = createdMobo.ComponentId }, dto);
         }
 
         [HttpGet]
@@ -42,6 +42,10 @@ namespace PCPartsShop.Controllers
         {
             var query = new GetMOBOByIdQuery { MOBOId = moboId };
             var res = await _mediator.Send(query);
+            if(res is null)
+            {
+                return NotFound();
+            }
             return Ok(_mapper.Map<GetMOBODto>(res));
         }
 

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using PCPartsShop.Domain.Models;
 using PCPartsShop.Infrastructure;
 using System;
@@ -19,19 +20,24 @@ namespace PCPartsShop.Application.Commands.OrderCommands.UpdateOrder
         }
         public async Task<Order> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
         {
-            var order = new Order
+            var order = await _context.Orders.FirstOrDefaultAsync(x => x.OrderId == request.OrderId);
+
+            if (order == null)
             {
-                OrderId = request.OrderId,
-                UserEmail = request.UserEmail,
-                UserFirstName = request.UserFirstName,
-                UserLastName = request.UserLastName,
-                UserCounty = request.UserCounty,
-                UserCity = request.UserCity,
-                UserAddress = request.UserAddress,
-                IsShipped = request.IsShipped,
-                TotalPrice = request.TotalPrice,
-                Items = request.Items
-            };
+                return null;
+            }
+
+            order.OrderId = request.OrderId;
+            order.UserEmail = request.UserEmail;
+            order.UserFirstName = request.UserFirstName;
+            order.UserLastName = request.UserLastName;
+            order.UserCounty = request.UserCounty;
+            order.UserCity = request.UserCity;
+            order.UserAddress = request.UserAddress;
+            order.IsShipped = request.IsShipped;
+            order.TotalPrice = request.TotalPrice;
+            order.Items = request.Items;
+            
             _context.Orders.Update(order);
             await _context.SaveChangesAsync();
             return order;

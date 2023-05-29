@@ -1,6 +1,6 @@
 ﻿using PCPartsShop.Domain.Dtos;
 using PCPartsShop.Domain.Models;
-using PCPartsShop.Application.Interfaces;
+using PCPartsShop.Application.Abstract;
 using System;
 using System.Collections.Generic;
 using System.IO;

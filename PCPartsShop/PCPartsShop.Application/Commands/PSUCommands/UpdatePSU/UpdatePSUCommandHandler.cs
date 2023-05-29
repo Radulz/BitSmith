@@ -20,16 +20,21 @@ namespace PCPartsShop.Application.Commands.PSUCommands.UpdatePSU
         }
         public async Task<PSU> Handle(UpdatePSUCommand request, CancellationToken cancellationToken)
         {
-            var psu = new PSU
+            var psu = await _context.PSUs.FirstOrDefaultAsync(x => x.ComponentId == request.PSUId);
+
+            if (psu == null)
             {
-                ComponentId = request.PSUId,
-                Make = request.Make,
-                Model = request.Model,
-                Price = request.Price,
-                Image = request.Image,
-                Power = request.Power,
-                Type = request.Type,
-            };
+                return null;
+            }
+
+            psu.ComponentId = request.PSUId;
+            psu.Make = request.Make;
+            psu.Model = request.Model;
+            psu.Price = request.Price;
+            psu.Image = request.Image;
+            psu.Power = request.Power;
+            psu.Type = request.Type;
+            
             _context.PSUs.Update(psu);
             await _context.SaveChangesAsync();
             return psu;

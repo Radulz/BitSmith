@@ -9,7 +9,7 @@ using Microsoft.OpenApi.Models;
 using PCPartsShop.Application.Commands.CPUCommands.CreateCPU;
 using PCPartsShop.Infrastructure;
 using PCPartsShop.WebAPI;
-using PCPartsShop.Application.Interfaces;
+using PCPartsShop.Application.Abstract;
 using PCPartsShop.Application.Services;
 using PCPartsShop.Domain.ConfigurationDtos;
 
@@ -40,7 +40,7 @@ namespace PCPartsShop_WebAPI
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<ICompatibilityChecker, CompatibilityChecker>();
             services.Configure<BrevoConfig>(Configuration.GetSection(nameof(BrevoEmailProvider)));
-            services.AddScoped<IEmailProvider, BrevoEmailProvider>();
+            services.AddHttpClient<IEmailProvider, BrevoEmailProvider>();
 
         }
 

@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PCPartsShop.Application.Interfaces
+namespace PCPartsShop.Application.Abstract
 {
     public interface IEmailProvider
     {

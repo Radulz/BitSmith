@@ -28,7 +28,7 @@ namespace PCPartsShop.WebAPI.Controllers
         public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command)
         {
             var response = await _mediator.Send(command);
-            return CreatedAtAction(nameof(GetUserById), new { UserId = response.UserId }, response);
+            return CreatedAtAction(nameof(CreateUser), new { UserId = response.UserId }, response);
         }
 
         [HttpPost]

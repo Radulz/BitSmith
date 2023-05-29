@@ -1,5 +1,4 @@
-﻿using PCPartsShop.Application.Interfaces;
-using PCPartsShop.Domain.Dtos;
+﻿using PCPartsShop.Domain.Dtos;
 using PCPartsShop.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -15,15 +14,18 @@ using Newtonsoft.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using PCPartsShop.Domain.ConfigurationDtos;
+using PCPartsShop.Application.Abstract;
 
 namespace PCPartsShop.Application.Services
 {
     public class BrevoEmailProvider : IEmailProvider
     {
         private readonly IOptions<BrevoConfig> _options;
-        public BrevoEmailProvider(IOptions<BrevoConfig> options)
+        private readonly HttpClient _client;
+        public BrevoEmailProvider(IOptions<BrevoConfig> options, HttpClient client)
         {
             _options = options;
+            _client = client;
         }
 
         public async Task<BrevoAPIResponseDto> SendEmail(BrevoEmailProviderDto email)
@@ -31,17 +33,14 @@ namespace PCPartsShop.Application.Services
             var baseUrl = _options.Value.BaseUrl;
             var apiKey = _options.Value.APIKey;
 
-            HttpClient client = new()
-            {
-                BaseAddress = new Uri(baseUrl)
-            };
-            client.DefaultRequestHeaders.Add("accept", "application/json");
-            client.DefaultRequestHeaders.Add("api-key", apiKey);
+            _client.BaseAddress = new Uri(baseUrl);            
+            _client.DefaultRequestHeaders.Add("accept", "application/json");
+            _client.DefaultRequestHeaders.Add("api-key", apiKey);
 
             var jsonPayload = JsonConvert.SerializeObject(email);
             var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("smtp/email", content);
+            var response = await _client.PostAsync("smtp/email", content);
 
             if (response.IsSuccessStatusCode)
             {

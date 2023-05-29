@@ -34,7 +34,7 @@ namespace PCPartsShop.Controllers
             var createdCpu = await _mediator.Send(command);
             var dto = _mapper.Map<GetCPUDto>(createdCpu);
 
-            return CreatedAtAction(nameof(GetCPUById), new { cpuId = createdCpu.ComponentId }, dto);
+            return CreatedAtAction(nameof(CreateCPU), new { cpuId = createdCpu.ComponentId }, dto);
         }
 
         [HttpGet]
@@ -43,6 +43,10 @@ namespace PCPartsShop.Controllers
         {
             var query = new GetCPUByIdQuery { CPUId = cpuId };
             var res = await _mediator.Send(query);
+            if(res is null)
+            {
+                return NotFound();
+            }
             return Ok(_mapper.Map<GetCPUDto>(res));
         }
 
@@ -69,7 +73,7 @@ namespace PCPartsShop.Controllers
             {
                 return NotFound($"{cpuId} entry not found.");
             }
-            return NoContent();
+            return Ok();
         }
 
         [HttpPut]

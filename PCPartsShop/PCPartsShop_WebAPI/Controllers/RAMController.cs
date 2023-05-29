@@ -33,7 +33,7 @@ namespace PCPartsShop.Controllers
             var createdRam = await _mediator.Send(command);
             var dto = _mapper.Map<GetRAMDto>(createdRam);
 
-            return CreatedAtAction(nameof(GetRAMById), new { ramId = createdRam.ComponentId }, dto);
+            return CreatedAtAction(nameof(CreateRAM), new { ramId = createdRam.ComponentId }, dto);
         }
 
         [HttpGet]
@@ -42,6 +42,10 @@ namespace PCPartsShop.Controllers
         {
             var query = new GetRAMByIdQuery { RAMId = ramId };
             var res = await _mediator.Send(query);
+            if(res is null)
+            {
+                return NotFound();
+            }
             return Ok(_mapper.Map<GetRAMDto>(res));
         }
 

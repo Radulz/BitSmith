@@ -20,20 +20,26 @@ namespace PCPartsShop.Application.Commands.GPUCommands.UpdateGPU
         }
         public async Task<GPU> Handle(UpdateGPUCommand request, CancellationToken cancellationToken)
         {
-            var gpu = new GPU
+            var gpu = await _context.GPUs.FirstOrDefaultAsync(x => x.ComponentId == request.GPUId);
+
+            if (gpu == null)
             {
-                ComponentId = request.GPUId,
-                Make = request.Make,
-                Model = request.Model,
-                Price = request.Price,
-                Image = request.Image,
-                Freq = request.Freq,
-                Memory = request.Memory,
-                MemoryType = request.MemoryType,
-                PowerC = request.PowerC,
-                Tech = request.Tech,
-                Length = request.Length,
-            };
+                return null;
+            }
+
+
+            gpu.ComponentId = request.GPUId;
+            gpu.Make = request.Make;
+            gpu.Model = request.Model;
+            gpu.Price = request.Price;
+            gpu.Image = request.Image;
+            gpu.Freq = request.Freq;
+            gpu.Memory = request.Memory;
+            gpu.MemoryType = request.MemoryType;
+            gpu.PowerC = request.PowerC;
+            gpu.Tech = request.Tech;
+            gpu.Length = request.Length;
+
             _context.GPUs.Update(gpu);
             await _context.SaveChangesAsync();
             return gpu;

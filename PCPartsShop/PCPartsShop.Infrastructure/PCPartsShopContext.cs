@@ -17,6 +17,9 @@ namespace PCPartsShop.Infrastructure
         public DbSet<MOBO> MOBOs { get; set; }
         public DbSet<PSU> PSUs { get; set; }
         public DbSet<RAM> RAMs { get; set; }
+        public DbSet<Case> Cases { get; set; }
+        public DbSet<Cooler> Coolers { get; set; }
+        public DbSet<SSD> SSDs { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
@@ -31,6 +34,9 @@ namespace PCPartsShop.Infrastructure
             modelBuilder.Entity<MOBO>().HasKey(p => p.ComponentId);
             modelBuilder.Entity<PSU>().HasKey(p => p.ComponentId);
             modelBuilder.Entity<RAM>().HasKey(p => p.ComponentId);
+            modelBuilder.Entity<Case>().HasKey(p => p.ComponentId);
+            modelBuilder.Entity<Cooler>().HasKey(p => p.ComponentId);
+            modelBuilder.Entity<SSD>().HasKey(p => p.ComponentId);
             modelBuilder.Entity<User>().HasKey(p => p.UserId);
             modelBuilder.Entity<Order>().HasKey(p => p.OrderId);
         }

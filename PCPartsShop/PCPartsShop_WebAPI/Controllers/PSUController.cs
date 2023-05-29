@@ -33,7 +33,7 @@ namespace PCPartsShop.Controllers
             var createdPsu = await _mediator.Send(command);
             var dto = _mapper.Map<GetPSUDto>(createdPsu);
 
-            return CreatedAtAction(nameof(GetPSUById), new { psuId = createdPsu.ComponentId }, dto);
+            return CreatedAtAction(nameof(CreatePSU), new { psuId = createdPsu.ComponentId }, dto);
         }
 
         [HttpGet]
@@ -42,6 +42,10 @@ namespace PCPartsShop.Controllers
         {
             var query = new GetPSUByIdQuery { PSUId = psuId };
             var res = await _mediator.Send(query);
+            if(res is null)
+            {
+                return NotFound();
+            }
             return Ok(_mapper.Map<GetPSUDto>(res));
         }
 

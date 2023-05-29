@@ -21,18 +21,23 @@ namespace PCPartsShop.Application.Commands.RAMCommands.UpdateRAM
 
         public async Task<RAM> Handle(UpdateRAMCommand request, CancellationToken cancellationToken)
         {
-            var r = new RAM
+            var r = await _context.RAMs.FirstOrDefaultAsync(x => x.ComponentId == request.RAMId);
+
+            if (r == null)
             {
-                ComponentId = request.RAMId,
-                Make = request.Make,
-                Model = request.Model,
-                Price = request.Price,
-                Image = request.Image,
-                Capacity = request.Capacity,
-                Freq = request.Freq,
-                Type = request.Type,
-                Voltage = request.Voltage,
-            };
+                return null;
+            }
+
+            r.ComponentId = request.RAMId;
+            r.Make = request.Make;
+            r.Model = request.Model;
+            r.Price = request.Price;
+            r.Image = request.Image;
+            r.Capacity = request.Capacity;
+            r.Freq = request.Freq;
+            r.Type = request.Type;
+            r.Voltage = request.Voltage;
+            
             _context.RAMs.Update(r);
             await _context.SaveChangesAsync();
             return r;

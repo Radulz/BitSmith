@@ -2,7 +2,7 @@
 using PCPartsShop.Domain.Models;
 using System.Collections.Generic;
 
-namespace PCPartsShop.Application.Interfaces
+namespace PCPartsShop.Application.Abstract
 {
     public interface ICompatibilityChecker
     {

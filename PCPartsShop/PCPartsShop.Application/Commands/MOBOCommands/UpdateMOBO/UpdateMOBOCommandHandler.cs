@@ -20,20 +20,25 @@ namespace PCPartsShop.Application.Commands.MOBOCommands.UpdateMOBO
         }
         public async Task<MOBO> Handle(UpdateMOBOCommand request, CancellationToken cancellationToken)
         {
-            var m = new MOBO
+            var m = await _context.MOBOs.FirstOrDefaultAsync(x => x.ComponentId == request.MOBOId);
+
+            if (m == null)
             {
-                ComponentId = request.MOBOId,
-                Make = request.Make,
-                Model = request.Model,
-                Price = request.Price,
-                Image = request.Image,
-                MemoryFreqInf = request.MemoryFreqInf,
-                MemoryFreqSup = request.MemoryFreqSup,
-                MemoryType = request.MemoryType,
-                Format = request.Format,
-                Chipset = request.Chipset,
-                Socket = request.Socket,
-            };
+                return null;
+            }
+
+            m.ComponentId = request.MOBOId;
+            m.Make = request.Make;
+            m.Model = request.Model;
+            m.Price = request.Price;
+            m.Image = request.Image;
+            m.MemoryFreqInf = request.MemoryFreqInf;
+            m.MemoryFreqSup = request.MemoryFreqSup;
+            m.MemoryType = request.MemoryType;
+            m.Format = request.Format;
+            m.Chipset = request.Chipset;
+            m.Socket = request.Socket;
+            
             _context.MOBOs.Update(m);
             await _context.SaveChangesAsync();
             return m;

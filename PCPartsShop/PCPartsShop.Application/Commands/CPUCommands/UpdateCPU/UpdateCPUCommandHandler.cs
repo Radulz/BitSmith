@@ -20,20 +20,24 @@ namespace PCPartsShop.Application.Commands.CPUCommands.UpdateCPU
         }
         public async Task<CPU> Handle(UpdateCPUCommand request, CancellationToken cancellationToken)
         {
-            var cpu = new CPU
+            var cpu = await _context.CPUs.FirstOrDefaultAsync(x => x.ComponentId == request.CPUId);
+            if (cpu == null)
             {
-                ComponentId = request.CPUId,
-                Make = request.Make,
-                Model = request.Model,
-                Price = request.Price,
-                Image = request.Image,
-                Freq = request.Freq,
-                MFreq = request.MFreq,
-                Cores = request.Cores,
-                Socket = request.Socket,
-                TDP = request.TDP,
-                Tech = request.Tech,
-            };
+                return null;
+            }
+
+            cpu.ComponentId = request.CPUId;
+            cpu.Make = request.Make;
+            cpu.Model = request.Model;
+            cpu.Price = request.Price;
+            cpu.Image = request.Image;
+            cpu.Freq = request.Freq;
+            cpu.MFreq = request.MFreq;
+            cpu.Cores = request.Cores;
+            cpu.Socket = request.Socket;
+            cpu.TDP = request.TDP;
+            cpu.Tech = request.Tech;
+
             _context.CPUs.Update(cpu);
             await _context.SaveChangesAsync();
             return cpu;

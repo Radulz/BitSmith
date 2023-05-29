@@ -19,6 +19,88 @@ namespace PCPartsShop.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("PCPartsShop.Domain.Models.Case", b =>
+                {
+                    b.Property<Guid>("ComponentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CaseType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ComponentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CoolerMaximumHeight")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GPUMaximumLength")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Make")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PSUPosition")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("RadiatorSupport")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RadiatorSupportLength")
+                        .HasColumnType("int");
+
+                    b.HasKey("ComponentId");
+
+                    b.ToTable("Cases");
+                });
+
+            modelBuilder.Entity("PCPartsShop.Domain.Models.Cooler", b =>
+                {
+                    b.Property<Guid>("ComponentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ComponentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CoolingType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Make")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumberOfHeatPipes")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("RadiatorLength")
+                        .HasColumnType("int");
+
+                    b.HasKey("ComponentId");
+
+                    b.ToTable("Coolers");
+                });
+
             modelBuilder.Entity("PCPartsShop.Domain.Models.Order", b =>
                 {
                     b.Property<int>("OrderId")
@@ -91,6 +173,38 @@ namespace PCPartsShop.Infrastructure.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("OrderItems");
+                });
+
+            modelBuilder.Entity("PCPartsShop.Domain.Models.SSD", b =>
+                {
+                    b.Property<Guid>("ComponentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ComponentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Connector")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Make")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.HasKey("ComponentId");
+
+                    b.ToTable("SSDs");
                 });
 
             modelBuilder.Entity("PCPartsShop.Domain.Models.User", b =>

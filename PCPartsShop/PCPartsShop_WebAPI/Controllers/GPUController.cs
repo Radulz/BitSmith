@@ -33,7 +33,7 @@ namespace PCPartsShop.Controllers
             var createdGpu = await _mediator.Send(command);
             var dto = _mapper.Map<GetGPUDto>(createdGpu);
 
-            return CreatedAtAction(nameof(GetGPUById), new { gpuId = createdGpu.ComponentId }, dto);
+            return CreatedAtAction(nameof(CreateGPU), new { gpuId = createdGpu.ComponentId }, dto);
         }
 
         [HttpGet]
@@ -42,6 +42,10 @@ namespace PCPartsShop.Controllers
         {
             var query = new GetGPUByIdQuery { GPUId = gpuId };
             var res = await _mediator.Send(query);
+            if(res is null)
+            {
+                return NotFound();
+            }
             return Ok(_mapper.Map<GetGPUDto>(res));
         }
 

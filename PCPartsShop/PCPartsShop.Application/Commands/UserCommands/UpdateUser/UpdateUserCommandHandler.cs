@@ -25,17 +25,22 @@ namespace PCPartsShop.Application.Commands.UserCommands.UpdateUser
         }
         public async Task<UserDto> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            var user = new User
+            var user = await _context.Users.FirstOrDefaultAsync(x=>x.UserId== request.UserId);
+
+            if(user == null)
             {
-                UserId = request.UserId,
-                Email = request.Email,
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                County = request.County,
-                City = request.City,
-                Address = request.Address,
-                Admin = request.Admin,
-            };
+                return null;
+            }
+
+            user.UserId = request.UserId;
+            user.Email = request.Email;
+            user.FirstName = request.FirstName;
+            user.LastName = request.LastName;
+            user.County = request.County;
+            user.City = request.City;
+            user.Address = request.Address;
+            user.Admin = request.Admin;
+            
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
             return _mapper.Map<UserDto>(user);

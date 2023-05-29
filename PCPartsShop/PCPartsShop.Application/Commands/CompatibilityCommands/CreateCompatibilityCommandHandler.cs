@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using PCPartsShop.Application.Interfaces;
+using PCPartsShop.Application.Abstract;
 using PCPartsShop.Domain.Dtos;
 using PCPartsShop.Domain.Models;
 using System;

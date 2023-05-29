@@ -35,7 +35,7 @@ namespace PCPartsShop.WebAPI.Controllers
             var createdOrder = await _mediator.Send(order);
             var dto = _mapper.Map<GetOrderDto>(createdOrder);
 
-            return CreatedAtAction(nameof(GetOrderById), new { OrderId = createdOrder.OrderId }, dto);
+            return CreatedAtAction(nameof(CreateOrder), new { OrderId = createdOrder.OrderId }, dto);
         }
 
         [HttpGet]
@@ -110,6 +110,10 @@ namespace PCPartsShop.WebAPI.Controllers
         public async Task<IActionResult> UpdateOrder([FromBody] UpdateOrderCommand order)
         {
             var response = await _mediator.Send(order);
+            if(response is null)
+            {
+                return NotFound();
+            }
             return Ok(_mapper.Map<GetOrderDto>(response));
         }
 
