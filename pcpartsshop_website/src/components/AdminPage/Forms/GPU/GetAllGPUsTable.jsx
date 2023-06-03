@@ -15,6 +15,7 @@ const columns = [
   },
 ];
 
+/* [OBSOLETE] */
 const GetAllGPUsTable = () => {
   const [components, setComponents] = useState([]);
   const fetchProducts = async () => {

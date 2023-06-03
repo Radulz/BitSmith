@@ -40,7 +40,7 @@ const SeeOrderDetailsForm = () => {
     if (!response) {
       toast.error("Order not found!", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: false,
+        autoClose: 5000,
       });
     }
   };

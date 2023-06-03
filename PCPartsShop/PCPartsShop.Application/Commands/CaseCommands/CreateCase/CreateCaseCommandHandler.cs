@@ -30,7 +30,7 @@ namespace PCPartsShop.Application.Commands.CaseCommands.CreateCase
                 PSUPosition = request.PSUPosition,
                 GPUMaximumLength = request.GPUMaximumLength,
                 RadiatorSupport = request.RadiatorSupport,
-                RadiatorSupportLength = request.RadiatorSupportLength,
+                RadiatorSupportLength = request.RadiatorSupport ? request.RadiatorSupportLength : 0,
                 CoolerMaximumHeight = request.CoolerMaximumHeight,
             };
 

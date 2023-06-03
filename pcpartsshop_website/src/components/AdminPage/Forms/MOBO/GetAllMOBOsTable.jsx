@@ -15,6 +15,7 @@ const columns = [
   },
 ];
 
+/* [OBSOLETE] */
 const GetAllMOBOsTable = () => {
   const [components, setComponents] = useState([]);
   const fetchProducts = async () => {

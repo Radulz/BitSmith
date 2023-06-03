@@ -14,7 +14,7 @@ const columns = [
     width: 90,
   },
 ];
-
+/*[OBSOLETE]*/
 const GetAllPSUsTable = () => {
   const [components, setComponents] = useState([]);
   const fetchProducts = async () => {

@@ -31,14 +31,18 @@ namespace PCPartsShop.WebAPI.Controllers
 
         [HttpDelete]
         [Route("{SSDId}")]
-        public async Task<IActionResult> DeleteSSD([FromBody] RemoveSSDCommand command)
+        public async Task<IActionResult> DeleteSSD(Guid ssdId)
         {
+            var command = new RemoveSSDCommand
+            {
+                SSDId = ssdId
+            };
             var SSDToRemove = await _mediator.Send(command);
             if (SSDToRemove)
             {
                 return Ok();
             }
-            return BadRequest();
+            return NotFound();
         }
 
         [HttpPut]

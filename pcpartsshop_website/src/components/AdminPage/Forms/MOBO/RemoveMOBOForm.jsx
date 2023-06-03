@@ -19,6 +19,7 @@ const schema = Joi.object({
   componentId: Joi.string().guid().required(),
 });
 
+/*[OBSOLETE]*/
 const RemoveMOBOForm = () => {
   const {
     control,
@@ -35,14 +36,14 @@ const RemoveMOBOForm = () => {
     if (!response) {
       toast.error(`Component with ID: ${componentId} was not found!`, {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: false,
+        autoClose: 5000,
       });
-    } else if (response.status === 204) {
+    } else if (response.status === 200) {
       toast.success(
         `Component with ID: ${componentId} was removed successfully.`,
         {
           position: toast.POSITION.TOP_CENTER,
-          autoClose: false,
+          autoClose: 5000,
         }
       );
     }

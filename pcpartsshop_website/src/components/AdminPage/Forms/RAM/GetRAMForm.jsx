@@ -19,7 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 const schema = Joi.object({
   componentId: Joi.string().guid().required(),
 });
-
+/*[OBSOLETE]*/
 const GetRAMForm = () => {
   const {
     control,
@@ -36,7 +36,7 @@ const GetRAMForm = () => {
   const notify = () => {
     toast.error("Component not found!", {
       position: toast.POSITION.TOP_CENTER,
-      autoClose: false,
+      autoClose: 5000,
     });
   };
   const onSubmit = async (data) => {

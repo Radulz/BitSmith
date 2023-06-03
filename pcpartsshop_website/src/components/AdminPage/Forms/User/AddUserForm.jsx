@@ -55,14 +55,14 @@ const AddUserForm = () => {
     if (!response) {
       toast.error("Something went wrong.", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: false,
+        autoClose: 5000,
       });
     } else if (response.status === 201) {
       toast.success(
         `User ${response.data.email} was registered with ID: ${response.data.userId}`,
         {
           position: toast.POSITION.TOP_CENTER,
-          autoClose: false,
+          autoClose: 5000,
         }
       );
     }
@@ -75,7 +75,7 @@ const AddUserForm = () => {
     if (user) {
       toast.error("This user is already registered.", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: false,
+        autoClose: 5000,
       });
       return;
     } else {

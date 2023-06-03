@@ -26,7 +26,25 @@ export const fetchProducts = () => {
     result = await axios.get(process.env.REACT_APP_API_URL + "RAM");
     const rams = result.data;
 
-    const products = [].concat(cpus, gpus, mobos, psus, rams);
+    result = await axios.get(process.env.REACT_APP_API_URL + "Case");
+    const cases = result.data;
+
+    result = await axios.get(process.env.REACT_APP_API_URL + "Cooler");
+    const coolers = result.data;
+
+    result = await axios.get(process.env.REACT_APP_API_URL + "SSD");
+    const ssds = result.data;
+
+    const products = [].concat(
+      cpus,
+      gpus,
+      mobos,
+      psus,
+      rams,
+      cases,
+      coolers,
+      ssds
+    );
 
     dispatch({ type: FETCHING_PRODUCTS_SUCCESS, products });
   };

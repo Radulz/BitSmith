@@ -34,5 +34,16 @@ namespace PCPartsShop.Domain.Dtos
         public string Type { get; set; }
         public int Capacity { get; set; }
         public double Voltage { get; set; }
+        public int Height { get; set; }
+        public string CoolingType { get; set; }
+        public int RadiatorLength { get; set; }
+        public int NumberOfHeatPipes { get; set; }
+        public int GPUMaximumLength { get; set; }
+        public int CoolerMaximumHeight { get; set; }
+        public bool RadiatorSupport { get; set; } 
+        public int RadiatorSupportLength { get; set; } 
+        public string CaseType { get; set; }
+        public string PSUPosition { get; set; }
+        public string Connector { get; set; }
     }
 }

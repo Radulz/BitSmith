@@ -35,12 +35,12 @@ const UpdateOrderStatusForm = () => {
     if (!response) {
       toast.error("Order not found!", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: false,
+        autoClose: 5000,
       });
     } else if (response.status === 200) {
       toast.success("Order status has been set as shipped.", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: false,
+        autoClose: 5000,
       });
     }
   };

@@ -14,7 +14,7 @@ const columns = [
     width: 90,
   },
 ];
-
+/*[OBSOLETE]*/
 const GetAllCPUsTable = () => {
   const [components, setComponents] = useState([]);
   const fetchProducts = async () => {

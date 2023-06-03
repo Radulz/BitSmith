@@ -31,14 +31,18 @@ namespace PCPartsShop.WebAPI.Controllers
 
         [HttpDelete]
         [Route("{coolerId}")]
-        public async Task<IActionResult> DeleteCooler([FromBody] RemoveCoolerCommand command)
+        public async Task<IActionResult> DeleteCooler(Guid coolerId)
         {
+            var command = new RemoveCoolerCommand
+            {
+                CoolerId = coolerId
+            };
             var coolerToRemove = await _mediator.Send(command);
             if (coolerToRemove)
             {
                 return Ok();
             }
-            return BadRequest();
+            return NotFound();
         }
 
         [HttpPut]

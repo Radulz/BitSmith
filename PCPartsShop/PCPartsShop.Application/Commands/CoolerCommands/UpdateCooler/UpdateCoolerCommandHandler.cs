@@ -33,9 +33,9 @@ namespace PCPartsShop.Application.Commands.CoolerCommands.UpdateCooler
             cooler.Image= request.Image;
             cooler.Price= request.Price;
             cooler.RadiatorLength= request.RadiatorLength;
-            cooler.Height= request.Height;
-            cooler.CoolingType= request.CoolingType;
-            cooler.NumberOfHeatPipes= request.NumberOfHeatPipes;
+            cooler.Height = request.CoolingType == "Air" ? request.Height : 0;
+            cooler.NumberOfHeatPipes = request.CoolingType == "Air" ? request.NumberOfHeatPipes : 0;
+            cooler.RadiatorLength = request.CoolingType == "Liquid" ? request.RadiatorLength : 0;
 
             _dbContext.Coolers.Update(cooler);
             await _dbContext.SaveChangesAsync();

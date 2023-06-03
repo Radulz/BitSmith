@@ -67,6 +67,97 @@ const Product = (props) => {
             )
           );
         })}
+        {product.componentType === "CASE" && product.radiatorSupport ? (
+          <Typography
+            dangerouslySetInnerHTML={{ __html: "Has radiator support: Yes" }}
+            variant="body2"
+            color="textSecondary"
+          />
+        ) : (
+          product.componentType === "CASE" && (
+            <Typography
+              dangerouslySetInnerHTML={{
+                __html: "Has radiator support: No",
+              }}
+              variant="body2"
+              color="textSecondary"
+            />
+          )
+        )}
+        {product.componentType === "CASE" &&
+        product.radiatorSupportLength === 0 ? (
+          <Typography
+            dangerouslySetInnerHTML={{ __html: "Radiator support length: N/A" }}
+            variant="body2"
+            color="textSecondary"
+          />
+        ) : (
+          product.componentType === "CASE" && (
+            <Typography
+              dangerouslySetInnerHTML={{
+                __html:
+                  "Radiator support length: " +
+                  product.radiatorSupportLength +
+                  " mm ",
+              }}
+              variant="body2"
+              color="textSecondary"
+            />
+          )
+        )}
+        {product.componentType === "COOLER" && product.height === 0 ? (
+          <Typography
+            dangerouslySetInnerHTML={{ __html: "Height: N/A" }}
+            variant="body2"
+            color="textSecondary"
+          />
+        ) : (
+          product.componentType === "COOLER" && (
+            <Typography
+              dangerouslySetInnerHTML={{
+                __html: "Height: " + product.height + " mm ",
+              }}
+              variant="body2"
+              color="textSecondary"
+            />
+          )
+        )}
+        {product.componentType === "COOLER" &&
+        product.numberOfHeatPipes === 0 ? (
+          <Typography
+            dangerouslySetInnerHTML={{ __html: "Number of heat pipes: N/A" }}
+            variant="body2"
+            color="textSecondary"
+          />
+        ) : (
+          product.componentType === "COOLER" && (
+            <Typography
+              dangerouslySetInnerHTML={{
+                __html: "Number of heat pipes: " + product.numberOfHeatPipes,
+              }}
+              variant="body2"
+              color="textSecondary"
+            />
+          )
+        )}
+        {product.componentType === "COOLER" && product.radiatorLength === 0 ? (
+          <Typography
+            dangerouslySetInnerHTML={{ __html: "Cooler radiator length: N/A" }}
+            variant="body2"
+            color="textSecondary"
+          />
+        ) : (
+          product.componentType === "COOLER" && (
+            <Typography
+              dangerouslySetInnerHTML={{
+                __html:
+                  "Cooler radiator length: " + product.radiatorLength + " mm ",
+              }}
+              variant="body2"
+              color="textSecondary"
+            />
+          )
+        )}
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
         <Typography variant="h5">{product.price.toFixed(2) + "$"}</Typography>

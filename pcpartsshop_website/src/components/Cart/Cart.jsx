@@ -29,6 +29,7 @@ const Cart = ({
   const [totalItems, setTotalItems] = useState(0);
   const [compatibility, setCompatibility] = useState(false);
   const [compatibilityMessages, setCompatibilityMessages] = useState([]);
+  const [isPsu, setIsPsu] = useState(false);
 
   useEffect(() => {
     let items = 0;
@@ -49,8 +50,13 @@ const Cart = ({
   ]);
 
   useEffect(() => {
-    console.log(compatibilityMessages);
-  }, [compatibilityMessages]);
+    setIsPsu(false);
+    productsAddedToCart.forEach((item) => {
+      if (item.componentType === "PSU") {
+        setIsPsu(true);
+      }
+    });
+  }, [isPsu, productsAddedToCart]);
 
   useEffect(() => {
     const getCompatibilityMessages = async () => {
@@ -218,11 +224,23 @@ const Cart = ({
                             </Typography>
                           </>
                         ) : (
-                          <div className={classes.cardContainer}>
-                            {compatibilityMessages.map((item, index) => (
-                              <CompatibilityCard key={index} item={item} />
-                            ))}
-                          </div>
+                          <>
+                            <div className={classes.cardContainer}>
+                              {compatibilityMessages.map((item, index) => (
+                                <CompatibilityCard key={index} item={item} />
+                              ))}
+                            </div>
+                            {isPsu && (
+                              <div>
+                                <Divider style={{ marginTop: "20px" }} />
+                                <Typography>
+                                  Please note that the power consumption is
+                                  calculated using the 'worst case scenario'
+                                  (maximum power consumption).
+                                </Typography>
+                              </div>
+                            )}
+                          </>
                         ))}
                     </Grid>
                   </Grid>

@@ -15,7 +15,6 @@ import { logOut } from "../../redux/User/user-actions";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { ColorButton } from "../Common/ColorButton";
 
 const NavBar = ({ productsAddedToCart, isLoggedIn, logOut, email, admin }) => {
   const [cartCount, setCartCount] = useState(0);

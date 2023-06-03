@@ -56,14 +56,14 @@ const UpdateUserForm = () => {
     if (!response) {
       toast.error("Something went wrong.", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: false,
+        autoClose: 5000,
       });
     } else if (response.status === 200) {
       toast.success(
         `User with ID: ${response.data.userId} was updated successfully.`,
         {
           position: toast.POSITION.TOP_CENTER,
-          autoClose: false,
+          autoClose: 5000,
         }
       );
     }
@@ -76,7 +76,7 @@ const UpdateUserForm = () => {
     if (user && user.data.userId !== data.userId) {
       toast.error("User cannot be updated. Read the note!", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: false,
+        autoClose: 5000,
       });
       return;
     } else if (!user || user.data.userId === data.userId) {

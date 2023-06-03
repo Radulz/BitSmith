@@ -35,12 +35,12 @@ const RemoveUserForm = () => {
     if (!response) {
       toast.error(`User with ID: ${userId} was not found!`, {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: false,
+        autoClose: 5000,
       });
     } else if (response.status === 204) {
       toast.success(`User with ID: ${userId} was removed successfully.`, {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: false,
+        autoClose: 5000,
       });
     }
   };
@@ -69,7 +69,12 @@ const RemoveUserForm = () => {
                   {" "}
                   {constants.USERID_LABEL}{" "}
                 </InputLabel>
-                <Input {...field} error={!!errors.userId} fullWidth={true} />
+                <Input
+                  {...field}
+                  error={!!errors.userId}
+                  fullWidth={true}
+                  style={{ width: 400 }}
+                />
                 {errors.userId ? (
                   <FormHelperText error>Guid. Field required.</FormHelperText>
                 ) : (

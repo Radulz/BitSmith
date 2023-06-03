@@ -11,6 +11,9 @@ const filterOptions = {
     "Motherboard",
     "Power unit",
     "Ram memory stick",
+    "Case",
+    "Cooler",
+    "Storage unit",
   ],
   sortBy: ["Price ascending", "Price descending"],
 };

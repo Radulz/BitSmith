@@ -4,9 +4,9 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import CancelPresentationOutlinedIcon from "@mui/icons-material/CancelPresentationOutlined";
+import CloseIcon from "@mui/icons-material/Close";
 import { IconButton } from "@material-ui/core";
-
+/*[OBSOLETE]*/
 const MOBOCard = ({ product, setProduct }) => {
   return (
     <div
@@ -85,7 +85,7 @@ const MOBOCard = ({ product, setProduct }) => {
             aria-label="Cancel product presentation"
             onClick={(e) => setProduct(null)}
           >
-            <CancelPresentationOutlinedIcon />
+            <CloseIcon />
           </IconButton>
         </CardActions>
       </Card>

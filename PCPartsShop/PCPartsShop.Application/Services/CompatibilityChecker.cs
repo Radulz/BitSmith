@@ -51,6 +51,9 @@ namespace PCPartsShop.Application.Services
                         case "GPU":
                             messages = messages.Concat(CheckGPUCompatibility(part1, part2)).ToList();
                         break;
+                        case "CASE":
+                            messages = messages.Concat(CheckCaseCompatibility(part1, part2)).ToList();
+                            break;
                         case "PSU":
                             totalPowerAvailable = part1.Power;
                             psu = part1;
@@ -147,7 +150,6 @@ namespace PCPartsShop.Application.Services
             }
             return messages;
         }
-
         private static List<CompatibilityMessage> CheckMOBOCompatibility(FullSpecificationComponentDto part1, FullSpecificationComponentDto part2)
         {
             var messages = new List<CompatibilityMessage>();
@@ -203,7 +205,6 @@ namespace PCPartsShop.Application.Services
 
             return messages;
         }
-
         private static List<CompatibilityMessage> CheckGPUCompatibility(FullSpecificationComponentDto part1, FullSpecificationComponentDto part2)
         {
             var messages = new List<CompatibilityMessage>();
@@ -225,7 +226,96 @@ namespace PCPartsShop.Application.Services
 
             return messages;
         }
+        private static List<CompatibilityMessage> CheckCaseCompatibility(FullSpecificationComponentDto part1, FullSpecificationComponentDto part2)
+        {
+            var messages = new List<CompatibilityMessage>();
 
+            if (part2.ComponentType.ToUpper() == "GPU")
+            {
+                if(part1.GPUMaximumLength >= part2.Length)
+                {
+                    messages.Add(new CompatibilityMessage
+                    {
+                        Component1 = part1,
+                        Component2 = part2,
+                        Summary = "Compatible",
+                        Message = $"{FormatStringAsCamelCase(part2.Make)} {part2.Model} fits into {FormatStringAsCamelCase(part1.Make)} {part1.Model}.",
+                        Severity = "Green",
+                    });
+                }
+                else
+                {
+                    messages.Add(new CompatibilityMessage
+                    {
+                        Component1 = part1,
+                        Component2 = part2,
+                        Summary = "Incompatible",
+                        Message = $"{FormatStringAsCamelCase(part2.Make)} {part2.Model} cannot fit into {FormatStringAsCamelCase(part1.Make)} {part1.Model}. We recommend choosing a case with at least {part2.Length} mm of length.",
+                        Severity = "Red",
+                    });
+                }
+            }
+            if (part2.ComponentType.ToUpper() == "COOLER")
+            {
+                if(part1.CoolerMaximumHeight >= part2.Height && part2.Height > 0)
+                {
+                    messages.Add(new CompatibilityMessage
+                    {
+                        Component1 = part1,
+                        Component2 = part2,
+                        Summary = "Compatible",
+                        Message = $"{FormatStringAsCamelCase(part2.Make)} {part2.Model} fits into {FormatStringAsCamelCase(part1.Make)} {part1.Model}.",
+                        Severity = "Green",
+                    });
+                }
+                else if (part2.Height > 0)
+                {
+                    messages.Add(new CompatibilityMessage
+                    {
+                        Component1 = part1,
+                        Component2 = part2,
+                        Summary = "Incompatible",
+                        Message = $"{FormatStringAsCamelCase(part2.Make)} {part2.Model} cannot fit into {FormatStringAsCamelCase(part1.Make)} {part1.Model}. We recommend choosing a case with at least {part2.Height} mm cooler height.",
+                        Severity = "Red",
+                    });
+                }
+                if(part1.RadiatorSupport && part1.RadiatorSupportLength > 0 && part2.RadiatorLength > 0 && part1.RadiatorSupportLength >= part2.RadiatorLength)
+                {
+                    messages.Add(new CompatibilityMessage
+                    {
+                        Component1 = part1,
+                        Component2 = part2,
+                        Summary = "Compatible",
+                        Message = $"{FormatStringAsCamelCase(part2.Make)} {part2.Model} fits into {FormatStringAsCamelCase(part1.Make)} {part1.Model}.",
+                        Severity = "Green",
+                    });
+                } 
+                else if (part1.RadiatorSupport && part1.RadiatorSupportLength > 0 && part2.RadiatorLength > 0 && part1.RadiatorSupportLength < part2.RadiatorLength)
+                {
+                    messages.Add(new CompatibilityMessage
+                    {
+                        Component1 = part1,
+                        Component2 = part2,
+                        Summary = "Incompatible",
+                        Message = $"{FormatStringAsCamelCase(part2.Make)} {part2.Model} cannot fit into {FormatStringAsCamelCase(part1.Make)} {part1.Model}. We recommend choosing a case with a radiator support of at least {part2.RadiatorLength} mm.",
+                        Severity = "Red",
+                    });
+                }
+                else if((!part1.RadiatorSupport || part1.RadiatorSupportLength == 0) && (part2.RadiatorLength > 0))
+                {
+                    messages.Add(new CompatibilityMessage
+                    {
+                        Component1 = part1,
+                        Component2 = part2,
+                        Summary = "Incompatible",
+                        Message = $"{FormatStringAsCamelCase(part1.Make)} {part1.Model} does not have a radiator support for {FormatStringAsCamelCase(part1.Make)} {part1.Model}. We recommend choosing a case with a radiator support of at least {part2.RadiatorLength} mm.",
+                        Severity = "Red",
+                    });
+                }
+            }
+
+            return messages;
+        }
         private static List<CompatibilityMessage> CheckPSUCompatibility(int totalPower, int totalPowerConsumption, FullSpecificationComponentDto psu)
         {
             var messages = new List<CompatibilityMessage>();
@@ -238,7 +328,7 @@ namespace PCPartsShop.Application.Services
                     Component1 = psu,
                     Component2 = null,
                     Summary = "Incompatible",
-                    Message = $"{FormatStringAsCamelCase(psu.Make)} {psu.Model} is generating less power than the total power consumption of the other components. We recommend choosing a power supply with at least {recommendedPowerOutput}W.",
+                    Message = $"{FormatStringAsCamelCase(psu.Make)} {psu.Model} is generating less power than the total power consumption of the other components. We recommend choosing a power supply with at least {totalPowerConsumption+100}W.",
                     Severity = "Red",
                 });
             }
@@ -260,7 +350,7 @@ namespace PCPartsShop.Application.Services
                     Component1 = psu,
                     Component2 = null,
                     Summary = "Partially compatible",
-                    Message = $"{FormatStringAsCamelCase(psu.Make)} {psu.Model} is generating enough power to power your build, however we recommend choosing a power supply with at least {recommendedPowerOutput}W.",
+                    Message = $"{FormatStringAsCamelCase(psu.Make)} {psu.Model} is powerful enough for your build, however we recommend choosing a power supply with at least {totalPowerConsumption+100}W.",
                     Severity = "Amber",
                 });
             }
@@ -279,8 +369,8 @@ namespace PCPartsShop.Application.Services
 
         private static bool CheckAlgorithmAvailability(List<FullSpecificationComponentDto> parts)
         {
-            int cpus, psus, mobos;
-            cpus = psus = mobos = 0;
+            int cpus, psus, mobos, cases, coolers;
+            cpus = psus = mobos = cases = coolers = 0;
 
             foreach (var part in parts)
             {
@@ -300,14 +390,21 @@ namespace PCPartsShop.Application.Services
                 {
                     return false;
                 }
-
                 if (part.ComponentType.ToUpper() == "RAM" && part.Qty > 4)
                 {
                     return false;
                 }
+                if (part.ComponentType.ToUpper() == "CASE")
+                {
+                    cases++;
+                }
+                if (part.ComponentType.ToUpper() == "COOLER")
+                {
+                    coolers++;
+                }
             }
 
-            if (cpus >= 2 || psus >= 2 || mobos >= 2)
+            if (cpus >= 2 || psus >= 2 || mobos >= 2 || cases >= 2 || coolers >= 2)
             {
                 return false;
             }
@@ -329,6 +426,7 @@ namespace PCPartsShop.Application.Services
                     totalPower += part.PowerConsumption * part.Qty;
                 break;
                 case "RAM":
+                case "SSD":
                     totalPower += 10 * part.Qty;
                 break;
             }

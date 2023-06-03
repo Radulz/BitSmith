@@ -19,7 +19,7 @@ import axios from "axios";
 const schema = Joi.object({
   make: Joi.string().required(),
   model: Joi.string().required(),
-  price: Joi.number().precision(2).required(),
+  price: Joi.number().positive().precision(2).required(),
   image: Joi.string().required(),
   frequency: Joi.number().integer().required(),
   memoryCapacity: Joi.number().integer().required(),
@@ -55,14 +55,14 @@ const AddGPUForm = () => {
     if (!response) {
       toast.error("Something went wrong.", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: false,
+        autoClose: 5000,
       });
     } else if (response.status === 201) {
       toast.success(
         `Component ${response.data.make} ${response.data.model} was created with ID: ${response.data.componentId}`,
         {
           position: toast.POSITION.TOP_CENTER,
-          autoClose: false,
+          autoClose: 5000,
         }
       );
     }

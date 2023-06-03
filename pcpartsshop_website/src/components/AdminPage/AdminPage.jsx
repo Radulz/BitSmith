@@ -18,7 +18,7 @@ const AdminPage = ({ admin, isLoggedIn }) => {
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />
-      <Grid container>
+      <Grid container spacing={1}>
         <Grid item lg={2} md={3} sm={4} xs={6}>
           <div className={classes.dashboardMenu}>
             <List
@@ -42,6 +42,9 @@ const AdminPage = ({ admin, isLoggedIn }) => {
                 setFormSelect={setFormSelect}
               />
               <ListCommand listText="RAM Stick" setFormSelect={setFormSelect} />
+              <ListCommand listText="Case" setFormSelect={setFormSelect} />
+              <ListCommand listText="Cooler" setFormSelect={setFormSelect} />
+              <ListCommand listText="SSD" setFormSelect={setFormSelect} />
               <ListSubheader component="div" id="nested-list-subheader">
                 Users controls
               </ListSubheader>

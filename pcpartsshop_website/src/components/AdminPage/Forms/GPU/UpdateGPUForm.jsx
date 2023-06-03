@@ -20,7 +20,7 @@ const schema = Joi.object({
   componentId: Joi.string().guid().required(),
   make: Joi.string().required(),
   model: Joi.string().required(),
-  price: Joi.number().precision(2).required(),
+  price: Joi.number().positive().precision(2).required(),
   image: Joi.string().required(),
   frequency: Joi.number().integer().required(),
   memoryCapacity: Joi.number().integer().required(),
@@ -57,14 +57,14 @@ const UpdateGPUForm = () => {
     if (!response) {
       toast.error("Something went wrong.", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: false,
+        autoClose: 5000,
       });
     } else if (response.status === 200) {
       toast.success(
         `Component with ID: ${response.data.componentId} was updated successfully.`,
         {
           position: toast.POSITION.TOP_CENTER,
-          autoClose: false,
+          autoClose: 5000,
         }
       );
     }

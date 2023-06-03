@@ -39,7 +39,7 @@ namespace PCPartsShop.Application.Commands.CaseCommands.UpdateCase
             pcCase.PSUPosition = request.PSUPosition;
             pcCase.GPUMaximumLength = request.GPUMaximumLength;
             pcCase.RadiatorSupport = request.RadiatorSupport;
-            pcCase.RadiatorSupportLength = request.RadiatorSupportLength;
+            pcCase.RadiatorSupportLength = request.RadiatorSupport ? request.RadiatorSupportLength : 0;
             pcCase.CoolerMaximumHeight = request.CoolerMaximumHeight;
 
             _dbContext.Cases.Update(pcCase);

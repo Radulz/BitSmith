@@ -72,7 +72,7 @@ namespace PCPartsShop.Controllers
             {
                 return NotFound($"{moboId} entry not found.");
             }
-            return NoContent();
+            return Ok();
         }
 
         [HttpPut]

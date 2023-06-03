@@ -19,7 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 const schema = Joi.object({
   componentId: Joi.string().guid().required(),
 });
-
+/*[OBSOLETE]*/
 const GetPSUForm = () => {
   const {
     control,
@@ -36,7 +36,7 @@ const GetPSUForm = () => {
   const notify = () => {
     toast.error("Component not found!", {
       position: toast.POSITION.TOP_CENTER,
-      autoClose: false,
+      autoClose: 5000,
     });
   };
   const onSubmit = async (data) => {

@@ -36,7 +36,7 @@ const GetUserForm = () => {
   const notify = () => {
     toast.error("User not found!", {
       position: toast.POSITION.TOP_CENTER,
-      autoClose: false,
+      autoClose: 5000,
     });
   };
   const onSubmit = async (data) => {
@@ -69,7 +69,12 @@ const GetUserForm = () => {
                   {" "}
                   {constants.USERID_LABEL}{" "}
                 </InputLabel>
-                <Input {...field} error={!!errors.userId} fullWidth={true} />
+                <Input
+                  {...field}
+                  error={!!errors.userId}
+                  fullWidth={true}
+                  style={{ width: 400 }}
+                />
                 {errors.userId ? (
                   <FormHelperText error>Guid. Field required.</FormHelperText>
                 ) : (

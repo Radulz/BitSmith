@@ -48,6 +48,23 @@ export default makeStyles((theme) => ({
   gridItem: {
     display: "flex",
     justifyContent: "center",
+    alignItems: "center",
+  },
+  uploadInput: {
+    "&:hover": {
+      cursor: "pointer",
+    },
+    position: "relative",
+    zIndex: "2",
+    opacity: "0",
+    cursor: "pointer",
+    height: "40px",
+    width: "170px",
+  },
+  uploadButton: {
+    position: "absolute",
+    zIndex: "1",
+    cursor: "pointer",
   },
   // container: {
   //   display: "block",

@@ -22,6 +22,9 @@ const componentMapping = {
   MOBO: "Motherboard",
   PSU: "Power unit",
   RAM: "Ram memory stick",
+  CASE: "Case",
+  COOLER: "Cooler",
+  SSD: "Storage unit",
 };
 
 const searchFields = ["make", "model"];
@@ -51,7 +54,7 @@ const Products = (props) => {
       setProductsFiltered(res.data);
     };
 
-    setProductsFiltered(products);
+    if (selected === "") setProductsFiltered(products);
     if (selected) {
       getProducts();
     }

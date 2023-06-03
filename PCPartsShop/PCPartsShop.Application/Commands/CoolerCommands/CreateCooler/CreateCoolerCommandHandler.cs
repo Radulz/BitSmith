@@ -27,9 +27,9 @@ namespace PCPartsShop.Application.Commands.CoolerCommands.CreateCooler
                 Price = request.Price,
                 Image = request.Image,
                 CoolingType = request.CoolingType,
-                Height = request.Height,
-                NumberOfHeatPipes = request.NumberOfHeatPipes,
-                RadiatorLength = request.RadiatorLength,
+                Height = request.CoolingType == "Air" ? request.Height : 0,
+                NumberOfHeatPipes = request.CoolingType == "Air" ? request.NumberOfHeatPipes : 0,
+                RadiatorLength = request.CoolingType == "Liquid" ? request.RadiatorLength : 0,
             };
 
             _dbContext.Coolers.Add(cooler);

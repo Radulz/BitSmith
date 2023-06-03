@@ -35,12 +35,12 @@ const UpdateUserAsAdmin = () => {
     if (!response) {
       toast.error("User not found!", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: false,
+        autoClose: 5000,
       });
     } else if (response.status === 200) {
       toast.success("User is now admin.", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: false,
+        autoClose: 5000,
       });
     }
   };

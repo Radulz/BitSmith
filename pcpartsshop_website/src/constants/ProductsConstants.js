@@ -113,6 +113,7 @@ export const displayedProductsDetails = {
     label: "Capacity: ",
     unit: {
       RAM: " GB ",
+      SSD: " GB ",
     },
   },
 
@@ -134,6 +135,48 @@ export const displayedProductsDetails = {
     label: "Highest memory frequency: ",
     unit: {
       MOBO: " MHz ",
+    },
+  },
+
+  gpuMaximumLength: {
+    label: "Maximum GPU length: ",
+    unit: {
+      CASE: " mm ",
+    },
+  },
+
+  coolerMaximumHeight: {
+    label: "Maximum cooler height: ",
+    unit: {
+      CASE: " mm ",
+    },
+  },
+
+  caseType: {
+    label: "Type: ",
+    unit: {
+      CASE: "",
+    },
+  },
+
+  psuPosition: {
+    label: "PSU position: ",
+    unit: {
+      CASE: "",
+    },
+  },
+
+  coolingType: {
+    label: "Type of cooling: ",
+    unit: {
+      COOLER: "",
+    },
+  },
+
+  connector: {
+    label: "Connector type: ",
+    unit: {
+      SSD: "",
     },
   },
 };

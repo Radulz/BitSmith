@@ -38,7 +38,7 @@ const GetUserByEmailForm = () => {
   const notify = () => {
     toast.error("User not found!", {
       position: toast.POSITION.TOP_CENTER,
-      autoClose: false,
+      autoClose: 5000,
     });
   };
   const onSubmit = async (data) => {

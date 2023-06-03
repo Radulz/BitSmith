@@ -27,19 +27,23 @@ namespace PCPartsShop.WebAPI.Controllers
         {
             var createdCase = await _mediator.Send(command);
 
-            return CreatedAtAction(nameof(CreateCase), new { cpuId = createdCase.ComponentId }, createdCase);
+            return CreatedAtAction(nameof(CreateCase), new { caseId = createdCase.ComponentId }, createdCase);
         }
 
         [HttpDelete]
         [Route("{caseId}")]
-        public async Task<IActionResult> DeleteCase([FromBody] RemoveCaseCommand command)
+        public async Task<IActionResult> DeleteCase(Guid caseId)
         {
+            var command = new RemoveCaseCommand
+            {
+                CaseId = caseId
+            };
             var caseToRemove = await _mediator.Send(command);
             if (caseToRemove)
             {
                 return Ok();
             }
-            return BadRequest();
+            return NotFound();
         }
 
         [HttpPut]
