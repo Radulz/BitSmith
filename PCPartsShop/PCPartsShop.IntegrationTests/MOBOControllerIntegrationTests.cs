@@ -199,7 +199,7 @@ namespace PCPartsShop.IntegrationTests
         }
 
         [TestMethod]
-        public async Task Delete_MOBO_ShouldReturnNoContentResponse()
+        public async Task Delete_MOBO_ShouldReturnOkResponse()
         {
             var client = _factory.CreateClient();
             var response = await client.GetAsync("/api/v1/MOBO");
@@ -208,7 +208,7 @@ namespace PCPartsShop.IntegrationTests
             var moboId = mobos[0].ComponentId;
 
             response = await client.DeleteAsync($"/api/v1/MOBO/{moboId}");
-            Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }
 
         [TestMethod]

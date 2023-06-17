@@ -107,7 +107,7 @@ namespace PCPartsShop.UnitTests
         }
 
         [TestMethod]
-        public async Task RemoveRAM_ShouldReturnNoContentStatusCode()
+        public async Task RemoveRAM_ShouldReturnOkStatusCode()
         {
             bool result = true;
             _mockMediator.Setup(c => c.Send(It.IsAny<RemoveRAMCommand>(), It.IsAny<CancellationToken>()))
@@ -115,8 +115,8 @@ namespace PCPartsShop.UnitTests
             Guid id = Guid.NewGuid();
             var controller = new RAMController(_mockMediator.Object, _mockMapper.Object);
             var res = await controller.RemoveRAM(id);
-            var status = res as NoContentResult;
-            Assert.AreEqual((int)HttpStatusCode.NoContent, status.StatusCode);
+            var status = res as OkResult;
+            Assert.AreEqual((int)HttpStatusCode.OK, status.StatusCode);
         }
     }
 }

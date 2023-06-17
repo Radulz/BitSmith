@@ -33,12 +33,14 @@ namespace PCPartsShop_WebAPI
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "PCPartsShop_WebAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BitSmith_WebAPI", Version = "v1" });
             });
             services.AddDbContext<PCPartsShopContext>(options => options.UseSqlServer(ConnectionString));
             services.AddMediatR(typeof(CreateCPUCommand));
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<ICompatibilityChecker, CompatibilityChecker>();
+            services.Configure<AzureBlobStorageConfig>(Configuration.GetSection(nameof(AzureBlobStorageConfig)));
+            services.AddSingleton<IFileService, FileService>();
             services.Configure<BrevoConfig>(Configuration.GetSection(nameof(BrevoEmailProvider)));
             services.AddHttpClient<IEmailProvider, BrevoEmailProvider>();
 

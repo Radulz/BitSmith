@@ -187,7 +187,7 @@ namespace PCPartsShop.IntegrationTests
         }
 
         [TestMethod]
-        public async Task Delete_RAM_ShouldReturnNoContentResponse()
+        public async Task Delete_RAM_ShouldReturnOkResponse()
         {
             var client = _factory.CreateClient();
             var response = await client.GetAsync("/api/v1/RAM");
@@ -196,7 +196,7 @@ namespace PCPartsShop.IntegrationTests
             var ramId = rams[0].ComponentId;
 
             response = await client.DeleteAsync($"/api/v1/RAM/{ramId}");
-            Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }
 
         [TestMethod]

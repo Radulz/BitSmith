@@ -107,7 +107,7 @@ namespace PCPartsShop.UnitTests
         }
 
         [TestMethod]
-        public async Task RemoveMOBO_ShouldReturnNoContentStatusCode()
+        public async Task RemoveMOBO_ShouldReturnOkStatusCode()
         {
             bool result = true;
             _mockMediator.Setup(c => c.Send(It.IsAny<RemoveMOBOCommand>(), It.IsAny<CancellationToken>()))
@@ -115,8 +115,8 @@ namespace PCPartsShop.UnitTests
             Guid id = Guid.NewGuid();
             var controller = new MOBOController(_mockMediator.Object, _mockMapper.Object);
             var res = await controller.RemoveMOBO(id);
-            var status = res as NoContentResult;
-            Assert.AreEqual((int)HttpStatusCode.NoContent, status.StatusCode);
+            var status = res as OkResult;
+            Assert.AreEqual((int)HttpStatusCode.OK, status.StatusCode);
         }
     }
 }

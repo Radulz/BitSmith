@@ -5,6 +5,8 @@ export const PRICE = "price";
 export const IMAGE = "image";
 export const CAPCITY = "capacity";
 export const CONNECTOR = "connector";
+export const DEFAULT_SSD_IMAGE =
+  "https://bitsmithblobstorage.blob.core.windows.net/product-images/DefaultImages/DefaultSSD.png";
 
 export const COMPONENTID_LABEL = "Component ID";
 export const MAKE_LABEL = "Make";

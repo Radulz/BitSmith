@@ -9,6 +9,8 @@ export const MEMORYTYPE = "memoryType";
 export const TECHNOLOGY = "technology";
 export const POWERCONSUMPTION = "powerConsumption";
 export const LENGTH = "length";
+export const DEFAULT_GPU_IMAGE =
+  "https://bitsmithblobstorage.blob.core.windows.net/product-images/DefaultImages/DefaultGPU.jpg";
 
 export const COMPONENTID_LABEL = "Component ID";
 export const MAKE_LABEL = "Make";

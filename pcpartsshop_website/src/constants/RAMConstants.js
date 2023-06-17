@@ -7,6 +7,8 @@ export const TYPE = "type";
 export const CAPACITY = "capacity";
 export const FREQUENCY = "frequency";
 export const VOLTAGE = "voltage";
+export const DEFAULT_RAM_IMAGE =
+  "https://bitsmithblobstorage.blob.core.windows.net/product-images/DefaultImages/DefaultRAM.jpg";
 
 export const COMPONENTID_LABEL = "Component ID";
 export const MAKE_LABEL = "Make";

@@ -10,6 +10,8 @@ export const RADIATORSUPPORT = "radiatorSupport";
 export const RADIATORSUPPORTLENGTH = "radiatorSupportLength";
 export const CASETYPE = "caseType";
 export const PSUPOSITION = "psuPosition";
+export const DEFAULT_CASE_IMAGE =
+  "https://bitsmithblobstorage.blob.core.windows.net/product-images/DefaultImages/DefaultCase.jpg";
 
 export const COMPONENTID_LABEL = "Component ID";
 export const MAKE_LABEL = "Make";

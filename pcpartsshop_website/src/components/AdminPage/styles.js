@@ -50,6 +50,12 @@ export default makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
   },
+  gridItemUpload: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+  },
   uploadInput: {
     "&:hover": {
       cursor: "pointer",
@@ -58,11 +64,11 @@ export default makeStyles((theme) => ({
     zIndex: "2",
     opacity: "0",
     cursor: "pointer",
-    height: "40px",
+    height: "80px",
     width: "170px",
   },
   uploadButton: {
-    position: "absolute",
+    marginLeft: "-170px",
     zIndex: "1",
     cursor: "pointer",
   },

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Grid,
@@ -6,6 +6,7 @@ import {
   Input,
   InputLabel,
   FormHelperText,
+  Typography,
 } from "@material-ui/core";
 import useStyles from "../../styles";
 import { useForm, Controller } from "react-hook-form";
@@ -16,12 +17,13 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Select, MenuItem } from "@material-ui/core";
 import axios from "axios";
+import FileUploadIcon from "@mui/icons-material/FileUpload";
 
 const schema = Joi.object({
   make: Joi.string().required(),
   model: Joi.string().required(),
   price: Joi.number().positive().precision(2).required(),
-  image: Joi.string().required(),
+  image: Joi.required(),
   gpuMaximumLength: Joi.number().integer().required(),
   coolerMaximumHeight: Joi.number().integer().required(),
   radiatorSupport: Joi.boolean().required(),
@@ -34,6 +36,7 @@ const AddCaseForm = () => {
   const {
     control,
     handleSubmit,
+    register,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -69,15 +72,35 @@ const AddCaseForm = () => {
       );
     }
   };
+  const [image, setImage] = useState({ url: "", isRemoved: true });
 
   const onSubmit = async (data) => {
-    console.log(data);
+    console.log(data.image);
+    if (image.isRemoved) {
+      toast.error("Image upload is required.", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 5000,
+      });
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", data.image[0]);
+
+    const fileResponse = await axios
+      .post(process.env.REACT_APP_API_URL + "File", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .catch((e) => console.log(e));
+
     const response = await axios
       .post(process.env.REACT_APP_API_URL + "Case", {
         make: data.make,
         model: data.model,
         price: data.price,
-        image: data.image,
+        image: fileResponse?.data?.blob?.uri ?? constants.DEFAULT_CASE_IMAGE,
         gpuMaximumLength: data.gpuMaximumLength,
         coolerMaximumHeight: data.coolerMaximumHeight,
         radiatorSupport: data.radiatorSupport,
@@ -147,25 +170,6 @@ const AddCaseForm = () => {
                   <FormHelperText error>Number. Field required.</FormHelperText>
                 ) : (
                   <FormHelperText>Dollars ($)</FormHelperText>
-                )}
-              </FormControl>
-            )}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} className={classes.gridItem}>
-          <Controller
-            name={constants.IMAGE}
-            control={control}
-            render={({ field }) => (
-              <FormControl>
-                <InputLabel htmlFor="component-simple">
-                  {constants.IMAGE_LABEL}
-                </InputLabel>
-                <Input {...field} error={!!errors.image} />
-                {errors.image ? (
-                  <FormHelperText error>URL. Field required.</FormHelperText>
-                ) : (
-                  <FormHelperText>URL to image</FormHelperText>
                 )}
               </FormControl>
             )}
@@ -293,6 +297,41 @@ const AddCaseForm = () => {
               </FormControl>
             )}
           />
+        </Grid>
+        <Grid item xs={12} sm={6} className={classes.gridItemUpload}>
+          <div>
+            <Input
+              {...register("image")}
+              onChange={(event) => {
+                if (event.target.value !== "") {
+                  setImage({
+                    url: event.target.value.replace(/.*[\/\\]/, ""),
+                    isRemoved: false,
+                  });
+                } else {
+                  setImage({
+                    url: event.target.value,
+                    isRemoved: true,
+                  });
+                }
+              }}
+              className={classes.uploadInput}
+              type="file"
+              id="image"
+              inputProps={{ accept: "image/*" }}
+            />
+            <Button
+              className={classes.uploadButton}
+              variant="outlined"
+              color="primary"
+              disableFocusRipple
+              disableRipple
+            >
+              Upload Image
+              <FileUploadIcon />
+            </Button>
+          </div>
+          <Typography>{image.url}</Typography>
         </Grid>
       </Grid>
       <br />

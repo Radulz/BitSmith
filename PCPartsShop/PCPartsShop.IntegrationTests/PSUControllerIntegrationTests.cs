@@ -175,7 +175,7 @@ namespace PCPartsShop.IntegrationTests
         }
 
         [TestMethod]
-        public async Task Delete_PSU_ShouldReturnNoContentResponse()
+        public async Task Delete_PSU_ShouldReturnOkResponse()
         {
             var client = _factory.CreateClient();
             var response = await client.GetAsync("/api/v1/PSU");
@@ -184,7 +184,7 @@ namespace PCPartsShop.IntegrationTests
             var psuId = psus[0].ComponentId;
 
             response = await client.DeleteAsync($"/api/v1/PSU/{psuId}");
-            Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }
 
         [TestMethod]

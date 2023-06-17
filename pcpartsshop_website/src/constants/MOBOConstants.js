@@ -9,6 +9,8 @@ export const CHIPSET = "chipset";
 export const LOWESTFREQUENCYSUPPORTED = "lowestFrequencySupported";
 export const HIGHESTFREQUENCYSUPPORTED = "highestFrequencySupported";
 export const MEMORYTYPE = "memoryType";
+export const DEFAULT_MOBO_IMAGE =
+  "https://bitsmithblobstorage.blob.core.windows.net/product-images/DefaultImages/DefaultMOBO.jpeg";
 
 export const COMPONENTID_LABEL = "Component ID";
 export const MAKE_LABEL = "Make";

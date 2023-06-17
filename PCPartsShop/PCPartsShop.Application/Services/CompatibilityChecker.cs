@@ -25,7 +25,7 @@ namespace PCPartsShop.Application.Services
                     Component1 = null,
                     Component2 = null,
                     Summary = "Unavailable",
-                    Message = "We are sorry but we cannot check the compatibility of this configuration. Make sure your cart doesn't contain multiple different Power supplies, CPUs or Motherboards. Also we cannot check the compatibility of a system that has more than 3 GPUs or more than 4 RAM sticks.",
+                    Message = "We are sorry but we cannot check the compatibility of this configuration. Make sure your cart doesn't contain multiple different Power supplies, CPUs, Motherboards, Cases or Coolers. Also we cannot check the compatibility of a system that has more than 3 GPUs or more than 4 RAM sticks.",
                     Severity = "Unavailable"
                 });
                 return messages;
@@ -89,7 +89,7 @@ namespace PCPartsShop.Application.Services
 
             if (part2.ComponentType.ToUpper() == "MOBO")
             {
-                if (part1.Socket == part2.Socket)
+                if (part1.Socket.ToLower() == part2.Socket.ToLower())
                 {
                     messages.Add(new CompatibilityMessage
                     {
@@ -174,12 +174,12 @@ namespace PCPartsShop.Application.Services
                         Component1 = part1,
                         Component2 = part2,
                         Summary = "Incompatible",
-                        Message = $"{FormatStringAsCamelCase(part1.Make)} {part1.Model} doesn't allow {FormatStringAsCamelCase(part2.Make)} {part2.Model} frequency.",
+                        Message = $"{FormatStringAsCamelCase(part1.Make)} {part1.Model} doesn't allow {FormatStringAsCamelCase(part2.Make)} {part2.Model} frequency. ({part2.Frequency})",
                         Severity = "Red",
                     });
                 }
 
-                if(part1.MemoryType == part2.Type)
+                if(part1.MemoryType.ToLower() == part2.Type.ToLower())
                 {
                     messages.Add(new CompatibilityMessage
                     {

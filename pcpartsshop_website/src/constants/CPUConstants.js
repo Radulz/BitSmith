@@ -9,6 +9,8 @@ export const TECHNOLOGY = "technology";
 export const MEMORYFREQUENCY = "memoryFrequency";
 export const THERMALDESGINPOWER = "thermalDesignPower";
 export const NUMBEROFCORES = "numberOfCores";
+export const DEFAULT_CPU_IMAGE =
+  "https://bitsmithblobstorage.blob.core.windows.net/product-images/DefaultImages/DefaultCPU.jpg";
 
 export const COMPONENTID_LABEL = "Component ID";
 export const MAKE_LABEL = "Make";

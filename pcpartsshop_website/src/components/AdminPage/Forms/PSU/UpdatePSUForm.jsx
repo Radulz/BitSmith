@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Grid,
@@ -6,6 +6,7 @@ import {
   Input,
   InputLabel,
   FormHelperText,
+  Typography,
 } from "@material-ui/core";
 import useStyles from "../../styles";
 import { useForm, Controller } from "react-hook-form";
@@ -15,31 +16,31 @@ import * as constants from "../../../../constants/PSUConstants";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import FileUploadIcon from "@mui/icons-material/FileUpload";
 
 const schema = Joi.object({
-  componentId: Joi.string().guid().required(),
   make: Joi.string().required(),
   model: Joi.string().required(),
   price: Joi.number().positive().precision(2).required(),
-  image: Joi.string().required(),
+  image: Joi.required(),
   power: Joi.number().integer().required(),
   modularity: Joi.string().required(),
 });
 
-const UpdatePSUForm = () => {
+const UpdatePSUForm = ({ component, setComponent }) => {
   const {
     control,
     handleSubmit,
+    register,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      componentId: "",
-      make: "",
-      model: "",
-      price: "",
+      make: component.make,
+      model: component.model,
+      price: component.price,
       image: "",
-      power: "",
-      modularity: "",
+      power: component.power,
+      modularity: component.modularity,
     },
     resolver: joiResolver(schema),
   });
@@ -60,44 +61,40 @@ const UpdatePSUForm = () => {
         }
       );
     }
+    setComponent(null);
   };
+  const [image, setImage] = useState({ url: "", isRemoved: true });
   const onSubmit = async (data) => {
-    console.log(data);
+    console.log(data.image);
+    let fileResponse;
+    if (!image.isRemoved) {
+      const formData = new FormData();
+      formData.append("file", data.image[0]);
+
+      fileResponse = await axios
+        .post(process.env.REACT_APP_API_URL + "File", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .catch((e) => console.log(e));
+    }
     const response = await axios
-      .put(process.env.REACT_APP_API_URL + `PSU/${data.componentId}`, {
+      .put(process.env.REACT_APP_API_URL + `PSU/${component.componentId}`, {
         make: data.make,
         model: data.model,
         price: data.price,
-        image: data.image,
+        image: fileResponse?.data?.blob?.uri ?? component.image,
         power: data.power,
         modularity: data.modularity,
       })
       .catch((e) => console.log(e));
     notify(response);
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6} className={classes.gridItem}>
-          <Controller
-            name={constants.COMPONENTID}
-            control={control}
-            render={({ field }) => (
-              <FormControl>
-                <InputLabel htmlFor="component-simple">
-                  {" "}
-                  {constants.COMPONENTID_LABEL}{" "}
-                </InputLabel>
-                <Input {...field} error={!!errors.componentId} />
-                {errors.componentId ? (
-                  <FormHelperText error>Guid. Field required.</FormHelperText>
-                ) : (
-                  <FormHelperText>Unique identifier (Guid)</FormHelperText>
-                )}
-              </FormControl>
-            )}
-          />
-        </Grid>
         <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
             name={constants.MAKE}
@@ -159,25 +156,6 @@ const UpdatePSUForm = () => {
         </Grid>
         <Grid item xs={12} sm={6} className={classes.gridItem}>
           <Controller
-            name={constants.IMAGE}
-            control={control}
-            render={({ field }) => (
-              <FormControl>
-                <InputLabel htmlFor="component-simple">
-                  {constants.IMAGE_LABEL}
-                </InputLabel>
-                <Input {...field} error={!!errors.image} />
-                {errors.image ? (
-                  <FormHelperText error>URL. Field required.</FormHelperText>
-                ) : (
-                  <FormHelperText>URL to image</FormHelperText>
-                )}
-              </FormControl>
-            )}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} className={classes.gridItem}>
-          <Controller
             name={constants.POWER}
             control={control}
             render={({ field }) => (
@@ -214,6 +192,50 @@ const UpdatePSUForm = () => {
             )}
           />
         </Grid>
+        <Grid item xs={12} sm={6} className={classes.gridItemUpload}>
+          <div>
+            <Input
+              {...register("image")}
+              onChange={(event) => {
+                if (event.target.value !== "") {
+                  setImage({
+                    url: event.target.value.replace(/.*[\/\\]/, ""),
+                    isRemoved: false,
+                  });
+                } else {
+                  setImage({
+                    url: event.target.value,
+                    isRemoved: true,
+                  });
+                }
+              }}
+              className={classes.uploadInput}
+              type="file"
+              id="image"
+              inputProps={{ accept: "image/*" }}
+            />
+            <Button
+              className={classes.uploadButton}
+              variant="outlined"
+              color="primary"
+              disableFocusRipple
+              disableRipple
+            >
+              Upload Image
+              <FileUploadIcon />
+            </Button>
+          </div>
+          <Typography>{image.url}</Typography>
+        </Grid>
+        {component.image !== null && (
+          <Grid item xs={12} sm={12} className={classes.gridItem}>
+            <img
+              src={component.image}
+              alt="component"
+              style={{ maxWidth: "300px", maxHeight: "300px" }}
+            />
+          </Grid>
+        )}
       </Grid>
       <br />
       <div
@@ -223,8 +245,8 @@ const UpdatePSUForm = () => {
           justifyContent: "center",
         }}
       >
-        <Button variant="contained" type="submit" color="primary">
-          Submit
+        <Button variant="contained" type="submit" color="secondary">
+          Update
         </Button>
       </div>
     </form>

@@ -199,7 +199,7 @@ namespace PCPartsShop.IntegrationTests
         }
 
         [TestMethod]
-        public async Task Delete_GPU_ShouldReturnNoContentResponse()
+        public async Task Delete_GPU_ShouldReturnOkResponse()
         {
             var client = _factory.CreateClient();
             var response = await client.GetAsync("/api/v1/GPU");
@@ -208,7 +208,7 @@ namespace PCPartsShop.IntegrationTests
             var gpuId = gpus[0].ComponentId;
 
             response = await client.DeleteAsync($"/api/v1/GPU/{gpuId}");
-            Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
         }
 
         [TestMethod]

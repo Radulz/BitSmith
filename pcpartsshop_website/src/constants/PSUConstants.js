@@ -5,6 +5,8 @@ export const PRICE = "price";
 export const IMAGE = "image";
 export const POWER = "power";
 export const MODULARITY = "modularity";
+export const DEFAULT_PSU_IMAGE =
+  "https://bitsmithblobstorage.blob.core.windows.net/product-images/DefaultImages/DefaultPSU.jpg";
 
 export const COMPONENTID_LABEL = "Component ID";
 export const MAKE_LABEL = "Make";

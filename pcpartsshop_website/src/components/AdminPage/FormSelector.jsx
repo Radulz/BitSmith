@@ -28,6 +28,7 @@ import UpdateSSDForm from "./Forms/SSD/UpdateSSDForm";
 import ComponentsTable from "./Forms/Common/ComponentsTable";
 import RemoveComponentForm from "./Forms/Common/RemoveComponentForm";
 import GetComponentForm from "./Forms/Common/GetComponentForm";
+import UpdateComponentForm from "./Forms/Common/UpdateComponentForm";
 
 const FormSelector = ({ formKeyword }) => {
   switch (formKeyword) {
@@ -68,21 +69,21 @@ const FormSelector = ({ formKeyword }) => {
     case "Remove User":
       return <RemoveUserForm />;
     case "Update CPU":
-      return <UpdateCPUForm />;
+      return <UpdateComponentForm componentType={"CPU"} />;
     case "Update GPU":
-      return <UpdateGPUForm />;
+      return <UpdateComponentForm componentType={"GPU"} />;
     case "Update Motherboard":
-      return <UpdateMOBOForm />;
+      return <UpdateComponentForm componentType={"MOBO"} />;
     case "Update Power Unit":
-      return <UpdatePSUForm />;
+      return <UpdateComponentForm componentType={"PSU"} />;
     case "Update RAM Stick":
-      return <UpdateRAMForm />;
+      return <UpdateComponentForm componentType={"RAM"} />;
     case "Update Case":
-      return <UpdateCaseForm />;
+      return <UpdateComponentForm componentType={"CASE"} />;
     case "Update Cooler":
-      return <UpdateCoolerForm />;
+      return <UpdateComponentForm componentType={"COOLER"} />;
     case "Update SSD":
-      return <UpdateSSDForm />;
+      return <UpdateComponentForm componentType={"SSD"} />;
     case "Update User":
       return <UpdateUserForm />;
     case "Get CPU":

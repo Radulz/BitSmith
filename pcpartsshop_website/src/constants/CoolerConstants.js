@@ -7,6 +7,8 @@ export const HEIGHT = "height";
 export const COOLINGTYPE = "coolingType";
 export const RADIATORLENGTH = "radiatorLength";
 export const NUMBEROFHEATPIPES = "numberOfHeatPipes";
+export const DEFAULT_COOLER_IMAGE =
+  "https://bitsmithblobstorage.blob.core.windows.net/product-images/DefaultImages/DefaultCooler.jpg";
 
 export const COMPONENTID_LABEL = "Component ID";
 export const MAKE_LABEL = "Make";

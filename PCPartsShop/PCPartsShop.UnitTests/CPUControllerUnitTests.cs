@@ -135,7 +135,7 @@ namespace PCPartsShop.UnitTests
         }
 
         [TestMethod]
-        public async Task RemoveCPU_ShouldReturnNoContentStatusCode()
+        public async Task RemoveCPU_ShouldReturnOkStatusCode()
         {
             bool result = true;
             _mockMediator.Setup(c => c.Send(It.IsAny<RemoveCPUCommand>(), It.IsAny<CancellationToken>()))
@@ -143,8 +143,8 @@ namespace PCPartsShop.UnitTests
             Guid id = Guid.NewGuid();
             var controller = new CPUController(_mockMediator.Object, _mockMapper.Object);
             var res = await controller.RemoveCPU(id);
-            var status = res as NoContentResult;
-            Assert.AreEqual((int)HttpStatusCode.NoContent, status.StatusCode);
+            var status = res as OkResult;
+            Assert.AreEqual((int)HttpStatusCode.OK, status.StatusCode);
         }
     }
 }
