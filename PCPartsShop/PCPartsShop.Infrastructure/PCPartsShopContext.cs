@@ -38,6 +38,7 @@ namespace PCPartsShop.Infrastructure
             modelBuilder.Entity<Cooler>().HasKey(p => p.ComponentId);
             modelBuilder.Entity<SSD>().HasKey(p => p.ComponentId);
             modelBuilder.Entity<User>().HasKey(p => p.UserId);
+            modelBuilder.Entity<User>().HasIndex(p => p.Email).IsUnique();
             modelBuilder.Entity<Order>().HasKey(p => p.OrderId);
         }
     }

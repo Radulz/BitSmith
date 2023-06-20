@@ -124,6 +124,7 @@ namespace PCPartsShop.WebAPI.Controllers
             var response = await _mediator.Send(command);
             return Ok(_mapper.Map<GetOrderDto>(response));
         }
+
         [HttpPatch]
         [Route("{orderId}")]
         public async Task<IActionResult> UpdateShippingStatus(int orderId)

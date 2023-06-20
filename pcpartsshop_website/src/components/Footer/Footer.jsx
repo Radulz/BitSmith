@@ -69,7 +69,7 @@ const Footer = () => {
                 <Typography>Career</Typography>
               </a>
               <a href="/contact">
-                <Typography>Contact</Typography>
+                <Typography>Contact: support@bit-smith.org</Typography>
               </a>
             </div>
           </Grid>
