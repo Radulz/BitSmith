@@ -16,11 +16,12 @@ Redux
 VSCode
 
 How to run the project:
+Local Machine:
 1. Install the required tools
-2. Install the npm packages using npm -install
-3. Clone the repository on your local machine
+2. Clone the repository on your local machine
+3. Install the npm packages using npm -install
 4. Get the connection string of the sql server
-5. Add this into user secrets under PCPartsShopConnection
+5. Add this into user secrets under ConnectionString: { PCPartsShopConnection: "" }
 6. Open the infrastructure project in Package manager console in Visual Studio
 7. Run update-database, this will apply all the migrations
 8. Run the backend using IIS
