@@ -25,7 +25,13 @@ Local Machine:
 6. Open the infrastructure project in Package manager console in Visual Studio
 7. Run update-database, this will apply all the migrations
 8. Run the backend using IIS
-9. Run the frontend using npm run start
+9. Open the frontend folder in visual studio code and open a new terminal window
+10. Run npm install
+11. Generate a new certificate, open command prompt as administrator and do the following:
+    - choco install mkcert
+    - mkcert -install
+    - mkcert -cert-file cert.pem -key-file key.pem localhost
+12. Run the frontend using npm run start
 
 Use the swagger to check if the connection with the database is made successfully.
 If the connection is established and you have added products in the database and they are not diplayed on FE, check the configs of .env
